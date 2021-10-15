@@ -1,6 +1,6 @@
 <?php
     $servidor = 'localhost';
-    $banco = 'aluno';
+    $banco = 'copa_mundo';
     $usuario = 'root';
     $senha = '';
     $conexao = mysqli_connect($servidor, $usuario, $senha);
