@@ -7,15 +7,52 @@
     <title>FIFA 22</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<body class="main">
-    <nav id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="#page-top">FIFA 22</a>
-            <button>
-                Menu
-            </button>
+<body>
+    <header class="menu-top">
+        <div class="header-1">
+            <div class="logo">
+                <img src="./assets/fifa_logo.png" alt="LOGO FIFA">
+            </div>
+               <nav>
+                   <ul>
+                       <li>
+                            <a href="#sobre">
+                                Sobre
+                            </a>
+                       </li>
+                       <li>
+                            <a href="#controle">
+                                Controle
+                            </a>
+                       </li>
+                       <li>
+                            <a href=#feedback">
+                                Feedback
+                            </a>
+                       </li>
+                       <div class="action">
+                           <div class="profile" onclick = 'menuToggle();'>
+                                <img src="./assets/profile.png" alt="">
+                           </div>
+                           <div class="menu">
+                               <ul>
+                                    <li><img src="./assets/profile.png" alt=""><a href="#"> Meu Perfil </a></li>
+                                    <li><img src="./assets/001-details.png" alt=""><a href="#"> Detalhes </a></li>
+                                    <li><img src="./assets/002-gear.png" alt=""><a href="#"> Configurações </a></li>
+                                    <li><img src="./assets/logout.png" alt=""><a href="#"> Saída </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                   </ul>
+               </nav>
         </div>
-    </nav>
+    </header>
 </body>
 </html>
