@@ -45,6 +45,10 @@ nav a{
     text-decoration: none;
     color: white;
 }
+nav a:hover{
+    color: #858383;
+    transition: 0.4s ;
+}
 
 .action{
     margin-top: 30px;
