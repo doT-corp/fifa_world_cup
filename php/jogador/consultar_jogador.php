@@ -28,7 +28,7 @@
     </head>
     <body>
         <?php
-        include "conecta_banco.php";
+        include "../conecta_banco.php";
         $procura = "SELECT * FROM jogador";
         $result = mysqli_query($conexao, $procura);
         while($row = mysqli_fetch_array($result)) {

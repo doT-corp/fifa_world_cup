@@ -47,8 +47,15 @@
                 ID: <input class="input-text" type="number" name="id"/> <br><br>
                 Nome: <input class="input-text" type="text" name="nome"/> <br><br>
                 Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
-                Pais: <input class="input-text" type="text" name="pais"/> <br><br>
-                ID Pais: <input class="input-text" type="number" name="pais"/> <br><br>
+                Posição: <input class="input-text" type="text" name="posicao"/> <br><br>
+                País:
+                <select name="pais">
+                    <?php
+                        include "../../php/conecta_banco.php";
+                        
+                        echo "<option value=''>"
+                    ?>
+                </select>
                 Situação: <input class="input-text" type="text" name="situacao"/> <br><br>
                 <input type="submit" class="btn" value="Enviar"/>
                 <input type="reset" class="btn" value="Redefinir"/>

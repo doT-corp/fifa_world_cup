@@ -1,5 +1,5 @@
 <?php
-    include "conecta_banco.php";
+    include "../conecta_banco.php";
     $id = $_POST['id'];
     $descricao = $_POST['descricao'];
     $localizacao = $_POST['localizacao'];

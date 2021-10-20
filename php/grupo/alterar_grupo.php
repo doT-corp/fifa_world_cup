@@ -1,5 +1,5 @@
 <?php
-    include "conecta_banco.php";
+    include "../conecta_banco.php";
     $id = $_POST['id'];
     $descricao = $_POST['descricao'];
     $query = "UPDATE grupo SET descricao = '$descricao' WHERE idgrupo = '$id';";

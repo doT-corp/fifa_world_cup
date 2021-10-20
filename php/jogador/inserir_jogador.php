@@ -1,5 +1,5 @@
 <?php>
-    include "conecta_banco.php";
+    include "../conecta_banco.php";
     $insere = "INSERT INTO jogador 
     (idjogador, nome, camisa, posicao, pais_idpais, situacao) VALUES
     ('$_POST[id]', '$_POST[nome]', '$_POST[camisa]', '$_POST[pais]', '$_POST[idpais]', '$_POST[situacao]')";

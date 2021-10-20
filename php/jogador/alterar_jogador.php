@@ -1,5 +1,5 @@
 <?php
-    include "conecta_banco.php";
+    include "../conecta_banco.php";
     $id = $_POST['id'];
     $nome = $_POST['nome'];
     $camisa = $_POST['camisa'];

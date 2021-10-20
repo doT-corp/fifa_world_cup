@@ -1,5 +1,5 @@
 <?php
-    include "conecta_banco.php";
+    include "../conecta_banco.php";
     $id = $_POST['id'];
     $query = "DELETE FROM estadio WHERE idestadio = '$id';";
     if(mysqli_query($conexao, $query))

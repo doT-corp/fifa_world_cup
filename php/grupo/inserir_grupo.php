@@ -1,5 +1,5 @@
 <?php
-    include "conecta_banco.php";
+    include "../conecta_banco.php";
     $insere = "INSERT INTO grupo 
     (idgrupo, descrição) VALUES
     ('$_POST[id]', '$_POST[descricao]')";
