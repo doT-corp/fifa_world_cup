@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `cartao` (
   `amarelo` tinyint(1) NOT NULL,
   `vermelho` tinyint(1) NOT NULL,
   `tempo` varchar(20) NOT NULL,
-  PRIMARY KEY (`jogos_idrodada`),
   KEY `jogador_idjogador` (`jogador_idjogador`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -64,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `gols` (
   `jogo_idrodada` int(11) NOT NULL,
   `jogador_idjogador` int(11) DEFAULT NULL,
   `tempo` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`jogo_idrodada`),
   KEY `jogador_idjogador` (`jogador_idjogador`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -108,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
 DROP TABLE IF EXISTS `jogos`;
 CREATE TABLE IF NOT EXISTS `jogos` (
   `idrodada` int(11) NOT NULL,
-  `dataa` date NOT NULL,
+  `data` date NOT NULL,
   `estadio_idestadio` int(11) NOT NULL,
   `pais_idpais_1` int(11) NOT NULL,
   `pais_idpais_2` int(11) NOT NULL,
@@ -138,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `pais` (
   `empates` int(11) NOT NULL,
   `derrotas` int(11) NOT NULL,
   `golspro` int(11) NOT NULL,
-  `golcontra` int(11) NOT NULL,
+  `golscontra` int(11) NOT NULL,
   `grupo_idgrupo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idpais`),
   KEY `grupo_idgrupo` (`grupo_idgrupo`)
@@ -156,7 +154,6 @@ CREATE TABLE IF NOT EXISTS `substituicao` (
   `jogador_idjogador_sai` int(11) DEFAULT NULL,
   `jogador_idjogador_entra` int(11) DEFAULT NULL,
   `tempo` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`jogos_idrodada`),
   KEY `jogador_idjogador_sai` (`jogador_idjogador_sai`),
   KEY `jogador_idjogador_entra` (`jogador_idjogador_entra`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
