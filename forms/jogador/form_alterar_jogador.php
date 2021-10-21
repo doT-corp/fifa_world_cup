@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alterar Estádio</title>
+        <title>Inserir Jogador</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -43,15 +43,23 @@
     </head>
     <body>
         <h1>Formulário para alterar dados do jogador</h1>
-        <form name="jogador" action="../php/alterar_jogador.php" method="post">
+        <form name="estadio" action="../../php/jogador/alterar_jogador.php" method="post">
                 ID: <input class="input-text" type="number" name="id"/> <br><br>
-                nome: <input class="input-text" type="text" name="nome"/> <br><br>
-                camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
-                posicao: <input class="input-text" type="text" name="posicao"/> <br><br>
-                pais: <input class="input-text" type="text" name="pais"/> <br><br>
-                idpais: <input class="input-text" type="number" name="idpais"/> <br><br>
-                situacao: <input class="input-text" type="text" name="situacao"/> <br><br>
-                <input type="submit" class="btn" value="Alterar"/>
+                Nome: <input class="input-text" type="text" name="nome"/> <br><br>
+                Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
+                Posição: <input class="input-text" type="text" name="posicao"/> <br><br>
+                País: <select name="pais">
+                        <?php
+                            include "../../php/conecta_banco.php";
+                            $query = mysqli_query($conexao, "SELECT selecao FROM pais");
+                            while($dados = mysqli_fetch_assoc($query))
+                            {
+                                echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
+                            }
+                        ?>
+                </select> <br><br>
+                Situação: <input class="input-text" type="text" name="situacao"/> <br><br>
+                <input type="submit" class="btn" value="Enviar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>
     </body>

@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
 DROP TABLE IF EXISTS `jogos`;
 CREATE TABLE IF NOT EXISTS `jogos` (
   `idrodada` int(11) NOT NULL,
-  `data` date NOT NULL,
+  `data` datetime NOT NULL,
   `estadio_idestadio` int(11) NOT NULL,
   `pais_idpais_1` int(11) NOT NULL,
   `pais_idpais_2` int(11) NOT NULL,
