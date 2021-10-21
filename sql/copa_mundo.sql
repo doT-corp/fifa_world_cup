@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `cartao` (
 DROP TABLE IF EXISTS `estadio`;
 CREATE TABLE IF NOT EXISTS `estadio` (
   `idestadio` int(11) NOT NULL,
-  `descrição` varchar(20) DEFAULT NULL,
-  `localização` varchar(20) DEFAULT NULL,
+  `descricao` varchar(20) DEFAULT NULL,
+  `localizacao` varchar(20) DEFAULT NULL,
   `capacidade` int(11) NOT NULL,
   PRIMARY KEY (`idestadio`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

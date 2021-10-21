@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Jogador</title>
+        <title>Inserir Jogo</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -42,23 +42,44 @@
         </style>
     </head>
     <body>
-        <h1>Formulário para inserir dados do jogador</h1>
-        <form name="estadio" action="../../php/jogador/inserir_jogador.php" method="post">
+        <h1>Formulário para inserir jogo</h1>
+        <form name="estadio" action="../../php/jogo/inserir_jogo.php" method="post">
                 ID: <input class="input-text" type="number" name="id"/> <br><br>
-                Nome: <input class="input-text" type="text" name="nome"/> <br><br>
-                Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
-                Posição: <input class="input-text" type="text" name="posicao"/> <br><br>
-                País: <select name="pais">
+                Dia: <input type="date" name="data"/> <br><br>
+                Hora: <input type="time" name="hora"/> <br><br>
+                Estadio: <select name="estadio">
+                        <?php
+                            include "../../php/conecta_banco.php";
+                            $query = mysqli_query($conexao, "SELECT descricao FROM estadio");
+                            while($dados = mysqli_fetch_assoc($query))
+                            {
+                                echo "<option value='".$dados['idestadio']."'>".$dados['descricao']."</option>";
+                            }
+                        ?>
+                </select> <br><br>
+                País 1: <select name="pais_um">
                         <?php
                             include "../../php/conecta_banco.php";
                             $query = mysqli_query($conexao, "SELECT selecao FROM pais");
                             while($dados = mysqli_fetch_assoc($query))
                             {
-                                echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
+                                echo "<option value='".$dados['pais']."'>".$dados['selecao']."</option>";
                             }
                         ?>
                 </select> <br><br>
-                Situação: <input class="input-text" type="text" name="situacao"/> <br><br>
+                País 2: <select name="pais_dois">
+                        <?php
+                            include "../../php/conecta_banco.php";
+                            $query = mysqli_query($conexao, "SELECT selecao FROM pais");
+                            while($dados = mysqli_fetch_assoc($query))
+                            {
+                                echo "<option value='".$dados['pais']."'>".$dados['selecao']."</option>";
+                            }
+                        ?>
+                </select> <br><br>
+                Gols País 1: <input class="input-text" type="number" name="gols_pais_um"/> <br><br>
+                Gols País 2: <input class="input-text" type="number" name="gols_pais_dois"/> <br><br>
+                Público: <input class="input-text" type="number" name="publico"/> <br><br>
                 <input type="submit" class="btn" value="Enviar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>

@@ -59,7 +59,7 @@
                         ?>
                 </select> <br><br>
                 Situação: <input class="input-text" type="text" name="situacao"/> <br><br>
-                <input type="submit" class="btn" value="Enviar"/>
+                <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>
     </body>
