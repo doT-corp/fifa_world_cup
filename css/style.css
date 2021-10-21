@@ -144,7 +144,7 @@ nav a:hover{
     color: #696969;
 }
 .img_back{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .title{
     font-family: 'Geo', sans-serif;
@@ -172,4 +172,58 @@ nav a:hover{
     text-align: center;
     text-shadow: 2px 2px 4px #000000;
     font-size: 20px;
+}
+.bottons{
+    margin-top: 160px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn-down{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.image{
+    opacity: 1;
+    display: block;
+    
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.paises:hover .image {
+    opacity: 0.8;
+  }
+.estadio:hover .image{
+    opacity: 0.8;
+}
+.jogadores:hover .image{
+    opacity: 0.8;
+}
+.grupo:hover .image{
+    opacity: 0.8;
+}
+.jogos:hover .image{
+    opacity: 0.8;
+}
+.title2{
+    font-family: 'Geo', sans-serif;
+    color: #D1D1D1;
+    text-align: center;
+    margin: 80px;
+    position: relative;
+    line-height: 60px;
+    font-size: 40px;
+}
+.title2::after{
+    content: '';
+    background:#D1D1D1;
+    width: 190px;
+    height: 5px;
+    border-radius: 1px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
 }
