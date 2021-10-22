@@ -44,8 +44,16 @@
     <body>
         <h1>Formulário para deletar jogador</h1>
         <form name="jogador" action="../../php/jogador/deletar_jogador.php" method="post">
-                ID: <input class="input-text" type="number" name="id"/> <br><br>
-                <input type="submit" class="btn" value="Deletar"/>
+            ID: <select name="id">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT idjogador, nome FROM jogador");
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        echo "<option value='".$dados['idjogador']."'>".$dados['idjogador']." - ".$dados['nome']."</option>";
+                    }
+                ?>
+            <input type="submit" class="btn" value="Deletar"/>
         </form>
     </body>
 </html>

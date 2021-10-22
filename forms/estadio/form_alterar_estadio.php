@@ -47,10 +47,10 @@
                 ID: <select name="id">
                     <?php
                         include "../../php/conecta_banco.php";
-                        $query = mysqli_query($conexao, "SELECT idestadio FROM estadio");
+                        $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
                         while($dados = mysqli_fetch_assoc($query))
                         {
-                            echo "<option value='".$dados['idestadio']."'>".$dados['idestadio']."</option>";
+                            echo "<option value='".$dados['idestadio']."'>".$dados['idestadio']." - ".$dados['descricao']."</option>";
                         }
                     ?>
                 </select><br><br>

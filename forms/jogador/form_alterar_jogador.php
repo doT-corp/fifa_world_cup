@@ -44,21 +44,40 @@
     <body>
         <h1>Formulário para alterar dados do jogador</h1>
         <form name="estadio" action="../../php/jogador/alterar_jogador.php" method="post">
-                ID: <input class="input-text" type="number" name="id"/> <br><br>
+                ID: <select name="id">
+                    <?php
+                        include "../../php/conecta_banco.php";
+                        $query = mysqli_query($conexao, "SELECT idjogador, nome FROM jogador");
+                        while($dados = mysqli_fetch_assoc($query))
+                        {
+                            echo "<option value='".$dados['idjogador']."'>".$dados['idjogador']." - ".$dados['nome']."</option>";
+                        }
+                    ?>
+                </select><br><br>
                 Nome: <input class="input-text" type="text" name="nome"/> <br><br>
                 Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
-                Posição: <input class="input-text" type="text" name="posicao"/> <br><br>
-                País: <select name="pais">
+                Posição: <select name="posicao">
+                    <option value="Atacante">Atacante</option>
+                    <option value="Central">Central</option>
+                    <option value="Goleiro">Goleiro</option>
+                    <option value="Lateral Direito">Lateral Direito</option>
+                    <option value="Lateral Esquerdo">Lateral Esquerdo</option>
+                    <option value="Meio Campo">Meio Campo</option>
+                </select> <br><br>
+                País: <select name="idpais">
                         <?php
                             include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT selecao FROM pais");
-                            while($dados = mysqli_fetch_assoc($query))
+                            $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais");
+                            while($dados = mysqli_fetch_array($query))
                             {
                                 echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
                             }
                         ?>
-                </select> <br><br>
-                Situação: <input class="input-text" type="text" name="situacao"/> <br><br>
+                </select><br><br>
+                Situação: 
+                <input type="radio" name="situacao" value="T"> Titular
+                <input type="radio" name="situacao" value="R"> Reserva
+                <br><br>
                 <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>
