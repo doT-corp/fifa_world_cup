@@ -44,7 +44,16 @@
     <body>
         <h1>Formulário para alterar dados do estádio</h1>
         <form name="estadio" action="../../php/estadio/alterar_estadio.php" method="post">
-                ID que será alterado: <input class="input-text" type="number" name="id"/> <br><br><br>
+                ID: <select name="id">
+                    <?php
+                        include "../../php/conecta_banco.php";
+                        $query = mysqli_query($conexao, "SELECT idestadio FROM estadio");
+                        while($dados = mysqli_fetch_assoc($query))
+                        {
+                            echo "<option value='".$dados['idestadio']."'>".$dados['idestadio']."</option>";
+                        }
+                    ?>
+                </select><br><br>
                 Descrição: <input class="input-text" type="text" name="descricao"/> <br><br>
                 Localização: <input class="input-text" type="text" name="localizacao"/> <br><br>
                 Capacidade: <input class="input-text" type="number" name="capacidade"/> <br><br>

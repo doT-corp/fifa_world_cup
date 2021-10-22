@@ -77,24 +77,26 @@
                             }
                         ?>
                 </select> <br><br>
-                Gols País 1: <input class="input-text" onkeyup="road();" type="number" name="gols_pais_um" id="gols_pais_um"/> <br><br>
+                Gols País 1: <input class="input-text" onkeyup="inputBox('gols_pais_um', 'qtd_gols_um', 'goal_one_');" type="number" name="gols_pais_um" id="gols_pais_um"/> <br><br>
                 <div id="qtd_gols_um"></div>
-                Gols País 2: <input class="input-text" type="number" name="gols_pais_dois"/> <br><br>
+                Gols País 2: <input class="input-text" onkeyup="inputBox('gols_pais_dois', 'qtd_gols_dois', 'goal_two_');" type="number" name="gols_pais_dois" id="gols_pais_dois"/> <br><br>
+                <div id="qtd_gols_dois"></div>
+                Cartão:
                 Público: <input class="input-text" type="number" name="publico"/> <br><br>
-                Cartão: 
                 <input type="submit" class="btn" value="Enviar"/>
                 <input type="reset" class="btn" value="Redefinir"/>      
         </form>
         <script type="text/javascript">
-                function road() {
-                    var count = document.getElementById("gols_pais_um").value;
-                    var container = document.getElementById("qtd_gols_um");
+                function inputBox(inputClass, container, name) {
+                    var count = document.getElementById(inputClass).value;
+                    var container = document.getElementById(container);
                     var myhtml = '';
                     while(count--) {
-                        myhtml += "<input type='number' name='goal" + count + "'><br><br>";
+                        myhtml += "
+                        <input type='number' name='"+ name + count + "'><br><input type='number' name='time_"+ name + count + "'><br><br>";
                     }
                     container.innerHTML = myhtml;
-                    console.log(myhtml);
+                    //console.log(myhtml);
                 }
         </script>
     </body>

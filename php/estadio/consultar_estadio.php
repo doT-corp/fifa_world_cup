@@ -9,7 +9,6 @@
                 body{
                     font-size: large;
                     font-family: 'Montserrat', sans-serif;
-                    margin-top: 350px;
                     text-align: center;
                 }
                 button{
@@ -24,26 +23,41 @@
                     background: #f8b2ab;
                     transition: all 0.3s;
                 }
+                td {
+                    padding: 20px;
+                }
         </style>
     </head>
     <body>
-        <?php
-        include "../conecta_banco.php";
-        $procura = "SELECT * FROM estadio";
-        $result = mysqli_query($conexao, $procura);
-        while($row = mysqli_fetch_array($result)) {
-            echo $row['idestadio'];
-            echo "<br>";
-            echo $row['descrição'];
-            echo "<br>";
-            echo $row['localização'];
-            echo "<br>";
-            echo $row['capacidade'];
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
-        }
-        echo '<br><a href="index.html"><button>Voltar</button></a>'
-    ?>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Localização</th>
+                <th>Capacidade</th>
+            <tr>
+                <?php
+                    include "../conecta_banco.php";
+                    $procura = "SELECT * FROM estadio";
+                    $result = mysqli_query($conexao, $procura);
+                    while($row = mysqli_fetch_array($result)) {
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $row['idestadio'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['descricao'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['localizacao'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['capacidade'];
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+        </table>
+        <a href="../../index.html"><button>Voltar</button>
     </body>
 </html>
