@@ -15,7 +15,7 @@ body{
     font-family: 'Bebas Neue', cursive;
 }
 .logo img{
-    width: 60%;
+    width: 70%;
 }
 header{
     background-color: #000000;
@@ -40,7 +40,7 @@ nav ul li{
     display:inline-block;
     margin-right: 10px;
     font-family: 'Geo', sans-serif;
-    font-size: 30px;
+    font-size: 130%;
     text-decoration: none;
     margin-right: 30px;
 }
@@ -259,6 +259,7 @@ footer{
 	font: bold 16px sans-serif;
 	padding: 50px 50px 60px 50px;
 	margin-top: 80px;
+    font: 'Geo', sans-serif;
 }
 
 .footer-distributed .footer-left,
@@ -266,12 +267,14 @@ footer{
 .footer-distributed .footer-right{
 	display: inline-block;
 	vertical-align: top;
+    font: 'Geo', sans-serif;
 }
 
 /* Footer left */
 
 .footer-distributed .footer-left{
 	width: 30%;
+    font: 'Geo', sans-serif;
 }
 
 .footer-distributed h3{
@@ -288,6 +291,7 @@ footer{
 
 .footer-distributed h3 span{
 	color:  #3765cf;
+    font: 'Geo', sans-serif;
 }
 
 /* Footer links */
@@ -387,7 +391,7 @@ footer{
 	width: 35px;
 	height: 35px;
 	cursor: pointer;
-	background-color:  #33383b;
+	
 	border-radius: 2px;
 
 	font-size: 20px;
@@ -419,3 +423,22 @@ footer{
 	}
 
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #3765cf;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1e3772;
+  }
