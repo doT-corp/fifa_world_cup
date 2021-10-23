@@ -44,19 +44,39 @@
     <body>
         <h1>Formulário para alterar dados do estádio</h1>
         <form name="estadio" action="../../php/estadio/alterar_estadio.php" method="post">
-                ID: <select name="id">
-                    <?php
-                        include "../../php/conecta_banco.php";
-                        $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
-                        while($dados = mysqli_fetch_assoc($query))
-                        {
-                            echo "<option value='".$dados['idestadio']."'>".$dados['idestadio']." - ".$dados['descricao']."</option>";
-                        }
-                    ?>
-                </select><br><br>
-                Descrição: <input class="input-text" type="text" name="descricao"/> <br><br>
-                Localização: <input class="input-text" type="text" name="localizacao"/> <br><br>
-                Capacidade: <input class="input-text" type="number" name="capacidade"/> <br><br>
+                ID: <?php
+                        $myid = $_POST['id'];
+                        echo $myid;
+                    ?><br><br>
+                Descrição Antiga: 
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT descricao FROM estadio WHERE idestadio = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['descricao'];
+                ?><br>
+                Descrição Nova:<input class="input-text" type="text" name="descricao"/> <br><br>
+
+                Localização Antiga: 
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT localizacao FROM estadio WHERE idestadio = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['localizacao'];
+                ?><br>
+                Localização Nova: <input class="input-text" type="text" name="localizacao"/> <br><br>
+
+                Capacidade Antiga: 
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT capacidade FROM estadio WHERE idestadio = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['capacidade'];
+                ?><br>                
+                Capacidade Nova: <input class="input-text" type="number" name="capacidade"/> <br><br>
+                <?php
+                    echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
+                ?>
                 <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>
