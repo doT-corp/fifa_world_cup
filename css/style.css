@@ -175,15 +175,15 @@ nav a:hover{
     font-size: 20px;
 }
 .bottons{
-    margin-top: 160px;
+    margin-top: 10%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .btn-down{
     margin-top: 60px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .image{
     opacity: 1;
@@ -442,3 +442,28 @@ footer{
   ::-webkit-scrollbar-thumb:hover {
     background: #1e3772;
   } 
+  @media (max-width: 780px){
+      .menu-bar{
+          visibility: hidden;
+      }
+      .profile .menu{
+          width: 10%;
+      }
+      .btn-down{
+          margin: 10%
+      }
+      .jogadores img{
+          width: 90%
+      }
+      .jogos img{
+          width: 90%;
+          margin-top: 10%;
+      }
+      .paises img{
+        width: 70%;
+        margin-left: 15%;
+      }
+      .estadio img{
+        width: 70%;
+      }
+  }
