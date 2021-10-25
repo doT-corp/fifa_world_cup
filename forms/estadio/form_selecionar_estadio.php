@@ -44,7 +44,7 @@
         </style>
     </head>
     <body>
-        <h1>Escolha o estádio para deletar</h1>
+        <h1>Escolha o estádio para alterar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
             <form name="estadio" action="form_alterar_estadio.php" id="myForm" method="post">
                 <ul id="list-buttons">
