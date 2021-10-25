@@ -5,7 +5,7 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body{ font: 14px sans-serif; }
+        body{ font: 14px sans-serif;justify-content: center; }
         .wrapper{ width: 360px; padding: 20px; }
     </style>
 </head>
@@ -16,17 +16,17 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); >
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="">
                 <span class="invalid-feedback"></span>
             </div>    
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="">
                 <span class="invalid-feedback"></span>
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
+                <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="">
                 <span class="invalid-feedback"></span>
             </div>
             <div class="form-group">
