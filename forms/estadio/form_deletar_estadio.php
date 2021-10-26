@@ -46,19 +46,19 @@
     <body>
         <h1>Escolha o estádio para deletar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
-            <form name="estadio" action="../../php/estadio/deletar_estadio.php" id="myForm" method="post">
-                <ul id="list-buttons">
-                    <?php
-                        include "../../php/conecta_banco.php";
-                        $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
-                        while($dados = mysqli_fetch_assoc($query))
-                        {
-                            echo "<li><button class='btn' id='".$dados['idestadio']."' onclick='getCupElement(".$dados['idestadio'].");'>".$dados['idestadio']." - ".$dados['descricao']."</button></li>";
-                        }
-                    ?>
-                </ul>
-                <input type="text" name="id" id="secret" style="display: none"/>
-            </form>
+        <form name="estadio" action="../../php/estadio/deletar_estadio.php" id="myForm" method="post">
+            <ul id="list-buttons">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        echo "<li><button class='btn' id='".$dados['idestadio']."' onclick='getCupElement(".$dados['idestadio'].");'>".$dados['idestadio']." - ".$dados['descricao']."</button></li>";
+                    }
+                ?>
+            </ul>
+            <input type="text" name="id" id="secret" style="display: none"/>
+        </form>
     </body>
     <script type="text/javascript">
         function search() {
