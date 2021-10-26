@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Deletar Jogador</title>
+        <title>Selecione um Jogador</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -46,7 +46,7 @@
         </style>
     </head>
     <body>
-        <h1>Escolha o país e jogador para deletar</h1>
+        <h1>Escolha o país e jogador</h1>
         <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
         <form method="post">
             <select name="pais" id="mySelect">
@@ -62,7 +62,7 @@
             </select>
             <input type="submit" value="Pesquisar"/>
         </form>
-        <form name="jogador" action="../../php/jogador/deletar_jogador.php" method="post">
+        <form name="jogador" action="form_alterar_jogador.php" method="post">
         <ul id="list-buttons">
                 <?php
                     include "../../php/conecta_banco.php";
