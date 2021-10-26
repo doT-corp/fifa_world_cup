@@ -29,29 +29,7 @@
         </style>
     </head>
     <body>
-        <form action="pesquisar_estadio.php" method="post">
-            Nome: <input type="text" name="nome"/>
-            Localizacao: <select name="localizacao">
-                <?php
-                    include "../../php/conecta_banco.php";
-                    $query = mysqli_query($conexao, "SELECT localizacao FROM estadio");
-                    $options = array();
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
-                        $loc = $dados['localizacao'];
-                        if(!in_array($loc, $options))
-                            array_push($options, $loc);             
-                    }
-                    for($i = 0; $i < count($options); $i++)
-                        echo "<option value='".$options[$i]."'>".$options[$i]."</option>";
-                ?>
-            </select>
-            <div class="myCapacidade">
-                Capacidade: <input type="number" name="capacidade"/>
-                <input type="radio" name="maior_menor"/> Maior que <br>
-                <input type="radio" name="maior_menor"/> Menor que <br>
-            </div>
-        </form>
+        Pesquisar por nome: <input type="text" id="myInput" onkeyup="search();"/>
         <table id="list-stadiums">
             <tr>
                 <th>ID</th>
@@ -83,4 +61,24 @@
         </table>
         <a href="../../index.html"><button>Voltar</button>
     </body>
+    <script type="text/javascript">
+        function search() {
+            var input, filter, myList, tr, tdNames, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            myList = document.getElementById("list-stadiums");
+            tr = myList.getElementsByTagName('tr');
+
+            for (i = 1; i < tr.length; i++) {
+                tdNames = tr[i].getElementsByClassName("nome")[0];
+                txtValue = tdNames.textContent || tdNames.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
 </html>

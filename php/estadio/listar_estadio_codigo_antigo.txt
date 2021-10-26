@@ -29,7 +29,33 @@
         </style>
     </head>
     <body>
-        Pesquisar por nome: <input type="text" id="myInput" onkeyup="search();"/>
+        <form method="post">
+            Nome: <input type="text" name="nome"/>
+            Localização: <select name="localizacao">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT localizacao FROM estadio");
+                    $options = array();
+                    array_push($options, 'Qualquer'); 
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        $loc = $dados['localizacao'];
+                        if(!in_array($loc, $options))
+                            array_push($options, $loc);             
+                    }
+                    for($i = 0; $i < count($options); $i++)
+                        echo "<option value='".$options[$i]."'>".$options[$i]."</option>";
+                ?>
+            </select>
+            <div class="myCapacidade">
+                Capacidade: <input type="number" name="capacidade" id="capacity" style="display: none"/>
+                <input type="radio" name="maior_menor" value="qualquer" id="qual" checked onclick="detect();"/> Qualquer <br>
+                <input type="radio" name="maior_menor" value="maior" onclick="detect();"/> Maior que <br>
+                <input type="radio" name="maior_menor" value="menor" onclick="detect();"/> Menor que <br>
+                <input type="radio" name="maior_menor" value="igual" onclick="detect();"/> Igual <br>
+            </div>
+            <input type="submit" name="botaoEnviar" value="Pesquisar"/>
+        </form>
         <table id="list-stadiums">
             <tr>
                 <th>ID</th>
@@ -39,14 +65,31 @@
             </tr>
                 <?php
                     include "../conecta_banco.php";
-                    $procura = "SELECT * FROM estadio";
+                    $botaoEnviar = filter_input(INPUT_POST, 'botaoEnviar', FILTER_SANITIZE_STRING);
+                    $procura = "SELECT * FROM estadio;";
+                    $opcoes_selecionadas = array();
+                    if($botaoEnviar)
+                    {
+                        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+                        $localizacao = filter_input(INPUT_POST, 'localizacao', FILTER_SANITIZE_STRING);
+                        $maior_menor = filter_input(INPUT_POST, 'maior_menor', FILTER_SANITIZE_STRING);
+                        $capacidade = filter_input(INPUT_POST, 'capacidade', FILTER_SANITIZE_STRING);
+
+                        if($nome != null) array_push($opcoes_selecionadas, "nome");
+                        if($capacidade != null) array_push($opcoes_selecionadas, "capacidade");
+                        foreach($sel as $opcoes_selecionadas)
+                        {
+                            if($sel == "nome") $procura += " WHERE descricao LIKE '%$nome%';";
+                        }
+
+                    }
                     $result = mysqli_query($conexao, $procura);
                     while($row = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>";
                     echo $row['idestadio'];
                     echo "</td>";
-                    echo "<td class='nome'>";
+                    echo "<td>";
                     echo $row['descricao'];
                     echo "</td>";
                     echo "<td>";
@@ -60,25 +103,14 @@
             ?>
         </table>
         <a href="../../index.html"><button>Voltar</button>
-    </body>
-    <script type="text/javascript">
-        function search() {
-            var input, filter, myList, tr, tdNames, i, txtValue;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            myList = document.getElementById("list-stadiums");
-            tr = myList.getElementsByTagName('tr');
-
-            for (i = 1; i < tr.length; i++) {
-                tdNames = tr[i].getElementsByClassName("nome")[0];
-                txtValue = tdNames.textContent || tdNames.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
+        <script type="text/javascript">
+            function detect() {
+                capacity = document.getElementById('capacity');
+                radio_qual = document.getElementById('qual');
+                
+                if(radio_qual.checked) capacity.style.display = 'none';
+                else capacity.style.display = '';
             }
-        }
-
-    </script>
+        </script>
+    </body>
 </html>
