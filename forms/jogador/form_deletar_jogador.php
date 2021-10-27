@@ -118,7 +118,6 @@
                 var myForm = document.getElementById("myForm").
                 myForm.submit();
             }
-
         </script>
     </body>
 </html>
