@@ -46,6 +46,7 @@
     <body>
         <h1>Escolha o estádio para deletar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
+        <h3 id="counter">Número de estádios encontrados: 0</h3>
         <form name="estadio" action="../../php/estadio/deletar_estadio.php" id="myForm" method="post">
             <ul id="list-buttons">
                 <?php
@@ -61,8 +62,9 @@
         </form>
     </body>
     <script type="text/javascript">
+        search();
         function search() {
-            var input, filter, ul, li, a, i, txtValue;
+            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
             ul = document.getElementById("list-buttons");
@@ -77,6 +79,17 @@
                     li[i].style.display = "none";
                 }
             }
+
+            n_encontrados = li.length;
+
+            for (i = 0; i < li.length; i++) {
+                if (li[i].style.display == "none") {
+                    n_encontrados--;
+                }
+            }
+
+            counter = document.getElementById("counter");
+            counter.innerHTML = "Número de estádios encontrados: " + n_encontrados;
         }
 
         function getCupElement(myId) {

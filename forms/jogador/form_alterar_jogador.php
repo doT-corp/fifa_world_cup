@@ -44,19 +44,31 @@
     <body>
         <h1>Formulário para alterar dados do jogador</h1>
         <form name="estadio" action="../../php/jogador/alterar_jogador.php" method="post">
-                ID: <select name="id">
-                    <?php
-                        include "../../php/conecta_banco.php";
-                        $query = mysqli_query($conexao, "SELECT idjogador, nome FROM jogador");
-                        while($dados = mysqli_fetch_assoc($query))
-                        {
-                            echo "<option value='".$dados['idjogador']."'>".$dados['idjogador']." - ".$dados['nome']."</option>";
-                        }
-                    ?>
-                </select><br><br>
-                Nome: <input class="input-text" type="text" name="nome"/> <br><br>
-                Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
-                Posição: <select name="posicao">
+                ID: <?php
+                        $myid = $_POST['id'];
+                        echo $myid;
+                    ?><br><br>
+                Nome Antigo: <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT nome FROM jogador WHERE idjogador = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['nome'];
+                ?><br>
+                Nome Novo: <input class="input-text" type="text" name="nome"/> <br><br>
+                Camisa Antiga: <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT camisa FROM jogador WHERE idjogador = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['camisa'];
+                ?><br>
+                Camisa Nova: <input class="input-text" type="text" name="camisa"/> <br><br>
+                Posição Antiga: <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT posicao FROM jogador WHERE idjogador = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['posicao'];
+                ?><br>
+                Posição Nova: <select name="posicao">
                     <option value="Atacante">Atacante</option>
                     <option value="Central">Central</option>
                     <option value="Goleiro">Goleiro</option>
@@ -64,7 +76,13 @@
                     <option value="Lateral Esquerdo">Lateral Esquerdo</option>
                     <option value="Meio Campo">Meio Campo</option>
                 </select> <br><br>
-                País: <select name="idpais">
+                País Antigo: <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT pais.selecao FROM pais INNER JOIN jogador ON jogador.pais_idpais = pais.idpais WHERE jogador.idjogador = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['selecao'];
+                ?><br>
+                País Novo: <select name="idpais">
                         <?php
                             include "../../php/conecta_banco.php";
                             $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais");
@@ -74,10 +92,19 @@
                             }
                         ?>
                 </select><br><br>
-                Situação: 
+                Situação Antiga: <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT situacao FROM jogador WHERE idjogador = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['situacao'];
+                ?><br>
+                Situação Nova: 
                 <input type="radio" name="situacao" value="T"> Titular
                 <input type="radio" name="situacao" value="R"> Reserva
                 <br><br>
+                <?php
+                    echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
+                ?>
                 <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>

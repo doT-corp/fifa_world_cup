@@ -48,6 +48,7 @@
     <body>
         <h1>Escolha o país e jogador para deletar</h1>
         <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
+        <h3 id="counter">Número de jogadores encontrados: 0</h3>
         <form method="post">
             <select name="pais" id="mySelect">
                 <?php
@@ -60,10 +61,11 @@
                     }
                 ?>
             </select>
-            <input type="submit" value="Pesquisar"/>
+            <input type="text" name="id" id="secret" style="display: none"/>
+            <input type="submit" value="Filtrar"/>
         </form>
-        <form name="jogador" action="../../php/jogador/deletar_jogador.php" method="post">
-        <ul id="list-buttons">
+        <form name="jogador" action="../../php/jogador/deletar_jogador.php" id="myForm" method="post">
+            <ul id="list-buttons">
                 <?php
                     include "../../php/conecta_banco.php";
                     $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
@@ -76,11 +78,12 @@
                     }
                 ?>
             </ul>
-            <input type="text" name="id" id="secret" style="display: none"/>
+            <input type="text" name="id" id="secret2" style="display: none"/>
         </form>
         <script type="text/javascript">
+            search('myInput', 'button');
             function search(myInput, myTag) {
-                var input, filter, ul, li, a, i, txtValue;
+                var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
                 input = document.getElementById(myInput);
                 filter = input.value.toUpperCase();
                 ul = document.getElementById("list-buttons");
@@ -95,11 +98,22 @@
                         li[i].style.display = "none";
                     }
                 }
+
+                n_encontrados = li.length;
+
+                for (i = 0; i < li.length; i++) {
+                    if (li[i].style.display == "none") {
+                        n_encontrados--;
+                    }
+                }
+
+                counter = document.getElementById("counter");
+                counter.innerHTML = "Número de jogadores encontrados: " + n_encontrados;
             }       
 
             function getCupElement(myId) {
                 var btn = document.getElementById(myId);
-                var secret = document.getElementById('secret');
+                var secret = document.getElementById('secret2');
                 secret.value = myId;
                 var myForm = document.getElementById("myForm").
                 myForm.submit();

@@ -31,34 +31,60 @@
     <body>
         Pesquisar por nome: <input type="text" id="myInput" onkeyup="search();"/>
         <h3 id="counter">Número de estádios encontrados: 0</h3>
+        <form method="post">
+            <select name="pais" id="mySelect">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    echo "<option value='selected'>Qualquer</option>";
+                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
+                    }
+                ?>
+            </select>
+            <input type="text" name="id" id="secret" style="display: none"/>
+            <input type="submit" value="Filtrar"/>
+        </form>
+        
         <table id="list-stadiums">
             <tr>
                 <th>ID</th>
-                <th>Descrição</th>
-                <th>Localização</th>
-                <th>Capacidade</th>
+                <th>Nome</th>
+                <th>Camisa</th>
+                <th>Posição</th>
+                <th>Seleção</th>
+                <th>Situação</th>
             </tr>
                 <?php
                     include "../conecta_banco.php";
-                    $procura = "SELECT * FROM estadio";
-                    $result = mysqli_query($conexao, $procura);
-                    while($row = mysqli_fetch_array($result)) {
-                    echo "<tr>";
-                    echo "<td>";
-                    echo $row['idestadio'];
-                    echo "</td>";
-                    echo "<td class='nome'>";
-                    echo $row['descricao'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['localizacao'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['capacidade'];
-                    echo "</td>";
-                    echo "</tr>";
-                }
-            ?>
+                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
+                    $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais;");
+                    if($sel_pais != "selected")
+                        $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais WHERE jogador.pais_idpais = '$sel_pais';");
+                    while($row = mysqli_fetch_array($query)) {
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $row['idjogador'];
+                        echo "</td>";
+                        echo "<td class='nome'>";
+                        echo $row['nome'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['camisa'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['posicao'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['selecao'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['situacao'];
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                ?>
         </table>
         <a href="../../index.html"><button>Voltar</button>
     </body>

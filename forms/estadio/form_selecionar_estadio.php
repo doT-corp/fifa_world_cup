@@ -46,23 +46,25 @@
     <body>
         <h1>Escolha o estádio para alterar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
-            <form name="estadio" action="form_alterar_estadio.php" id="myForm" method="post">
-                <ul id="list-buttons">
-                    <?php
-                        include "../../php/conecta_banco.php";
-                        $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
-                        while($dados = mysqli_fetch_assoc($query))
-                        {
-                            echo "<li><button class='btn' id='".$dados['idestadio']."' onclick='getCupElement(".$dados['idestadio'].");'>".$dados['idestadio']." - ".$dados['descricao']."</button></li>";
-                        }
-                    ?>
-                </ul>
-                <input type="text" name="id" id="secret" style="display: none"/>
-            </form>
+        <h3 id="counter">Número de jogadores encontrados: 0</h3>
+        <form name="estadio" action="form_alterar_estadio.php" id="myForm" method="post">
+            <ul id="list-buttons">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        echo "<li><button class='btn' id='".$dados['idestadio']."' onclick='getCupElement(".$dados['idestadio'].");'>".$dados['idestadio']." - ".$dados['descricao']."</button></li>";
+                    }
+                ?>
+            </ul>
+            <input type="text" name="id" id="secret" style="display: none"/>
+        </form>
     </body>
     <script type="text/javascript">
+        search()
         function search() {
-            var input, filter, ul, li, a, i, txtValue;
+            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
             ul = document.getElementById("list-buttons");
@@ -77,6 +79,17 @@
                     li[i].style.display = "none";
                 }
             }
+            
+            n_encontrados = li.length;
+
+            for (i = 0; i < li.length; i++) {
+                if (li[i].style.display == "none") {
+                    n_encontrados--;
+                }
+            }
+
+            counter = document.getElementById("counter");
+            counter.innerHTML = "Número de estádios encontrados: " + n_encontrados;
         }
 
         function getCupElement(myId) {
