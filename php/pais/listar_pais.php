@@ -29,19 +29,16 @@
         </style>
     </head>
     <body>
-        Pesquisar por nome: <input type="text" id="myInput" onkeyup="search();"/>
-        <h3 id="counter">Número de estádios encontrados: 0</h3>
+        Pesquisar por nome: <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
+        <h3 id="counter">Número de países encontrados: 0</h3>
         <form method="post">
-            <select name="pais" id="mySelect">
-                <?php
-                    include "../../php/conecta_banco.php";
-                    echo "<option value='selected'>Qualquer</option>";
-                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
-                        echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
-                    }
-                ?>
+            <select name="continente" id="mySelect">
+                <option value="selected">Qualquer</option>
+                <option value="África">África</option>
+                <option value="América">América</option>
+                <option value="Ásia">Ásia</option>
+                <option value="Europa">Europa</option>
+                <option value="Oceania">Oceania</option>
             </select>
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar"/>
@@ -51,36 +48,56 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Camisa</th>
-                <th>Posição</th>
-                <th>Seleção</th>
-                <th>Situação</th>
+                <th>Continente</th>
+                <th>Técnico</th>
+                <th>Pontos</th>
+                <th>Vitorias</th>
+                <th>Empates</th>
+                <th>Derrotas</th>
+                <th>Gols Pró</th>
+                <th>Gols Contra</th>
+                <th>Grupo</th>
             </tr>
                 <?php
                     include "../conecta_banco.php";
                     $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
-                    $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais;");
+                    $query = mysqli_query($conexao, "SELECT pais.idpais, pais.selecao, pais.continente, pais.tecnico, pais.pontos, pais.vitorias, pais.empates, pais.derrotas, pais.golspro, pais.golscontra, grupo.descricao FROM pais INNER JOIN grupo ON pais.grupo_idgrupo = grupo.idgrupo;");
                     if($sel_pais != "selected")
-                        $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais WHERE jogador.pais_idpais = '$sel_pais';");
+                        $query = mysqli_query($conexao, "SELECT pais.idpais, pais.selecao, pais.continente, pais.tecnico, pais.pontos, pais.vitorias, pais.empates, pais.derrotas, pais.golspro, pais.golscontra, grupo.descricao FROM pais INNER JOIN grupo ON pais.grupo_idgrupo = grupo.idgrupo WHERE continente = '$sel_con';");
                     while($row = mysqli_fetch_array($query)) {
                         echo "<tr>";
                         echo "<td>";
-                        echo $row['idjogador'];
+                        echo $row['idpais'];
                         echo "</td>";
                         echo "<td class='nome'>";
-                        echo $row['nome'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['camisa'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['posicao'];
-                        echo "</td>";
-                        echo "<td>";
                         echo $row['selecao'];
                         echo "</td>";
                         echo "<td>";
-                        echo $row['situacao'];
+                        echo $row['continente'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['tecnico'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['pontos'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['vitorias'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['empates'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['derrotas'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['golspro'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['golscontra'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['descricao'];
                         echo "</td>";
                         echo "</tr>";
                     }

@@ -8,8 +8,8 @@
     $situacao = $_POST['situacao'];
     $query = "UPDATE jogador SET nome = '$nome', camisa = '$camisa', posicao = '$posicao', pais_idpais = '$idpais', situacao = '$situacao' WHERE idjogador = '$id';";
     if(mysqli_query($conexao, $query))
-        echo "Senha alterada com sucesso!";
+        echo "Jogador alterado com sucesso!";
     else
-        echo "Senha alterada com sucesso!";
+        echo "Erro ao alterar jogador.";
     echo '<br><a href="../../index.html"><button>Voltar</button></a>'
 ?>

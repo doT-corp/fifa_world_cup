@@ -587,16 +587,16 @@ DELIMITER ;
 DROP TABLE IF EXISTS `pais`;
 CREATE TABLE IF NOT EXISTS `pais` (
   `idpais` int(11) NOT NULL,
-  `selecao` varchar(20) DEFAULT NULL,
-  `continente` varchar(20) DEFAULT NULL,
-  `tecnico` varchar(20) DEFAULT NULL,
-  `pontos` int(11) NOT NULL,
-  `vitorias` int(11) NOT NULL,
-  `empates` int(11) NOT NULL,
-  `derrotas` int(11) NOT NULL,
-  `golspro` int(11) NOT NULL,
-  `golscontra` int(11) NOT NULL,
-  `grupo_idgrupo` varchar(20) DEFAULT NULL,
+  `selecao` varchar(20) NOT NULL,
+  `continente` varchar(20) NOT NULL,
+  `tecnico` varchar(20) NOT NULL,
+  `pontos` int(11) DEFAULT NULL,
+  `vitorias` int(11) DEFAULT NULL,
+  `empates` int(11) DEFAULT NULL,
+  `derrotas` int(11) DEFAULT NULL,
+  `golspro` int(11) DEFAULT NULL,
+  `golscontra` int(11) DEFAULT NULL,
+  `grupo_idgrupo` varchar(20) NOT NULL,
   PRIMARY KEY (`idpais`),
   KEY `grupo_idgrupo` (`grupo_idgrupo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

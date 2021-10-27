@@ -57,7 +57,7 @@
                 Grupo: <select name="grupo">
                         <?php
                             include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT descricao FROM grupo");
+                            $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo");
                             while($dados = mysqli_fetch_assoc($query))
                             {
                                 echo "<option value='".$dados['idgrupo']."'>".$dados['descricao']."</option>";

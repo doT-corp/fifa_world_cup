@@ -8,6 +8,6 @@
     if(mysqli_query($conexao, $query))
         echo "Estadio alterado com sucesso!";
     else
-        echo "Estadio alterado com sucesso!";
+        echo "Erro ao alterar estádio.";
     echo '<br><a href="../../index.html"><button>Voltar</button></a>'
 ?>
