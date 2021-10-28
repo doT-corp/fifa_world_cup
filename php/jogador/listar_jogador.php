@@ -94,7 +94,7 @@
             var input, filter, myList, tr, tdNames, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
-            myList = document.getElementById("list-stadiums");
+            myList = document.getElementById("list");
             tr = myList.getElementsByTagName('tr');
 
             for (i = 1; i < tr.length; i++) {

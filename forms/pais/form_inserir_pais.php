@@ -42,7 +42,7 @@
         </style>
     </head>
     <body>
-        <h1>Formulário para inserir dados do jogador</h1>
+        <h1>Formulário para inserir dados do país</h1>
         <form name="estadio" action="../../php/pais/inserir_pais.php" method="post">
                 ID: <input class="input-text" type="number" name="id"/> <br><br>
                 Nome: <input class="input-text" type="text" name="nome"/> <br><br>
