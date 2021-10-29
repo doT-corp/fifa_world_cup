@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Estádio</title>
+        <title>Inserir País</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -42,12 +42,28 @@
         </style>
     </head>
     <body>
-        <h1>Formulário para inserir dados do estádio</h1>
-        <form name="estadio" action="../../php/estadio/inserir_estadio.php" method="post">
+        <h1>Formulário para inserir dados do país</h1>
+        <form name="estadio" action="../../php/pais/inserir_pais.php" method="post">
                 ID: <input class="input-text" type="number" name="id"/> <br><br>
-                Descrição: <input class="input-text" type="text" name="descricao"/> <br><br>
-                Localização: <input class="input-text" type="text" name="localizacao"/> <br><br>
-                Capacidade: <input class="input-text" type="number" name="capacidade"/> <br><br>
+                Nome: <input class="input-text" type="text" name="nome"/> <br><br>
+                Continente: <select name="continente">
+                    <option value="África">África</option>
+                    <option value="América">América</option>
+                    <option value="Ásia">Ásia</option>
+                    <option value="Europa">Europa</option>
+                    <option value="Oceania">Oceania</option>
+                </select> <br><br>
+                Técnico: <input class="input-text" type="text" name="tecnico"/> <br><br>
+                Grupo: <select name="grupo">
+                        <?php
+                            include "../../php/conecta_banco.php";
+                            $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo");
+                            while($dados = mysqli_fetch_assoc($query))
+                            {
+                                echo "<option value='".$dados['idgrupo']."'>".$dados['descricao']."</option>";
+                            }
+                        ?>
+                </select> <br><br>
                 <input type="submit" class="btn" value="Enviar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
         </form>

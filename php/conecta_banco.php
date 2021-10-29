@@ -5,6 +5,8 @@
     $senha = '';
     $conexao = mysqli_connect($servidor, $usuario, $senha);
     
+    mysqli_set_charset($conexao, "utf8");
+
     if(!($conexao)) {
         echo "Não foi possível estabelecer uma conexão com o MySQL.";
         exit;

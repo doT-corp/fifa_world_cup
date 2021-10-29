@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Estádio</title>
+        <title>Inserir Jogo - Estatísticas</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -42,14 +41,28 @@
         </style>
     </head>
     <body>
-        <h1>Formulário para inserir dados do estádio</h1>
-        <form name="estadio" action="../../php/estadio/inserir_estadio.php" method="post">
-                ID: <input class="input-text" type="number" name="id"/> <br><br>
-                Descrição: <input class="input-text" type="text" name="descricao"/> <br><br>
-                Localização: <input class="input-text" type="text" name="localizacao"/> <br><br>
-                Capacidade: <input class="input-text" type="number" name="capacidade"/> <br><br>
-                <input type="submit" class="btn" value="Enviar"/>
-                <input type="reset" class="btn" value="Redefinir"/>
+        <?php
+            include "../../php/conecta_banco.php";
+            $id = $_POST['id'];
+            $data = $_POST['data'];
+            $estadio = $_POST['estadio'];
+            $pais_um = $_POST['pais_um'];
+            $pais_dois = $_POST['pais_dois'];
+            $gols_um = $_POST['gols_um'];
+            $gols_dois = $_POST['gols_dois'];
+            $publico = $_POST['publico'];
+            if(isset($_POST['submit']))
+            {
+                $insere = "INSERT INTO jogos (idrodada, data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
+                VALUES ('$id', '$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
+                $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
+            }
+        ?>
+        <h1>Estatísticas do jogo</h1>
+        <form action="../../php/jogo/inserir_estatisticas_jogo.php" method="post">
+            <h2>Especificar Gols País 1</h2>
+            <input type="submit" class="btn" value="Inserir"/>
+            <input type="reset" class="btn" value="Redefinir"/> 
         </form>
     </body>
 </html>

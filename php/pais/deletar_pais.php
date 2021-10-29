@@ -1,7 +1,7 @@
 <?php
     include "../conecta_banco.php";
     $id = $_POST['id'];
-    $query = "DELETE FROM jogador WHERE idjogador = '$id';";
+    $query = "DELETE FROM pais WHERE idpais = '$id';";
     if(mysqli_query($conexao, $query))
         echo "Registro excluído com sucesso!";
     else
