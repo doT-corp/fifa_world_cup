@@ -1,12 +1,3 @@
-<?php
-    include "../../php/conecta_banco.php";
-    $insere = "INSERT INTO jogos
-    (idrodada, data_hora, estadio_idestadio, pais_idpais1, pais_idpais2, gols_idpais1, gols_idpais2, publico) VALUES
-    ('$_POST[id]', '2020-11-21 20:00:00', '$_POST[estadio]', '$_POST[pais_um]', '$_POST[pais_dois]', '$_POST[gols_um]', '$_POST[gols_dois]', '$_POST[publico]')";
-
-    mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
-?>
-<!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
@@ -50,9 +41,26 @@
         </style>
     </head>
     <body>
+        <?php
+            include "../../php/conecta_banco.php";
+            $id = $_POST['id'];
+            $data = $_POST['data'];
+            $estadio = $_POST['estadio'];
+            $pais_um = $_POST['pais_um'];
+            $pais_dois = $_POST['pais_dois'];
+            $gols_um = $_POST['gols_um'];
+            $gols_dois = $_POST['gols_dois'];
+            $publico = $_POST['publico'];
+            if(isset($_POST['submit']))
+            {
+                $insere = "INSERT INTO jogos (idrodada, data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
+                VALUES ('$id', '$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
+                $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
+            }
+        ?>
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/inserir_estatisticas_jogo.php" method="post">
-            
+            <h2>Especificar Gols País 1</h2>
             <input type="submit" class="btn" value="Inserir"/>
             <input type="reset" class="btn" value="Redefinir"/> 
         </form>

@@ -477,7 +477,7 @@ INSERT INTO `jogador` (`idjogador`, `nome`, `camisa`, `posicao`, `pais_idpais`, 
 DROP TABLE IF EXISTS `jogos`;
 CREATE TABLE IF NOT EXISTS `jogos` (
   `idrodada` int(11) NOT NULL,
-  `data` datetime NOT NULL,
+  `data_hora` datetime NOT NULL,
   `estadio_idestadio` int(11) NOT NULL,
   `pais_idpais_1` int(11) NOT NULL,
   `pais_idpais_2` int(11) NOT NULL,
@@ -494,7 +494,7 @@ CREATE TABLE IF NOT EXISTS `jogos` (
 -- Extraindo dados da tabela `jogos`
 --
 
-INSERT INTO `jogos` (`idrodada`, `data`, `estadio_idestadio`, `pais_idpais_1`, `pais_idpais_2`, `gols_idpais_1`, `gols_idpais_2`, `publico`) VALUES
+INSERT INTO `jogos` (`idrodada`, `data_hora`, `estadio_idestadio`, `pais_idpais_1`, `pais_idpais_2`, `gols_idpais_1`, `gols_idpais_2`, `publico`) VALUES
 (1, '2020-11-21 20:00:00', 5000, 1100, 1120, 2, 1, 73258),
 (2, '2020-11-22 17:00:00', 5200, 1110, 1130, 1, 1, 33456),
 (3, '2020-11-22 17:00:00', 5300, 1140, 1160, 0, 0, 31827),
