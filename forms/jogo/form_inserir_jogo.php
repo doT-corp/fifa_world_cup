@@ -43,14 +43,13 @@
     </head>
     <body>
         <h1>Formulário para inserir jogo</h1>
-        <form name="estadio" action="../../php/jogo/inserir_jogo.php" method="post">
+        <form action="form_inserir_jogo_estatisticas.php" method="post">
                 ID: <input class="input-text" type="number" name="id"/> <br><br>
-                Dia: <input type="date" name="data"/> <br><br>
-                Hora: <input type="time" name="hora"/> <br><br>
+                Dia e Hora: <input type="datetime-local" name="data"/> <br><br>
                 Estadio: <select name="estadio">
                         <?php
                             include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT descricao FROM estadio");
+                            $query = mysqli_query($conexao, "SELECT descricao FROM estadio ORDER BY descricao ASC");
                             while($dados = mysqli_fetch_assoc($query))
                             {
                                 echo "<option value='".$dados['idestadio']."'>".$dados['descricao']."</option>";
@@ -60,7 +59,7 @@
                 País 1: <select name="pais_um">
                         <?php
                             include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT selecao FROM pais");
+                            $query = mysqli_query($conexao, "SELECT selecao FROM pais ORDER BY selecao ASC");
                             while($dados = mysqli_fetch_assoc($query))
                             {
                                 echo "<option value='".$dados['pais']."'>".$dados['selecao']."</option>";
@@ -70,34 +69,21 @@
                 País 2: <select name="pais_dois">
                         <?php
                             include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT selecao FROM pais");
+                            $query = mysqli_query($conexao, "SELECT selecao FROM pais ORDER BY selecao ASC");
                             while($dados = mysqli_fetch_assoc($query))
                             {
                                 echo "<option value='".$dados['pais']."'>".$dados['selecao']."</option>";
                             }
                         ?>
                 </select> <br><br>
-                Gols País 1: <input class="input-text" onkeyup="inputBox('gols_pais_um', 'qtd_gols_um', 'goal_one_');" type="number" name="gols_pais_um" id="gols_pais_um"/> <br><br>
-                <div id="qtd_gols_um"></div>
-                Gols País 2: <input class="input-text" onkeyup="inputBox('gols_pais_dois', 'qtd_gols_dois', 'goal_two_');" type="number" name="gols_pais_dois" id="gols_pais_dois"/> <br><br>
-                <div id="qtd_gols_dois"></div>
-                Cartão:
+                Quantidade de gols do país 1: <input class="input-text" type="number" name="gols_um"/> <br><br>
+                Quantidade de gols do país 2: <input class="input-text" type="number" name="gols_dois"/> <br><br>
+                Quantidade de cartões amarelos: <input class="input-text" type="number" name="amarelo"/> <br><br>
+                Quantidade de cartões vermelhos: <input class="input-text" type="number" name="vermelhos"/> <br><br>
+                Quantidade de substituições (máximo 6): <input class="input-text" type="number" name="substituições" max="6"/> <br><br>
                 Público: <input class="input-text" type="number" name="publico"/> <br><br>
-                <input type="submit" class="btn" value="Enviar"/>
+                <input type="submit" class="btn" value="Continuar"/>
                 <input type="reset" class="btn" value="Redefinir"/>      
         </form>
-        <script type="text/javascript">
-                function inputBox(inputClass, container, name) {
-                    var count = document.getElementById(inputClass).value;
-                    var container = document.getElementById(container);
-                    var myhtml = '';
-                    while(count--) {
-                        myhtml += "
-                        <input type='number' name='"+ name + count + "'><br><input type='number' name='time_"+ name + count + "'><br><br>";
-                    }
-                    container.innerHTML = myhtml;
-                    //console.log(myhtml);
-                }
-        </script>
     </body>
 </html>
