@@ -86,7 +86,7 @@
                 Quantidade de substituições do país 2 (máximo 3): <input class="input-text" type="number" name="substituicoes_dois" max="3"/> <br><br>
                 Público: <input class="input-text" type="number" name="publico"/> <br><br>
                 <input type="submit" name="submit" id="submit" class="btn" value="Continuar"/>
-                <input type="reset" class="btn" value="Redefinir"/>      
+                <input type="reset" class="btn" value="Redefinir"/>
         </form>
     </body>
 </html>

@@ -231,6 +231,10 @@
                 echo "<input type='number' style='display: none;' name='gols_dois' value='".$gols_dois."'>";
                 echo "<input type='number' style='display: none;' name='substituicoes_um' value='".$substituicoes_um."'>";
                 echo "<input type='number' style='display: none;' name='substituicoes_dois' value='".$substituicoes_dois."'>";
+                echo "<input type='number' style='display: none;' name='amarelo_um' value='".$amarelo_um."'>";
+                echo "<input type='number' style='display: none;' name='amarelo_dois' value='".$amarelo_dois."'>";
+                echo "<input type='number' style='display: none;' name='vermelho_um' value='".$vermelho_um."'>";
+                echo "<input type='number' style='display: none;' name='vermelho_dois' value='".$vermelho_dois."'>";
             ?>
             <input type="submit" class="btn" value="Inserir"/>
             <input type="reset" class="btn" value="Redefinir"/> 
