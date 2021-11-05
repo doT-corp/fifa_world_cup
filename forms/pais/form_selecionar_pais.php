@@ -7,12 +7,13 @@
         <title>Selecione o país</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="fifa_icon.png">
+        <link rel="icon" href="../../assets/fifa_icon.png">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
-                background-image: url('../../assets/backgorund.png');
+                /*background-image: url('../../assets/backgorund.png');*/
+                background-color: #171920;
                 width: 98%;
                 height:auto;
                 text-align:center;
@@ -120,6 +121,7 @@
         select{
             margin-left:2%;
         }
+        /*Essa parte é do scroll bar lateral =)*/ 
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -138,6 +140,7 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #1e3772;
   } 
+  /*responsive =)*/ 
         @media screen and (max-width: 600px){
             body{
                 width: auto;
@@ -164,7 +167,9 @@
             select{
                 margin: 3%;
             }
-            
+            #list-buttons{
+                margin-left: -7%;
+            }
         }
         </style>
     </head>

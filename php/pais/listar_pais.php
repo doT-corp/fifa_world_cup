@@ -7,11 +7,10 @@
         <title>Listar País</title>           
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="fifa_icon.png">
+        <link rel="icon" href="../../assets/fifa_icon.png">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <style>
-     
-        
+    
             body{
                 font-family: 'Montserrat', sans-serif;
                 background-image: url('../../assets/backgorund.png');
@@ -19,6 +18,7 @@
                 height:auto;
                 text-align:center;
                 color:rgb(214, 213, 212);
+                margin-top: 3%;
             }
             h1{
                 text-align: center;
