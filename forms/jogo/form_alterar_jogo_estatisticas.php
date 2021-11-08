@@ -58,10 +58,18 @@
             $vermelho_dois = $_POST['vermelho_dois'];
             $publico = $_POST['publico'];
             $query = "UPDATE jogos SET data_hora = '$data', estadio_idestadio = '$estadio', pais_idpais_1 = '$pais_um', pais_idpais_2 = '$pais_dois', gols_idpais_1 = '$gols_um', gols_idpais_2 = '$gols_dois', publico = '$publico' WHERE idrodada = '$id';";
-            $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
+            $result = mysqli_query($conexao, $query) or die("Erro ao alterar jogo.");
+        
+            $resetar = "DELETE FROM gols WHERE jogos_idrodada = '$id';";
+            mysqli_query($conexao, $resetar) or die("Erro!");
+            $resetar = "DELETE FROM substituicao WHERE jogos_idrodada = '$id';";
+            mysqli_query($conexao, $resetar) or die("Erro!");
+            $resetar = "DELETE FROM cartao WHERE jogos_idrodada = '$id';";
+            mysqli_query($conexao, $resetar) or die("Erro!");
+        
         ?>
         <h1>Estatísticas do jogo</h1>
-        <form action="../../php/jogo/inserir_estatisticas_jogo.php" method="post">
+        <form action="../../php/jogo/estatisticas_jogo.php" method="post">
             <h2>Especificar País 1</h2><br>
             <h2>Gols</h2>
             <?php
@@ -193,7 +201,7 @@
             <?php
                 $i = 1;
                 if($amarelo_dois != 0) {
-                    for($i = 1; $i <= $amarelo_um; $i++) {
+                    for($i = 1; $i <= $amarelo_dois; $i++) {
                         $query = mysqli_query($conexao, "SELECT idjogador, nome FROM jogador WHERE pais_idpais = $pais_dois ORDER BY nome ASC");
                         echo "<select name='amarelo_jogador_".$i."_dois'>";
                         while($dados = mysqli_fetch_assoc($query))
@@ -235,7 +243,7 @@
                 echo "<input type='number' style='display: none;' name='vermelho_um' value='".$vermelho_um."'>";
                 echo "<input type='number' style='display: none;' name='vermelho_dois' value='".$vermelho_dois."'>";
             ?>
-            <input type="submit" class="btn" value="Inserir"/>
+            <input type="submit" class="btn" value="Alterar"/>
             <input type="reset" class="btn" value="Redefinir"/> 
         </form>
     </body>

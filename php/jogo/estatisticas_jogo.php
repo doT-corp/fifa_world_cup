@@ -26,7 +26,7 @@
             $g1 = $jogador[$i - 1];
             $g2 = $tempo[$i - 1];
 
-            $insere = "INSERT INTO gols (jogo_idrodada, jogador_idjogador, tempo) 
+            $insere = "INSERT INTO gols (jogos_idrodada, jogador_idjogador, tempo) 
             VALUES ('$id', '$g1', '$g2');";
 
             mysqli_query($conexao, $insere) or die("Não inseriu!");
@@ -46,7 +46,7 @@
             $g1 = $jogador[$i - 1];
             $g2 = $tempo[$i - 1];
 
-            $insere = "INSERT INTO gols (jogo_idrodada, jogador_idjogador, tempo) 
+            $insere = "INSERT INTO gols (jogos_idrodada, jogador_idjogador, tempo) 
             VALUES ('$id', '$g1', '$g2');";
 
             mysqli_query($conexao, $insere) or die("Não inseriu!");
@@ -184,6 +184,6 @@
     $tempo = array();
     $jogador = array();
 
-    echo "Dados inseridos no banco com sucesso!";
+    echo "Dados alterados no banco com sucesso!";
     echo '<br><a href="../../index.html"><button>Voltar</button></a>'
 ?>

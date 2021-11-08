@@ -66,16 +66,16 @@
         </form>
         <form name="jogo" action="form_alterar_jogo.php" method="post">
         <ul id="list-buttons">
-                <?php
-                    include "../../php/conecta_banco.php";
-                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
-                    $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais;");
-                    if($sel_pais != "selected")
-                        $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais WHERE jogos.pais_idpais_1 = '$sel_pais' OR jogos.pais_idpais_2 = '$sel_pais';");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
-                        echo "<li><button class='btn' id='".$dados['idrodada']."' onclick='getCupElement(".$dados['idrodada'].");'>".$dados['pa1']." x ".$dados['pa2']."</button></li>";
-                    }
+            <?php
+                include "../../php/conecta_banco.php";
+                $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
+                $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais;");
+                if($sel_pais != "selected")
+                    $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais WHERE jogos.pais_idpais_1 = '$sel_pais' OR jogos.pais_idpais_2 = '$sel_pais';");
+                while($dados = mysqli_fetch_assoc($query))
+                {
+                    echo "<li><button class='btn' id='".$dados['idrodada']."' onclick='getCupElement(".$dados['idrodada'].");'>".$dados['pa1']." x ".$dados['pa2']."</button></li>";
+                }
                 ?>
             </ul>
             <input type="text" name="id" id="secret2" style="display: none"/>

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Selecione o país</title>
+        <title>Deletar um Jogo</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -46,32 +46,35 @@
         </style>
     </head>
     <body>
-        <h1>Escolha o país e continente</h1>
+        <h1>Escolha o jogo</h1>
         <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
-        <h3 id="counter">Número de países encontrados: 0</h3>
+        <h3 id="counter">Número de jogos encontrados: 0</h3>
         <form method="post">
-            <select name="continente" id="mySelect">
-                <option value="selected">Qualquer</option>
-                <option value="África">África</option>
-                <option value="América">América</option>
-                <option value="Ásia">Ásia</option>
-                <option value="Europa">Europa</option>
-                <option value="Oceania">Oceania</option>
+            <select name="pais" id="mySelect">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    echo "<option value='selected'>Qualquer</option>";
+                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
+                    }
+                ?>
             </select>
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar"/>
         </form>
-        <form name="paises" action="form_alterar_pais.php" id="myForm" method="post">
-            <ul id="list-buttons">
+        <form name="jogo" action="../../php/jogo/deletar_jogo.php" method="post">
+        <ul id="list-buttons">
                 <?php
                     include "../../php/conecta_banco.php";
-                    $sel_con = filter_input(INPUT_POST, 'continente', FILTER_SANITIZE_STRING);
-                    $query = mysqli_query($conexao, "SELECT idpais, selecao, continente FROM pais");
-                    if($sel_con != "selected")
-                        $query = mysqli_query($conexao, "SELECT idpais, selecao, continente FROM pais WHERE continente = '$sel_con';");
+                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
+                    $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais;");
+                    if($sel_pais != "selected")
+                        $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais WHERE jogos.pais_idpais_1 = '$sel_pais' OR jogos.pais_idpais_2 = '$sel_pais';");
                     while($dados = mysqli_fetch_assoc($query))
                     {
-                        echo "<li><button class='btn' id='".$dados['idpais']."' onclick='getCupElement(".$dados['idpais'].");'>".$dados['selecao']."</button><p>ID: ".$dados['idpais']."<br>Contintente: ".$dados['continente']."</p><br><br><br><br></li>";
+                        echo "<li><button class='btn' id='".$dados['idrodada']."' onclick='getCupElement(".$dados['idrodada'].");'>".$dados['pa1']." x ".$dados['pa2']."</button></li>";
                     }
                 ?>
             </ul>
@@ -105,7 +108,7 @@
                 }
 
                 counter = document.getElementById("counter");
-                counter.innerHTML = "Número de países encontrados: " + n_encontrados;
+                counter.innerHTML = "Número de jogos encontrados: " + n_encontrados;
             }       
 
             function getCupElement(myId) {
