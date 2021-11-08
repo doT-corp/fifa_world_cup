@@ -78,12 +78,15 @@
                 </select> <br><br>
                 Quantidade de gols do país 1: <input class="input-text" type="number" name="gols_um"/> <br><br>
                 Quantidade de gols do país 2: <input class="input-text" type="number" name="gols_dois"/> <br><br>
-                Quantidade de cartões amarelos: <input class="input-text" type="number" name="amarelo"/> <br><br>
-                Quantidade de cartões vermelhos: <input class="input-text" type="number" name="vermelhos"/> <br><br>
-                Quantidade de substituições (máximo 6): <input class="input-text" type="number" name="substituicoes" max="6"/> <br><br>
+                Quantidade de cartões amarelos do país 1: <input class="input-text" type="number" name="amarelo_um"/> <br><br>
+                Quantidade de cartões vermelhos do país 1: <input class="input-text" type="number" name="vermelho_um"/> <br><br>
+                Quantidade de cartões amarelos do país 2: <input class="input-text" type="number" name="amarelo_dois"/> <br><br>
+                Quantidade de cartões vermelhos do país 2: <input class="input-text" type="number" name="vermelho_dois"/> <br><br>
+                Quantidade de substituições do país 1 (máximo 3): <input class="input-text" type="number" name="substituicoes_um" max="3"/> <br><br>
+                Quantidade de substituições do país 2 (máximo 3): <input class="input-text" type="number" name="substituicoes_dois" max="3"/> <br><br>
                 Público: <input class="input-text" type="number" name="publico"/> <br><br>
                 <input type="submit" name="submit" id="submit" class="btn" value="Continuar"/>
-                <input type="reset" class="btn" value="Redefinir"/>      
+                <input type="reset" class="btn" value="Redefinir"/>
         </form>
     </body>
 </html>

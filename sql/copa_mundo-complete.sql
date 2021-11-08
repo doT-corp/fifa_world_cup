@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `gols` (
 -- Extraindo dados da tabela `gols`
 --
 
-INSERT INTO `gols` (`jogo_idrodada`, `jogador_idjogador`, `tempo`) VALUES
+INSERT INTO `gols` (`jogos_idrodada`, `jogador_idjogador`, `tempo`) VALUES
 (1, 2240, '22:15'),
 (1, 2245, '51:44'),
 (1, 2445, '62:11'),

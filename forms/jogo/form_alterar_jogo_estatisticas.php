@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Jogo - Estatísticas</title>
+        <title>Alterar Jogo - Estatísticas</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <style>
             body{
@@ -57,9 +57,16 @@
             $vermelho_um = $_POST['vermelho_um'];
             $vermelho_dois = $_POST['vermelho_dois'];
             $publico = $_POST['publico'];
-            $insere = "INSERT INTO jogos (idrodada, data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
-            VALUES ('$id', '$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
-            $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
+            $query = "UPDATE jogos SET data_hora = '$data', estadio_idestadio = '$estadio', pais_idpais_1 = '$pais_um', pais_idpais_2 = '$pais_dois', gols_idpais_1 = '$gols_um', gols_idpais_2 = '$gols_dois', publico = '$publico' WHERE idrodada = '$id';";
+            $result = mysqli_query($conexao, $query) or die("Erro ao alterar jogo.");
+        
+            $resetar = "DELETE FROM gols WHERE jogos_idrodada = '$id';";
+            mysqli_query($conexao, $resetar) or die("Erro!");
+            $resetar = "DELETE FROM substituicao WHERE jogos_idrodada = '$id';";
+            mysqli_query($conexao, $resetar) or die("Erro!");
+            $resetar = "DELETE FROM cartao WHERE jogos_idrodada = '$id';";
+            mysqli_query($conexao, $resetar) or die("Erro!");
+        
         ?>
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/estatisticas_jogo.php" method="post">
@@ -236,7 +243,7 @@
                 echo "<input type='number' style='display: none;' name='vermelho_um' value='".$vermelho_um."'>";
                 echo "<input type='number' style='display: none;' name='vermelho_dois' value='".$vermelho_dois."'>";
             ?>
-            <input type="submit" class="btn" value="Inserir"/>
+            <input type="submit" class="btn" value="Alterar"/>
             <input type="reset" class="btn" value="Redefinir"/> 
         </form>
     </body>
