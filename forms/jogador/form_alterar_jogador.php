@@ -194,12 +194,13 @@
                     echo $row['camisa'];
                 ?><br>
                 Camisa Nova: <input class="input-text" type="text" name="camisa"/> <br><br>
+         
                 Posição Antiga: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT posicao FROM jogador WHERE idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['posicao'];
-                ?><br>
+                ?><br><br>
                 Posição Nova: <select name="posicao">
                     <option value="Atacante">Atacante</option>
                     <option value="Central">Central</option>
@@ -213,7 +214,7 @@
                     $query = mysqli_query($conexao, "SELECT pais.selecao FROM pais INNER JOIN jogador ON jogador.pais_idpais = pais.idpais WHERE jogador.idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['selecao'];
-                ?><br>
+                ?><br><br>
                 País Novo: <select name="idpais">
                         <?php
                             include "../../php/conecta_banco.php";
