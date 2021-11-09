@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+    session_start();
+
+    if(!isset($_SESSION['usuario'])) echo '<script type="text/JavaScript"> location.reload(); </script>';
+
+    if(!$_SESSION['usuario']) {
+        $_SESSION['usuario'] = "Visitante";
+        exit();
+    }
+?>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -44,8 +53,17 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li><img src="./assets/002-gear.png" alt=""><a href="#"> Configurações </a></li>
-                            <li><img src="./assets/logout.png" alt=""><a href="#"> Saída </a></li>
+                            <li><img src="./assets/002-gear.png" alt=""><a href="#"> Olá, <?php echo $_SESSION['usuario']; ?> </a></li>
+                            <li>
+                                <img src="./assets/logout.png" alt="">
+                                
+                                <?php 
+                                    if($_SESSION['usuario'] == "Visitante")
+                                        echo "<a href='forms/login/login.html'> Login </a>";
+                                    else
+                                        echo "<a href='php/login/logout.php'> Sair </a>";
+                                ?>
+                            </li>
                         </ul>
                     </div>
                </div>

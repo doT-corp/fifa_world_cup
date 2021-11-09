@@ -11,7 +11,7 @@
 
     if($row == 1) {
         $_SESSION['usuario'] = $nome;
-        echo "deu certo";
+        header("Location: ../../index.php");
         exit();
     }
     else
