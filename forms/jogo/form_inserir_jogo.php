@@ -175,7 +175,6 @@
     <body>
         <h1>Formulário para inserir jogo</h1>
         <form name="jogo" action="form_inserir_jogo_estatisticas.php" method="post">
-                ID: <input class="input-text" type="number" name="id" id="id"> <br><br>
                 Dia e Hora: <input type="datetime-local" name="data"/> <br><br>
                 Estadio: <select name="estadio">
                         <?php

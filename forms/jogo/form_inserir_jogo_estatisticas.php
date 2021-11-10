@@ -177,7 +177,6 @@
     <body>
         <?php
             include "../../php/conecta_banco.php";
-            $id = $_POST['id'];
             $data = $_POST['data'];
             $estadio = $_POST['estadio'];
             $pais_um = $_POST['pais_um'];
@@ -191,9 +190,14 @@
             $vermelho_um = $_POST['vermelho_um'];
             $vermelho_dois = $_POST['vermelho_dois'];
             $publico = $_POST['publico'];
-            $insere = "INSERT INTO jogos (idrodada, data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
-            VALUES ('$id', '$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
+            $insere = "INSERT INTO jogos (data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
+            VALUES ('$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
             $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
+
+            $select_id = "SELECT idrodada FROM jogos WHERE data_hora = '$data' AND estadio_idestadio = '$estadio' AND pais_idpais_1 = '$pais_um' AND pais_idpais_2 = '$pais_dois' AND gols_idpais_1 = '$gols_um' AND gols_idpais_2 = '$gols_dois' AND publico = '$publico';";
+            $r_id = mysqli_query($conexao, $select_id) or die("Erro ao inserir jogo.");
+            $myrow = mysqli_fetch_array($r_id);
+            $id = $myrow['idrodada'];
         ?>
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/estatisticas_jogo.php" method="post">
@@ -359,7 +363,7 @@
                     }
                 }
                 else echo "<h3>Não houve cartões vermelhos do time 2</h3>";
-                
+
                 echo "<input type='number' style='display: none;' name='id' value='".$id."'>";
                 echo "<input type='number' style='display: none;' name='gols_um' value='".$gols_um."'>";
                 echo "<input type='number' style='display: none;' name='gols_dois' value='".$gols_dois."'>";

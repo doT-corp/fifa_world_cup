@@ -176,7 +176,6 @@
     <body>
         <h1>Formulário para inserir dados do jogador</h1>
         <form name="estadio" action="../../php/jogador/inserir_jogador.php" method="post">
-                ID: <input class="input-text" type="number" name="id"/> <br><br>
                 Nome: <input class="input-text" type="text" name="nome"/> <br><br>
                 Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
                 Posição: <select name="posicao">
