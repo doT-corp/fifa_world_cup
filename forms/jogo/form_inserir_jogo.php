@@ -217,6 +217,7 @@
                 Público: <input class="input-text" type="number" name="publico"/> <br><br>
                 <input type="submit" name="submit" id="submit" class="btn" value="Continuar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
+                <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>

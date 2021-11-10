@@ -241,6 +241,7 @@
                 ?>
                 <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
+                <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>

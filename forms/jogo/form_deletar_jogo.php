@@ -175,6 +175,7 @@
     <body>
         <h1>Escolha o jogo</h1>
         <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
+        <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         <h3 id="counter">Número de jogos encontrados: 0</h3>
         <form method="post">
             <select name="pais" id="mySelect">

@@ -176,6 +176,7 @@
     <body>
         <h1>Escolha o país e continente</h1>
         <input type="text" id="myInput" class="search" onkeyup="search('myInput', 'button');"/>
+        <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         <h3 id="counter">Número de países encontrados: 0</h3>
         <form method="post">
             <select name="continente" id="mySelect">

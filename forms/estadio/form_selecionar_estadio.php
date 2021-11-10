@@ -214,6 +214,7 @@ button{
     <body>
         <h1>Escolha o estádio para alterar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
+        <a href="../../bottons-estadios.html"><input type="button" class="btn" value="Voltar"/></a>
         <h3 id="counter">Número de jogadores encontrados: 0</h3>
         <form name="estadio" action="form_alterar_estadio.php" id="myForm" method="post">
             <ul id="list-buttons">

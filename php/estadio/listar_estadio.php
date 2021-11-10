@@ -155,6 +155,7 @@ background: #1e3772;
         margin-top: 6%;
     }
     input{
+        margin-top: 10%;
         inline-size: 86%;
     }
     form{
@@ -170,7 +171,12 @@ background: #1e3772;
     select{
         margin: 3%;
     }
-    
+    button{
+        margin-top: 6%;
+        inline-size: 86%;
+    }
+
+
 }
 h3{
     font-weight: 700;
@@ -203,17 +209,22 @@ button{
         font-size: 20px;
         border-color: transparent;
         background-color: #3765cf;
-        box-shadow: 2px 10px 18px #000000 ;
+        box-shadow: 2px 10px 18px #000000;
+        margin-bottom:-4%;
        }
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
+        }
+    table {
+        margin-top: 30px;
+    }   
 </style>
     </head>
     <body>
         <h3>Pesquisar por nome:</h3> <input type="text" id="myInput" onkeyup="search();"/>
         <h3 id="counter">Número de estádios encontrados: 0</h3>
+        <a href="../../bottons-estadios.html"><button>Voltar</button></a>
         <table id="list-stadiums" class="center">
             <tr>
                 <th>ID</th>
@@ -243,7 +254,7 @@ button{
                 }
             ?>
         </table>
-        <a href="../../index.php"><button>Voltar</button>
+        
     </body>
     <script type="text/javascript">
         search();

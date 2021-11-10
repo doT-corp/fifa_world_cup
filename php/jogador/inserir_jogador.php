@@ -219,7 +219,7 @@ button{
 
     mysqli_query($conexao, $insere) or die("Não inseriu!");
     echo "Dados inseridos no banco com sucesso!";
-    echo '<br><a href="../../index.php"><button>Voltar</button></a>';
+    echo '<br><a href="../../bottons-jogadores.html"><button>Voltar</button></a>';
 ?>
     </body>
     </html>

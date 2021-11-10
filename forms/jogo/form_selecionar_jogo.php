@@ -175,6 +175,7 @@
     <body>
         <h1>Escolha o jogo</h1>
         <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
+        <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         <h3 id="counter">Número de jogos encontrados: 0</h3>
         <form method="post">
             <select name="pais" id="mySelect">
@@ -201,7 +202,7 @@
                     $query = mysqli_query($conexao, "SELECT jogos.idrodada, p1.selecao as pa1, p2.selecao as pa2 FROM jogos INNER JOIN pais as p1 ON jogos.pais_idpais_1 = p1.idpais INNER JOIN pais as p2 ON jogos.pais_idpais_2 = p2.idpais WHERE jogos.pais_idpais_1 = '$sel_pais' OR jogos.pais_idpais_2 = '$sel_pais';");
                 while($dados = mysqli_fetch_assoc($query))
                 {
-                    echo "<li><button class='btn' id='".$dados['idrodada']."' onclick='getCupElement(".$dados['idrodada'].");'>".$dados['pa1']." x ".$dados['pa2']."</button></li>";
+                    echo "<li><button class='btn' id='".$dados['idrodada']."' onclick='getCupElement(".$dados['idrodada'].");'>".$dados['pa1']." x ".$dados['pa2']."</button><p>ID Rodada: ".$dados['idrodada']."</p><br><br></li>";
                 }
                 ?>
             </ul>

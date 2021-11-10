@@ -399,7 +399,7 @@ button{
     $jogador = array();
 
     echo "Dados alterados no banco com sucesso!";
-    echo '<br><a href="../../index.php"><button>Voltar</button></a>'
+    echo '<br><a href="../../bottons-jogos.html"><button>Voltar</button></a>'
 ?>
 </body>
 </html>

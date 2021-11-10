@@ -176,6 +176,7 @@
     <body>
         <h1>Escolha o estádio para deletar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
+        <a href="../../bottons-estadios.html"><input type="button" class="btn" value="Voltar"/></a>
         <h3 id="counter">Número de estádios encontrados: 0</h3>
         <form name="estadio" action="../../php/estadio/deletar_estadio.php" id="myForm" method="post">
             <ul id="list-buttons">

@@ -223,7 +223,7 @@ button{
         echo "Estadio alterado com sucesso!";
     else
         echo "Erro ao alterar estádio.";
-    echo '<br><a href="../../index.php"><button>Voltar</button></a>'
+    echo '<br><a href="../../bottons-estadios.html"><button>Voltar</button></a>'
 ?>
 </body>
 </html>

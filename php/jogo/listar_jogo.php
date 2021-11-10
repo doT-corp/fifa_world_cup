@@ -228,7 +228,7 @@ button{
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar" onclick="search();"/>
         </form>
-        
+        <a href="../../bottons-jogos.html"><button>Voltar</button></a>
         <table id="list" class="center">
             <tr>
                 <th>ID</th>
@@ -313,7 +313,6 @@ button{
                     }
                 ?>
         </table>
-        <a href="../../index.php"><button>Voltar</button>
     </body>
     <script type="text/javascript">
         search();

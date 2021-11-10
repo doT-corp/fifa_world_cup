@@ -310,6 +310,7 @@
                 <p>Atenção: após a confirmação, os gols, substituições e cartões serão excluidos para serem repostos por novos.</p>
                 <input type="submit" name="submit" id="submit" class="btn" value="Continuar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
+                <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>
