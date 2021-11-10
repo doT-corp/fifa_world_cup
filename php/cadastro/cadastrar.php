@@ -52,5 +52,5 @@
     }
 
     $conexao->close();
-    echo "<br><a href='../../index.html'><button>Voltar</button></a>";
+    echo "<br><a href='../../index.php'><button>Voltar</button></a>";
 ?>
