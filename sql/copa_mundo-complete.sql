@@ -84,7 +84,7 @@ INSERT INTO `cartao` (`jogos_idrodada`, `jogador_idjogador`, `amarelo`, `vermelh
 
 DROP TABLE IF EXISTS `estadio`;
 CREATE TABLE IF NOT EXISTS `estadio` (
-  `idestadio` int(11) NOT NULL,
+  `idestadio` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(20) DEFAULT NULL,
   `localizacao` varchar(20) DEFAULT NULL,
   `capacidade` int(11) NOT NULL,
@@ -212,7 +212,7 @@ INSERT INTO `grupo` (`idgrupo`, `descricao`) VALUES
 
 DROP TABLE IF EXISTS `jogador`;
 CREATE TABLE IF NOT EXISTS `jogador` (
-  `idjogador` smallint(6) NOT NULL,
+  `idjogador` smallint(6) NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) DEFAULT NULL,
   `camisa` int(11) NOT NULL,
   `posicao` varchar(20) DEFAULT NULL,
@@ -476,7 +476,7 @@ INSERT INTO `jogador` (`idjogador`, `nome`, `camisa`, `posicao`, `pais_idpais`, 
 
 DROP TABLE IF EXISTS `jogos`;
 CREATE TABLE IF NOT EXISTS `jogos` (
-  `idrodada` int(11) NOT NULL,
+  `idrodada` int(11) NOT NULL AUTO_INCREMENT,
   `data_hora` datetime NOT NULL,
   `estadio_idestadio` int(11) NOT NULL,
   `pais_idpais_1` int(11) NOT NULL,
@@ -586,7 +586,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `pais`;
 CREATE TABLE IF NOT EXISTS `pais` (
-  `idpais` int(11) NOT NULL,
+  `idpais` int(11) NOT NULL AUTO_INCREMENT,
   `selecao` varchar(20) NOT NULL,
   `continente` varchar(20) NOT NULL,
   `tecnico` varchar(20) NOT NULL,
