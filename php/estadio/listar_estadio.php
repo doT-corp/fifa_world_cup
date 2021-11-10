@@ -243,7 +243,7 @@ button{
                 }
             ?>
         </table>
-        <a href="../../index.html"><button>Voltar</button>
+        <a href="../../index.php"><button>Voltar</button>
     </body>
     <script type="text/javascript">
         search();

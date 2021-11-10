@@ -258,6 +258,7 @@
             ?>
         </table>
         </div>
+        <a href="../../index.php"><button>Voltar</button>
     </body>
     <script type="text/javascript">
         search();

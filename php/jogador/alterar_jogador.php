@@ -225,7 +225,7 @@ button{
         echo "Jogador alterado com sucesso!";
     else
         echo "Erro ao alterar jogador.";
-    echo '<br><a href="../../index.html"><button>Voltar</button></a>'
+    echo '<br><a href="../../index.php"><button>Voltar</button></a>'
 ?>
 </body>
 </html>
