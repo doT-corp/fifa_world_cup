@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 26-Out-2021 às 17:40
+-- Tempo de geração: 09-Nov-2021 às 16:43
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -109,7 +109,7 @@ INSERT INTO `estadio` (`idestadio`, `descricao`, `localizacao`, `capacidade`) VA
 
 DROP TABLE IF EXISTS `gols`;
 CREATE TABLE IF NOT EXISTS `gols` (
-  `jogo_idrodada` int(11) NOT NULL,
+  `jogos_idrodada` int(11) NOT NULL,
   `jogador_idjogador` int(11) DEFAULT NULL,
   `tempo` varchar(50) DEFAULT NULL,
   KEY `jogador_idjogador` (`jogador_idjogador`)
