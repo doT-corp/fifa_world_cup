@@ -255,6 +255,9 @@ button{
         $chave = rand();
         $sql = "INSERT INTO usuario (nome_completo, nome_usuario, email, senha, data_registro, confirmou, codigo_confirmacao) VALUES ('$nome_completo', '$nome_usuario', '$email', MD5('".$senha."'), NOW(), 0, $chave);";
 
+        $subject = "Verificação de e-mail";
+        
+
         if($conexao->query($sql) === TRUE) {
             $_SESSION['status'] = 'cadastro_feito';
         }
