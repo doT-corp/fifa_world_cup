@@ -228,7 +228,7 @@ button{
         echo "Registro excluído com sucesso!";
     else
         echo "Falha na exclusão!";
-    echo '<br><a href="../../bottons-jogos.html"><button>Voltar</button></a>'
+    echo '<br><a href="../../bottons-jogos.html"><button>Voltar</button></a>';
 ?>
 </body>
 </html>

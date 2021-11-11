@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -250,9 +251,8 @@ button{
             if($_SESSION['usuario'] == "Visitante")
                 echo "<a href='../../index.php'><button>Voltar</button></a>";
             else
-                echo "<a href='../../bottons-paises.html'><button>Voltar</button></a>";
+                echo "<a href='../../bottons-jogadores.html'><button>Voltar</button></a>";
         ?>
-        <a href="../../bottons-jogadores.html"><button>Voltar</button></a>
         <div style="overflow-x:auto;" class="divs">
             <table id="list" class="center">
                 <tr>
