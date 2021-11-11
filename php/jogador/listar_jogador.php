@@ -214,7 +214,18 @@ button{
             background-color: #284a99;
             transition: 0.2s;
 
-        }      
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 50%;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        tr:nth-child(even){background-color: #21242e}
 </style>
     </head>
     <body>
@@ -235,16 +246,23 @@ button{
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar"/>
         </form>
+        <?php
+            if($_SESSION['usuario'] == "Visitante")
+                echo "<a href='../../index.php'><button>Voltar</button></a>";
+            else
+                echo "<a href='../../bottons-paises.html'><button>Voltar</button></a>";
+        ?>
         <a href="../../bottons-jogadores.html"><button>Voltar</button></a>
-        <table id="list" class="center">
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Camisa</th>
-                <th>Posição</th>
-                <th>Seleção</th>
-                <th>Situação</th>
-            </tr>
+        <div style="overflow-x:auto;" class="divs">
+            <table id="list" class="center">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Camisa</th>
+                    <th>Posição</th>
+                    <th>Seleção</th>
+                    <th>Situação</th>
+                </tr>
                 <?php
                     include "../conecta_banco.php";
                     $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
@@ -274,8 +292,8 @@ button{
                         echo "</tr>";
                     }
                 ?>
-        </table>
-        
+            </table>
+        </div>
     </body>
     <script type="text/javascript">
         search();

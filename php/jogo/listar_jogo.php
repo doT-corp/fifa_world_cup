@@ -208,7 +208,18 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 50%;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        tr:nth-child(even){background-color: #21242e}
 </style>
     </head>
     <body>
@@ -228,18 +239,24 @@ button{
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar" onclick="search();"/>
         </form>
-        <a href="../../bottons-jogos.html"><button>Voltar</button></a>
-        <table id="list" class="center">
-            <tr>
-                <th>ID</th>
-                <th>Data e Hora</th>
-                <th>Estadio</th>
-                <th>País 1</th>
-                <th>Gols País 1</th>
-                <th>País 2</th>
-                <th>Gols País 2</th>
-                <th>Público</th>
-            </tr>
+        <?php
+            if($_SESSION['usuario'] == "Visitante")
+                echo "<a href='../../index.php'><button>Voltar</button></a>";
+            else
+                echo "<a href='../../bottons-jogos.html'><button>Voltar</button></a>";
+        ?>
+        <div style="overflow-x:auto;" class="divs">
+            <table id="list" class="center">
+                <tr>
+                    <th>ID</th>
+                    <th>Data e Hora</th>
+                    <th>Estadio</th>
+                    <th>País 1</th>
+                    <th>Gols País 1</th>
+                    <th>País 2</th>
+                    <th>Gols País 2</th>
+                    <th>Público</th>
+                </tr>
                 <?php
                     include "../conecta_banco.php";
                     $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
@@ -312,7 +329,8 @@ button{
                         echo "</tr>";
                     }
                 ?>
-        </table>
+            </table>
+        </div
     </body>
     <script type="text/javascript">
         search();

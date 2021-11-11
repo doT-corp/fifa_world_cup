@@ -13,7 +13,7 @@
     
     body{
         font-family: 'Montserrat', sans-serif;
-        background-image: url('../../assets/backgorund.png');
+        background-color: #171920;
         width: 98%;
         height:auto;
         text-align:center;
@@ -216,22 +216,36 @@ button{
             background-color: #284a99;
             transition: 0.2s;
         }
-    table {
-        margin-top: 30px;
-    }   
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 50%;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        tr:nth-child(even){background-color: #21242e}
 </style>
     </head>
     <body>
         <h3>Pesquisar por nome:</h3> <input type="text" id="myInput" onkeyup="search();"/>
         <h3 id="counter">Número de estádios encontrados: 0</h3>
-        <a href="../../bottons-estadios.html"><button>Voltar</button></a>
-        <table id="list-stadiums" class="center">
-            <tr>
-                <th>ID</th>
-                <th>Descrição</th>
-                <th>Localização</th>
-                <th>Capacidade</th>
-            </tr>
+        <?php
+            if($_SESSION['usuario'] == "Visitante")
+                echo "<a href='../../index.php'><button>Voltar</button></a>";
+            else
+                echo "<a href='../../bottons-estadios.html'><button>Voltar</button></a>";
+        ?>
+        <div style="overflow-x:auto;" class="divs">
+            <table id="list-stadiums" class="center">
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Localização</th>
+                    <th>Capacidade</th>
+                </tr>
                 <?php
                     include "../conecta_banco.php";
                     $procura = "SELECT * FROM estadio";
@@ -252,9 +266,9 @@ button{
                     echo "</td>";
                     echo "</tr>";
                 }
-            ?>
-        </table>
-        
+                ?>
+            </table>
+        </div>
     </body>
     <script type="text/javascript">
         search();

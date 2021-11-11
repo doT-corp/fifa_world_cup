@@ -209,10 +209,25 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
+        } 
+       
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 95%;
+            border: 1px solid #ddd;
+        }
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #21242e}     
 </style>
     </head>
     <body>
+        <H1>Lista dos países presentes</H1>
         Pesquisar por nome: <input type="text" id="myInput" onkeyup="search();"/>
         <h3 id="counter">Número de países encontrados: 0</h3>
         <form method="post">
@@ -227,66 +242,72 @@ button{
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar"/>
         </form>
-        <a href="../../bottons-paises.html"><button>Voltar</button></a>
-        <table id="list" class="center">
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Continente</th>
-                <th>Técnico</th>
-                <th>Pontos</th>
-                <th>Vitorias</th>
-                <th>Empates</th>
-                <th>Derrotas</th>
-                <th>Gols Pró</th>
-                <th>Gols Contra</th>
-                <th>Grupo</th>
-            </tr>
-            <?php
-                include "../conecta_banco.php";
-                $sel_con = filter_input(INPUT_POST, 'continente', FILTER_SANITIZE_STRING);
-                $query = mysqli_query($conexao, "SELECT pais.idpais, pais.selecao, pais.continente, pais.tecnico, pais.pontos, pais.vitorias, pais.empates, pais.derrotas, pais.golspro, pais.golscontra, grupo.descricao FROM pais INNER JOIN grupo ON pais.grupo_idgrupo = grupo.idgrupo;");
-                if($sel_con != "selected")
-                    $query = mysqli_query($conexao, "SELECT pais.idpais, pais.selecao, pais.continente, pais.tecnico, pais.pontos, pais.vitorias, pais.empates, pais.derrotas, pais.golspro, pais.golscontra, grupo.descricao FROM pais INNER JOIN grupo ON pais.grupo_idgrupo = grupo.idgrupo WHERE continente = '$sel_con';");
-                while($row = mysqli_fetch_array($query)) {
-                    echo "<tr'>";
-                    echo "<td>";
-                    echo $row['idpais'];
-                    echo "</td>";
-                    echo "<td class='nome'>";
-                    echo $row['selecao'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['continente'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['tecnico'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['pontos'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['vitorias'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['empates'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['derrotas'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['golspro'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['golscontra'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $row['descricao'];
-                    echo "</td>";
-                    echo "</tr>";
-                }
-            ?>
-        </table>
+        <?php
+            if($_SESSION['usuario'] == "Visitante")
+                echo "<a href='../../index.php'><button>Voltar</button></a>";
+            else
+                echo "<a href='../../bottons-paises.html'><button>Voltar</button></a>";
+        ?>
+            <div style="overflow-x:auto;" class="divs">
+                <table id="list" class="center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Continente</th>
+                        <th>Técnico</th>
+                        <th>Pontos</th>
+                        <th>Vitorias</th>
+                        <th>Empates</th>
+                        <th>Derrotas</th>
+                        <th>Gols Pró</th>
+                        <th>Gols Contra</th>
+                        <th>Grupo</th>
+                    </tr>
+                    <?php
+                        include "../conecta_banco.php";
+                        $sel_con = filter_input(INPUT_POST, 'continente', FILTER_SANITIZE_STRING);
+                        $query = mysqli_query($conexao, "SELECT pais.idpais, pais.selecao, pais.continente, pais.tecnico, pais.pontos, pais.vitorias, pais.empates, pais.derrotas, pais.golspro, pais.golscontra, grupo.descricao FROM pais INNER JOIN grupo ON pais.grupo_idgrupo = grupo.idgrupo;");
+                        if($sel_con != "selected")
+                            $query = mysqli_query($conexao, "SELECT pais.idpais, pais.selecao, pais.continente, pais.tecnico, pais.pontos, pais.vitorias, pais.empates, pais.derrotas, pais.golspro, pais.golscontra, grupo.descricao FROM pais INNER JOIN grupo ON pais.grupo_idgrupo = grupo.idgrupo WHERE continente = '$sel_con';");
+                        while($row = mysqli_fetch_array($query)) {
+                            echo "<tr'>";
+                            echo "<td>";
+                            echo $row['idpais'];
+                            echo "</td>";
+                            echo "<td class='nome'>";
+                            echo $row['selecao'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['continente'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['tecnico'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['pontos'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['vitorias'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['empates'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['derrotas'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['golspro'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['golscontra'];
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row['descricao'];
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </table>
         </div>
     </body>
     <script type="text/javascript">
