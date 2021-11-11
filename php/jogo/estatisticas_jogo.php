@@ -214,8 +214,15 @@ button{
 <body>
     <?php
     include "../conecta_banco.php";
+    
+    $id = 0;
 
-    $id = $_POST["id"];
+    $data = $_POST['data'];
+    $estadio = $_POST['estadio'];
+    $pais_um = $_POST['pais_um'];
+    $pais_dois = $_POST['pais_dois'];
+    $publico = $_POST['publico'];
+    $alterar_inserir = $_POST['alterar-inserir'];
 
     $tempo = array();
     $jogador = array();
@@ -229,6 +236,21 @@ button{
     $vermelho_um = $_POST['vermelho_um'];
     $vermelho_dois = $_POST['vermelho_dois'];
     $i = 0;
+
+    if($alterar_inserir == "alterar") {
+        $id = $_POST["id"];
+        $query = "UPDATE jogos SET data_hora = '$data', estadio_idestadio = '$estadio', pais_idpais_1 = '$pais_um', pais_idpais_2 = '$pais_dois', gols_idpais_1 = '$gols_um', gols_idpais_2 = '$gols_dois', publico = '$publico' WHERE idrodada = '$id';";
+        $result = mysqli_query($conexao, $query) or die("Erro ao alterar jogo.");
+    }
+    else {
+        $insere = "INSERT INTO jogos (data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
+        VALUES ('$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
+        $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
+        $select_id = "SELECT idrodada FROM jogos WHERE data_hora = '$data' AND estadio_idestadio = '$estadio' AND pais_idpais_1 = '$pais_um' AND pais_idpais_2 = '$pais_dois' AND gols_idpais_1 = '$gols_um' AND gols_idpais_2 = '$gols_dois' AND publico = '$publico';";
+        $r_id = mysqli_query($conexao, $select_id) or die("Erro ao inserir jogo.");
+        $myrow = mysqli_fetch_array($r_id);
+        $id = $myrow['idrodada'];
+    }
 
     if($gols_um != 0) 
     {

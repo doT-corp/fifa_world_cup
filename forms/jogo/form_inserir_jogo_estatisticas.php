@@ -198,6 +198,9 @@
             $r_id = mysqli_query($conexao, $select_id) or die("Erro ao inserir jogo.");
             $myrow = mysqli_fetch_array($r_id);
             $id = $myrow['idrodada'];
+
+            $delete_id = "DELETE FROM jogos WHERE idrodada = '$id';";
+            $del = mysqli_query($conexao, $delete_id) or die("Erro ao inserir jogo.");
         ?>
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/estatisticas_jogo.php" method="post">
@@ -364,7 +367,11 @@
                 }
                 else echo "<h3>Não houve cartões vermelhos do time 2</h3>";
 
-                echo "<input type='number' style='display: none;' name='id' value='".$id."'>";
+                echo "<input type='datetime-local' style='display: none;' name='data' value='".$data."'>";
+                echo "<input type='number' style='display: none;' name='estadio' value='".$estadio."'>";
+                echo "<input type='number' style='display: none;' name='pais_um' value='".$pais_um."'>";
+                echo "<input type='number' style='display: none;' name='pais_dois' value='".$pais_dois."'>";
+                echo "<input type='number' style='display: none;' name='publico' value='".$publico."'>";
                 echo "<input type='number' style='display: none;' name='gols_um' value='".$gols_um."'>";
                 echo "<input type='number' style='display: none;' name='gols_dois' value='".$gols_dois."'>";
                 echo "<input type='number' style='display: none;' name='substituicoes_um' value='".$substituicoes_um."'>";
@@ -373,9 +380,11 @@
                 echo "<input type='number' style='display: none;' name='amarelo_dois' value='".$amarelo_dois."'>";
                 echo "<input type='number' style='display: none;' name='vermelho_um' value='".$vermelho_um."'>";
                 echo "<input type='number' style='display: none;' name='vermelho_dois' value='".$vermelho_dois."'>";
+                echo "<input type='text' style='display: none;' name='alterar-inserir' value='inserir'>";
             ?>
             <input type="submit" class="btn" value="Inserir"/>
-            <input type="reset" class="btn" value="Redefinir"/> 
+            <input type="reset" class="btn" value="Redefinir"/>
+            <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>

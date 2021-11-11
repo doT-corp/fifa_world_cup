@@ -80,7 +80,7 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li><img src="./assets/002-gear.png" alt=""><a href="#"> Olá, <?php echo $_SESSION['usuario']; ?>! </a></li>
+                            <li><img src="./assets/002-gear.png" alt=""><a href="perfil.php"> Olá, <?php echo $_SESSION['usuario']; ?>! </a></li>
                             <li>
                                 <?php 
                                     if($_SESSION['usuario'] == "Visitante") {
@@ -201,7 +201,7 @@
 			<div class="footer-right">
 				<p class="footer-company-about">
 					<span>Sobre a empresa</span>
-					A doT. acredita que a criatividade capacita a transformação, pessoalmente e profissionalmente em todos os setores. Além de oferecermos resultados financeiros sólidos, também estamos impulsionando uma inovação incrível, acumulando vários de novos clientes, oferecendo bilhões de experiências em várias telas e processando trilhões de transações de dados online.
+					A doT. acredita que a criatividade capacita a transformação, pessoalmente e profissionalmente em todos os setores. Além de oferecermos resultados financeiros sólidos, também estamos impulsionando uma inovação incrível, acumulando vários de novos clientes, oferecendo bilhões de experiências em várias telas com os nossos softwares.
                     </p>
 				<div class="footer-icons">
 					<a href="https://www.facebook.com"><img src="./assets/facebook.png"><i class="fa fa-facebook"></i></a>

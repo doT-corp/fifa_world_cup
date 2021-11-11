@@ -233,8 +233,6 @@ button{
             $vermelho_um = $_POST['vermelho_um'];
             $vermelho_dois = $_POST['vermelho_dois'];
             $publico = $_POST['publico'];
-            $query = "UPDATE jogos SET data_hora = '$data', estadio_idestadio = '$estadio', pais_idpais_1 = '$pais_um', pais_idpais_2 = '$pais_dois', gols_idpais_1 = '$gols_um', gols_idpais_2 = '$gols_dois', publico = '$publico' WHERE idrodada = '$id';";
-            $result = mysqli_query($conexao, $query) or die("Erro ao alterar jogo.");
         
             $resetar = "DELETE FROM gols WHERE jogos_idrodada = '$id';";
             mysqli_query($conexao, $resetar) or die("Erro!");
@@ -242,7 +240,6 @@ button{
             mysqli_query($conexao, $resetar) or die("Erro!");
             $resetar = "DELETE FROM cartao WHERE jogos_idrodada = '$id';";
             mysqli_query($conexao, $resetar) or die("Erro!");
-        
         ?>
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/estatisticas_jogo.php" method="post">
@@ -410,6 +407,11 @@ button{
                 else echo "<h3>Não houve cartões vermelhos do time 2</h3>";
                 
                 echo "<input type='number' style='display: none;' name='id' value='".$id."'>";
+                echo "<input type='datetime-local' style='display: none;' name='data' value='".$data."'>";
+                echo "<input type='number' style='display: none;' name='estadio' value='".$estadio."'>";
+                echo "<input type='number' style='display: none;' name='pais_um' value='".$pais_um."'>";
+                echo "<input type='number' style='display: none;' name='pais_dois' value='".$pais_dois."'>";
+                echo "<input type='number' style='display: none;' name='publico' value='".$publico."'>";
                 echo "<input type='number' style='display: none;' name='gols_um' value='".$gols_um."'>";
                 echo "<input type='number' style='display: none;' name='gols_dois' value='".$gols_dois."'>";
                 echo "<input type='number' style='display: none;' name='substituicoes_um' value='".$substituicoes_um."'>";
@@ -418,9 +420,11 @@ button{
                 echo "<input type='number' style='display: none;' name='amarelo_dois' value='".$amarelo_dois."'>";
                 echo "<input type='number' style='display: none;' name='vermelho_um' value='".$vermelho_um."'>";
                 echo "<input type='number' style='display: none;' name='vermelho_dois' value='".$vermelho_dois."'>";
+                echo "<input type='text' style='display: none;' name='alterar-inserir' value='alterar'>";
             ?>
             <input type="submit" class="btn" value="Alterar"/>
-            <input type="reset" class="btn" value="Redefinir"/> 
+            <input type="reset" class="btn" value="Redefinir"/>
+            <a href="../../bottons-paises.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>
