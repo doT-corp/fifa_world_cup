@@ -175,7 +175,7 @@
     </head>
     <body>
         <h1>Formulário para alterar dados do estádio</h1>
-        <form name="estadio" action="../../php/estadio/alterar_estadio.php" method="post">
+        <form name="estadio" action="../../php/grupo/alterar_grupo.php" method="post">
                 ID: <?php
                         $myid = $_POST['id'];
                         echo $myid;
@@ -187,13 +187,13 @@
                     $row = mysqli_fetch_array($query);
                     echo $row['descricao'];
                 ?><br>                
-                Descrição Nova: <input class="input-text" type="text" name="descricao"/> <br><br>
+                Descrição Nova (máximo 3 caracteres): <input class="input-text" type="text" name="descricao" max="3"/> <br><br>
                 <?php
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
                 <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
-                <a href="../../bottons-estadios.html"><input type="button" class="btn" value="Voltar"/></a>
+                <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>

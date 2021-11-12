@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Selecione o grupo</title>
+        <title>Selecione o usuário</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
@@ -212,18 +212,18 @@ button{
 </style>
     </head>
     <body>
-        <h1>Escolha o grupo para alterar</h1>
+        <h1>Escolha o usuário para alterar</h1>
         <input type="text" id="myInput" onkeyup="search()"/>
-        <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
-        <h3 id="counter">Número de grupos encontrados: 0</h3>
-        <form name="grupo" action="form_alterar_grupo.php" id="myForm" method="post">
+        <a href="../../bottons-usuarios.html"><input type="button" class="btn" value="Voltar"/></a>
+        <h3 id="counter">Número de usuários encontrados: 0</h3>
+        <form name="usuario" action="form_alterar_usuario.php" id="myForm" method="post">
             <ul id="list-buttons">
                 <?php
                     include "../../php/conecta_banco.php";
-                    $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo;");
+                    $query = mysqli_query($conexao, "SELECT idusuario, nome_usuario, email FROM usuario WHERE nome_usuario <> 'admin';");
                     while($dados = mysqli_fetch_assoc($query))
                     {
-                        echo "<li><button class='btn' id='".$dados['idgrupo']."' onclick='getCupElement(\"".$dados['idgrupo']."\");'>".$dados['descricao']."</button></li>";      
+                        echo "<li><button class='btn' id='".$dados['idusuario']."' onclick='getCupElement(".$dados['idusuario'].");'>".$dados['nome_usuario']."<br>".$dados['email']."</button></li>";
                     }
                 ?>
             </ul>
@@ -231,8 +231,7 @@ button{
         </form>
     </body>
     <script type="text/javascript">
-        search();
-        var myForm = document.getElementById("myForm");
+        search()
         function search() {
             var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
@@ -259,14 +258,14 @@ button{
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de grupos encontrados: " + n_encontrados;
+            counter.innerHTML = "Número de usuários encontrados: " + n_encontrados;
         }
 
         function getCupElement(myId) {
-            console.log(myId);
             var btn = document.getElementById(myId);
             var secret = document.getElementById('secret');
             secret.value = myId;
+            var myForm = document.getElementById("myForm").
             myForm.submit();
         }
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Selecione o grupo</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA22</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -208,67 +208,20 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
-</style>
-    </head>
-    <body>
-        <h1>Escolha o grupo para alterar</h1>
-        <input type="text" id="myInput" onkeyup="search()"/>
-        <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
-        <h3 id="counter">Número de grupos encontrados: 0</h3>
-        <form name="grupo" action="form_alterar_grupo.php" id="myForm" method="post">
-            <ul id="list-buttons">
-                <?php
-                    include "../../php/conecta_banco.php";
-                    $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo;");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
-                        echo "<li><button class='btn' id='".$dados['idgrupo']."' onclick='getCupElement(\"".$dados['idgrupo']."\");'>".$dados['descricao']."</button></li>";      
-                    }
-                ?>
-            </ul>
-            <input type="text" name="id" id="secret" style="display: none"/>
-        </form>
-    </body>
-    <script type="text/javascript">
-        search();
-        var myForm = document.getElementById("myForm");
-        function search() {
-            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("list-buttons");
-            li = ul.getElementsByTagName('li');
-
-            for (i = 0; i < li.length; i++) {
-                btn = li[i].getElementsByTagName("button")[0];
-                txtValue = btn.textContent || btn.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-            
-            n_encontrados = li.length;
-
-            for (i = 0; i < li.length; i++) {
-                if (li[i].style.display == "none") {
-                    n_encontrados--;
-                }
-            }
-
-            counter = document.getElementById("counter");
-            counter.innerHTML = "Número de grupos encontrados: " + n_encontrados;
         }
+    </style>  
+</head>
+<body>
+    <?php
+    include "../conecta_banco.php";
 
-        function getCupElement(myId) {
-            console.log(myId);
-            var btn = document.getElementById(myId);
-            var secret = document.getElementById('secret');
-            secret.value = myId;
-            myForm.submit();
-        }
+    $desc = "Grupo ".$_POST['descricao']."";
 
-        </script>
+    $insere = "INSERT INTO grupo (idgrupo, descricao) VALUES ('$_POST[descricao]', '$desc');";
+
+    mysqli_query($conexao, $insere) or die("Não inseriu!");
+    echo "Dados inseridos no banco com sucesso!";
+    echo '<br><a href="../../bottons-grupos.html"><button>Voltar</button></a>';
+?>
+</body>
 </html>

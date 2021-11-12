@@ -178,14 +178,14 @@
         <input type="text" id="myInput" onkeyup="search()"/>
         <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
         <h3 id="counter">Número de grupos encontrados: 0</h3>
-        <form name="estadio" action="../../php/grupo/deletar_grupo.php" id="myForm" method="post">
+        <form name="grupo" action="../../php/grupo/deletar_grupo.php" id="myForm" method="post">
             <ul id="list-buttons">
                 <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo");
                     while($dados = mysqli_fetch_assoc($query))
                     {
-                        echo "<li><button class='btn' id='".$dados['idgrupo']."' onclick='getCupElement(".$dados['idgrupo'].");'>".$dados['descricao']."</button></li>";
+                        echo "<li><button class='btn' id='".$dados['idgrupo']."' onclick='getCupElement(\"".$dados['idgrupo']."\");'>".$dados['descricao']."</button></li>";
                     }
                 ?>
             </ul>
@@ -220,7 +220,7 @@
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de estádios encontrados: " + n_encontrados;
+            counter.innerHTML = "Número de grupos encontrados: " + n_encontrados;
         }
 
         function getCupElement(myId) {

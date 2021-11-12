@@ -1,10 +1,11 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Selecione o grupo</title>
+        <title>Listar Estádios</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
@@ -155,6 +156,7 @@ background: #1e3772;
         margin-top: 6%;
     }
     input{
+        margin-top: 10%;
         inline-size: 86%;
     }
     form{
@@ -170,7 +172,12 @@ background: #1e3772;
     select{
         margin: 3%;
     }
-    
+    button{
+        margin-top: 6%;
+        inline-size: 86%;
+    }
+
+
 }
 h3{
     font-weight: 700;
@@ -203,72 +210,101 @@ button{
         font-size: 20px;
         border-color: transparent;
         background-color: #3765cf;
-        box-shadow: 2px 10px 18px #000000 ;
+        box-shadow: 2px 10px 18px #000000;
+        margin-bottom:-4%;
        }
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 50%;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        tr:nth-child(even){background-color: #21242e}
 </style>
     </head>
     <body>
-        <h1>Escolha o grupo para alterar</h1>
-        <input type="text" id="myInput" onkeyup="search()"/>
-        <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
-        <h3 id="counter">Número de grupos encontrados: 0</h3>
-        <form name="grupo" action="form_alterar_grupo.php" id="myForm" method="post">
-            <ul id="list-buttons">
+        <h3>Pesquisar por nome:</h3> <input type="text" id="myInput" onkeyup="search();"/>
+        <h3 id="counter">Número de estádios encontrados: 0</h3>
+        <?php
+            if($_SESSION['usuario'] == "Visitante")
+                echo "<a href='../../index.php'><button>Voltar</button></a>";
+            else
+                echo "<a href='../../bottons-grupos.html'><button>Voltar</button></a>";
+        ?>
+        <div style="overflow-x:auto;" class="divs">
+            <table id="list-stadiums" class="center">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome Completo</th>
+                    <th>Nome de Usuário</th>
+                    <th>Email</th>
+                    <th>Data Registro</th>
+                </tr>
                 <?php
-                    include "../../php/conecta_banco.php";
-                    $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo;");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
-                        echo "<li><button class='btn' id='".$dados['idgrupo']."' onclick='getCupElement(\"".$dados['idgrupo']."\");'>".$dados['descricao']."</button></li>";      
-                    }
+                    include "../conecta_banco.php";
+                    $procura = "SELECT * FROM usuario WHERE nome_usuario <> 'admin';";
+                    $result = mysqli_query($conexao, $procura);
+                    while($row = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>";
+                    echo $row['idusuario'];
+                    echo "</td>";
+                    echo "<td class='nome'>";
+                    echo $row['nome_completo'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['nome_usuario'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['email'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['data_registro'];
+                    echo "</td>";
+                    echo "</tr>";
+                }
                 ?>
-            </ul>
-            <input type="text" name="id" id="secret" style="display: none"/>
-        </form>
+            </table>
+        </div>
     </body>
     <script type="text/javascript">
         search();
-        var myForm = document.getElementById("myForm");
         function search() {
-            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
+            var input, filter, myList, tr, tdNames, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
-            ul = document.getElementById("list-buttons");
-            li = ul.getElementsByTagName('li');
+            myList = document.getElementById("list-stadiums");
+            tr = myList.getElementsByTagName('tr');
 
-            for (i = 0; i < li.length; i++) {
-                btn = li[i].getElementsByTagName("button")[0];
-                txtValue = btn.textContent || btn.innerText;
+            for (i = 1; i < tr.length; i++) {
+                tdNames = tr[i].getElementsByClassName("nome")[0];
+                txtValue = tdNames.textContent || tdNames.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
+                    tr[i].style.display = "";
                 } else {
-                    li[i].style.display = "none";
+                    tr[i].style.display = "none";
                 }
             }
-            
-            n_encontrados = li.length;
 
-            for (i = 0; i < li.length; i++) {
-                if (li[i].style.display == "none") {
+            n_encontrados = tr.length;
+
+            for (i = 0; i < tr.length; i++) {
+                if (tr[i].style.display == "none") {
                     n_encontrados--;
                 }
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de grupos encontrados: " + n_encontrados;
+            counter.innerHTML = "Número de usuarios encontrados: " + (n_encontrados - 1);
         }
 
-        function getCupElement(myId) {
-            console.log(myId);
-            var btn = document.getElementById(myId);
-            var secret = document.getElementById('secret');
-            secret.value = myId;
-            myForm.submit();
-        }
-
-        </script>
+    </script>
 </html>

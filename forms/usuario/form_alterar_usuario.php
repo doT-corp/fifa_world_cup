@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Grupo</title>
+        <title>Alterar Usuário</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
@@ -174,12 +174,49 @@
         </style>
     </head>
     <body>
-        <h1>Formulário para inserir um novo grupo</h1>
-        <form name="estadio" action="../../php/grupo/inserir_grupo.php" method="post">
-                Letra/Descrição (máximo 3 caracteres): <input class="input-text" type="text" name="descricao" max="3"/> <br><br>
-                <input type="submit" class="btn" value="Enviar"/>
+        <h1>Formulário para alterar dados do usuário</h1>
+        <form name="estadio" action="../../php/usuario/alterar_usuario.php" method="post">
+                ID: <?php
+                        $myid = $_POST['id'];
+                        echo $myid;
+                    ?><br><br>
+                Nome Completo Antigo: 
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT nome_completo FROM usuario WHERE idusuario = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['nome_completo'];
+                ?><br>
+                Nome Completo Novo:<input class="input-text" type="text" name="nome_completo"/> <br><br>
+
+                Nome de Usuário Antigo: 
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT nome_usuario FROM usuario WHERE idusuario = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['nome_usuario'];
+                ?><br>
+                Nome de Usuário Novo: <input class="input-text" type="text" name="nome_usuario"/> <br><br>
+
+                E-mail Antigo: 
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT email FROM usuario WHERE idusuario = '$myid';");
+                    $row = mysqli_fetch_array($query);
+                    echo $row['email'];
+                ?><br>                
+                E-mail Novo: <input class="input-text" type="email" name="email"/> <br><br>
+                <?php
+                    echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
+                ?>
+             
+                Senha Nova: <input class="input-text" type="email" name="senha"/> <br><br>
+                <?php
+                    echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
+                ?>
+                <input type="submit" class="btn" value="Alterar"/>
                 <input type="reset" class="btn" value="Redefinir"/>
-                <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
+                <a href="../../bottons-estadios.html"><input type="button" class="btn" value="Voltar"/></a>
         </form>
     </body>
 </html>
