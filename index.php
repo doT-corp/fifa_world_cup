@@ -151,6 +151,16 @@
                     <img src="./assets/estadio-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
+            <div class="grupo">
+                <?php
+                    if($_SESSION['usuario'] == "Visitante")
+                        echo "<a href='#.html'>";
+                    else
+                        echo "<a href='#.html'>";
+                ?>
+                    <img src="./assets/grupo-btn.png" alt="" width="320px" class="image">
+                </a>             
+            </div>
         </article>
         <article class="btn-down">
             <div class="jogadores">
@@ -173,6 +183,16 @@
                     <img src="./assets/jogos-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
+            <div class="usuario">
+                <?php
+                    if($_SESSION['usuario'] == "Visitante")
+                        echo "<a href='#.html'>";
+                    else
+                        echo "<a href='#.html'>";
+                ?>
+                    <img src="./assets/usuarios.png" alt="" width="320px" class="image">
+                </a>             
+            </div>
         </article>
         <div class="obs">
             <h3>
@@ -184,7 +204,7 @@
     <footer class="footer-distributed">
         <div class="footer-left">
             <img src="./assets/Logo_footer.png" width="12%">
-                  <h3>Sobre <span>FIFA22</span></h3>
+                  <h3>Copa <span> FIFA 22</span></h3>
                   <p class="footer-links">
 					<a href="#">Início</a>
 					|
@@ -193,7 +213,7 @@
 					<a href="#categorias">Categorias</a>
 					|
 					<a>Contato</a>
-				</p>
+				</p> 
 
 				<p class="footer-company-name">© 2021 doT. Inc</p>
 			</div>
