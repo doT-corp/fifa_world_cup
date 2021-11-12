@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Grupo</title>
+        <title>Deletar Usuário</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
@@ -174,12 +174,62 @@
         </style>
     </head>
     <body>
-        <h1>Formulário para inserir um novo grupo</h1>
-        <form name="estadio" action="../../php/grupo/inserir_grupo.php" method="post">
-                Letra/Descrição (máximo 3 caracteres): <input class="input-text" type="text" name="descricao" max="3"/> <br><br>
-                <input type="submit" class="btn" value="Enviar"/>
-                <input type="reset" class="btn" value="Redefinir"/>
-                <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
+        <h1>Escolha o usuário para deletar</h1>
+        <input type="text" id="myInput" onkeyup="search()"/>
+        <a href="../../bottons-usuarios.html"><input type="button" class="btn" value="Voltar"/></a>
+        <h3 id="counter">Número de usuários encontrados: 0</h3>
+        <form name="estadio" action="../../php/usuario/deletar_usuario.php" id="myForm" method="post">
+            <ul id="list-buttons">
+                <?php
+                    include "../../php/conecta_banco.php";
+                    $query = mysqli_query($conexao, "SELECT idusuario, nome_usuario, email FROM usuario WHERE nome_usuario <> 'admin';");
+                    while($dados = mysqli_fetch_assoc($query))
+                    {
+                        echo "<li><button class='btn' id='".$dados['idusuario']."' onclick='getCupElement(".$dados['idusuario'].");'>".$dados['nome_usuario']."<br>".$dados['email']."</button></li>";
+                    }
+                ?>
+            </ul>
+            <input type="text" name="id" id="secret" style="display: none"/>
         </form>
     </body>
+    <script type="text/javascript">
+        search();
+        function search() {
+            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("list-buttons");
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                btn = li[i].getElementsByTagName("button")[0];
+                txtValue = btn.textContent || btn.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+
+            n_encontrados = li.length;
+
+            for (i = 0; i < li.length; i++) {
+                if (li[i].style.display == "none") {
+                    n_encontrados--;
+                }
+            }
+
+            counter = document.getElementById("counter");
+            counter.innerHTML = "Número de usuários encontrados: " + n_encontrados;
+        }
+
+        function getCupElement(myId) {
+            var btn = document.getElementById(myId);
+            var secret = document.getElementById('secret');
+            secret.value = myId;
+            var myForm = document.getElementById("myForm").
+            myForm.submit();
+        }
+
+        </script>
 </html>

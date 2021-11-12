@@ -151,16 +151,13 @@
                     <img src="./assets/estadio-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
-            <div class="grupo">
-                <?php
-                    if($_SESSION['usuario'] == "Visitante")
-                        echo "<a href='#.html'>";
-                    else
-                        echo "<a href='#.html'>";
-                ?>
-                    <img src="./assets/grupo-btn.png" alt="" width="320px" class="image">
-                </a>             
-            </div>
+            <?php if($_SESSION['usuario'] == "admin"): ?>
+                <div class="grupo">
+                    <a href='bottons-grupos.html'>
+                        <img src="./assets/grupo-btn.png" alt="" width="320px" class="image">
+                    </a>             
+                </div>
+            <?php endif; ?>
         </article>
         <article class="btn-down">
             <div class="jogadores">
@@ -183,16 +180,13 @@
                     <img src="./assets/jogos-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
-            <div class="usuario">
-                <?php
-                    if($_SESSION['usuario'] == "Visitante")
-                        echo "<a href='#.html'>";
-                    else
-                        echo "<a href='#.html'>";
-                ?>
-                    <img src="./assets/usuarios.png" alt="" width="320px" class="image">
-                </a>             
-            </div>
+            <?php if($_SESSION['usuario'] == "admin"): ?>
+                <div class="usuario">
+                    <a href='bottons-usuarios.html'>
+                        <img src="./assets/usuarios.png" alt="" width="320px" class="image">
+                    </a>             
+                </div>
+            <?php endif; ?>
         </article>
         <div class="obs">
             <h3>
