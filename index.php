@@ -96,7 +96,7 @@
                             <?php
                                 if($_SESSION['usuario'] == "Visitante") {
                                     echo "<li><img src='./assets/cadastro.png' alt=''>";
-                                    echo "<a href='forms/cadastro/cadastro.html'> Cadastrar </a></li>";
+                                    echo "<a href='testmail.php'> Cadastrar </a></li>";
                                 }
                             ?>
                         </ul>

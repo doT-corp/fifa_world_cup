@@ -252,11 +252,16 @@ button{
 
     if($_SESSION['usuario_existe'] == false)
     {
+        ini_set('display_errors', 1);
         $chave = rand();
-        $sql = "INSERT INTO usuario (nome_completo, nome_usuario, email, senha, data_registro, confirmou, codigo_confirmacao) VALUES ('$nome_completo', '$nome_usuario', '$email', MD5('".$senha."'), NOW(), 0, $chave);";
+        $sql = "INSERT INTO usuario (nome_completo, nome_usuario, email, senha, data_registro, ativou, chave) VALUES ('$nome_completo', '$nome_usuario', '$email', MD5('".$senha."'), NOW(), 0, $chave);";
 
-        $subject = "Verificação de e-mail";
-        
+        $destino = "guisamuel53@gmail.com";
+        $sobre = "Verificação de e-mail";
+        $mensagem = "<a href='copa:8080/verificar.php?vkey=$chave'>Registrar Conta</a>";
+        $headers = "De yeey@yeey.com";
+
+        mail($destino, "oi@gmail.com", $sobre, $mensagem, $headers);
 
         if($conexao->query($sql) === TRUE) {
             $_SESSION['status'] = 'cadastro_feito';
