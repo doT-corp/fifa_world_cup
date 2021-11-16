@@ -231,7 +231,7 @@ button{
     </head>
     <body>
         <h2>Pesquisar por nome:</h2> <input type="text" id="myInput" onkeyup="search();"/>
-        <h3 id="counter">Número de estádios encontrados: 0</h3>
+        <h3 id="counter">Número de jogadores encontrados: 0</h3>
         <form method="post">
             <select name="pais" id="mySelect">
                 <?php
@@ -323,7 +323,7 @@ button{
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de estádios encontrados: " + (n_encontrados - 1);
+            counter.innerHTML = "Número de jogadores encontrados: " + (n_encontrados - 1);
         }
 
     </script>
