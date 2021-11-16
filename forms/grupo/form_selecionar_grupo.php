@@ -1,11 +1,10 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listar Estádios</title>
+        <title>Selecione o grupo</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
@@ -156,7 +155,6 @@ background: #1e3772;
         margin-top: 6%;
     }
     input{
-        margin-top: 10%;
         inline-size: 86%;
     }
     form{
@@ -172,10 +170,7 @@ background: #1e3772;
     select{
         margin: 3%;
     }
-    button{
-        margin-top: 6%;
-        inline-size: 86%;
-    }
+    
 }
 h3{
     font-weight: 700;
@@ -208,123 +203,72 @@ button{
         font-size: 20px;
         border-color: transparent;
         background-color: #3765cf;
-        box-shadow: 2px 10px 18px #000000;
-        margin-bottom:-4%;
+        box-shadow: 2px 10px 18px #000000 ;
        }
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-
-        }
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 50%;
-            border: 1px solid #ddd;
-        }
-        th, td {
-            text-align: center;
-            padding: 8px;
-        }
-        tr:nth-child(even){background-color: #21242e}
+        }      
 </style>
     </head>
     <body>
-        <h2>Pesquisar por nome:</h2> <input type="text" id="myInput" onkeyup="search();"/>
-        <h3 id="counter">Número de estádios encontrados: 0</h3>
-        <form method="post">
-            <select name="pais" id="mySelect">
+        <h1>Escolha o grupo para alterar</h1>
+        <input type="text" id="myInput" onkeyup="search()"/>
+        <a href="../../bottons-grupos.html"><input type="button" class="btn" value="Voltar"/></a>
+        <h3 id="counter">Número de grupos encontrados: 0</h3>
+        <form name="grupo" action="form_alterar_grupo.php" id="myForm" method="post">
+            <ul id="list-buttons">
                 <?php
                     include "../../php/conecta_banco.php";
-                    echo "<option value='selected'>Qualquer</option>";
-                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
+                    $query = mysqli_query($conexao, "SELECT idgrupo, descricao FROM grupo;");
                     while($dados = mysqli_fetch_assoc($query))
                     {
-                        echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
+                        echo "<li><button class='btn' id='".$dados['idgrupo']."' onclick='getCupElement(\"".$dados['idgrupo']."\");'>".$dados['descricao']."</button></li>";      
                     }
                 ?>
-            </select>
+            </ul>
             <input type="text" name="id" id="secret" style="display: none"/>
-            <input type="submit" value="Filtrar"/>
         </form>
-        <?php
-            if($_SESSION['usuario'] != "admin")
-                echo "<a href='../../index.php'><button>Voltar</button></a>";
-            else
-                echo "<a href='../../bottons-jogadores.html'><button>Voltar</button></a>";
-        ?>
-        <div style="overflow-x:auto;" class="divs">
-            <table id="list" class="center">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Camisa</th>
-                    <th>Posição</th>
-                    <th>Seleção</th>
-                    <th>Situação</th>
-                </tr>
-                <?php
-                    include "../conecta_banco.php";
-                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
-                    $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais;");
-                    if($sel_pais != "selected")
-                        $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais WHERE jogador.pais_idpais = '$sel_pais';");
-                    while($row = mysqli_fetch_array($query)) {
-                        echo "<tr>";
-                        echo "<td>";
-                        echo $row['idjogador'];
-                        echo "</td>";
-                        echo "<td class='nome'>";
-                        echo $row['nome'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['camisa'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['posicao'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['selecao'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['situacao'];
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                ?>
-            </table>
-        </div>
     </body>
     <script type="text/javascript">
         search();
+        var myForm = document.getElementById("myForm");
         function search() {
-            var input, filter, myList, tr, tdNames, i, txtValue, n_encontrados, counter;
+            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
-            myList = document.getElementById("list");
-            tr = myList.getElementsByTagName('tr');
+            ul = document.getElementById("list-buttons");
+            li = ul.getElementsByTagName('li');
 
-            for (i = 1; i < tr.length; i++) {
-                tdNames = tr[i].getElementsByClassName("nome")[0];
-                txtValue = tdNames.textContent || tdNames.innerText;
+            for (i = 0; i < li.length; i++) {
+                btn = li[i].getElementsByTagName("button")[0];
+                txtValue = btn.textContent || btn.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
+                    li[i].style.display = "";
                 } else {
-                    tr[i].style.display = "none";
+                    li[i].style.display = "none";
                 }
             }
+            
+            n_encontrados = li.length;
 
-            n_encontrados = tr.length;
-
-            for (i = 0; i < tr.length; i++) {
-                if (tr[i].style.display == "none") {
+            for (i = 0; i < li.length; i++) {
+                if (li[i].style.display == "none") {
                     n_encontrados--;
                 }
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de estádios encontrados: " + (n_encontrados - 1);
+            counter.innerHTML = "Número de grupos encontrados: " + n_encontrados;
         }
 
-    </script>
+        function getCupElement(myId) {
+            console.log(myId);
+            var btn = document.getElementById(myId);
+            var secret = document.getElementById('secret');
+            secret.value = myId;
+            myForm.submit();
+        }
+
+        </script>
 </html>

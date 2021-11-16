@@ -133,46 +133,68 @@
         <article class="bottons"> <!--Conteúdo: Botões-->
             <div class="paises">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/pais/listar_pais.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-paises.html'>";
+                    else
+                        echo "<a href='permissao.html'>";        
                 ?>
                     <img src="./assets/paises-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
             <div class="estadio">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/estadio/listar_estadio.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-estadios.html'>";
+                    else
+                        echo "<a href='permissao.html'>";   
                 ?>
                     <img src="./assets/estadio-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
+            <?php if($_SESSION['usuario'] == "admin"): ?>
+                <div class="grupo">
+                    <a href='bottons-grupos.html'>
+                        <img src="./assets/grupo-btn.png" alt="" width="320px" class="image">
+                    </a>             
+                </div>
+            <?php endif; ?>
         </article>
         <article class="btn-down">
             <div class="jogadores">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/jogador/listar_jogador.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-jogadores.html'>";
+                    else
+                        echo "<a href='permissao.html'>";   
                 ?>
                     <img src="./assets/jogadores-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
             <div class="jogos">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/jogo/listar_jogo.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-jogos.html'>";
+                    else
+                        echo "<a href='permissao.html'>";  
                 ?>
                     <img src="./assets/jogos-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
+            <?php if($_SESSION['usuario'] == "admin"): ?>
+                <div class="usuario">
+                    <a href='bottons-usuarios.html'>
+                        <img src="./assets/usuarios.png" alt="" width="320px" class="image">
+                    </a>             
+                </div>
+            <?php endif; ?>
         </article>
         <div class="obs">
             <h3>
@@ -184,7 +206,7 @@
     <footer class="footer-distributed">
         <div class="footer-left">
             <img src="./assets/Logo_footer.png" width="12%">
-                  <h3>Sobre <span>FIFA22</span></h3>
+                  <h3>Copa <span> FIFA 22</span></h3>
                   <p class="footer-links">
 					<a href="#">Início</a>
 					|
@@ -193,7 +215,7 @@
 					<a href="#categorias">Categorias</a>
 					|
 					<a>Contato</a>
-				</p>
+				</p> 
 
 				<p class="footer-company-name">© 2021 doT. Inc</p>
 			</div>

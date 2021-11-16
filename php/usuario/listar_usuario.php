@@ -176,6 +176,8 @@ background: #1e3772;
         margin-top: 6%;
         inline-size: 86%;
     }
+
+
 }
 h3{
     font-weight: 700;
@@ -214,7 +216,6 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-
         }
         table {
             border-collapse: collapse;
@@ -230,67 +231,46 @@ button{
 </style>
     </head>
     <body>
-        <h2>Pesquisar por nome:</h2> <input type="text" id="myInput" onkeyup="search();"/>
+        <h3>Pesquisar por nome:</h3> <input type="text" id="myInput" onkeyup="search();"/>
         <h3 id="counter">Número de estádios encontrados: 0</h3>
-        <form method="post">
-            <select name="pais" id="mySelect">
-                <?php
-                    include "../../php/conecta_banco.php";
-                    echo "<option value='selected'>Qualquer</option>";
-                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
-                        echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
-                    }
-                ?>
-            </select>
-            <input type="text" name="id" id="secret" style="display: none"/>
-            <input type="submit" value="Filtrar"/>
-        </form>
         <?php
             if($_SESSION['usuario'] != "admin")
                 echo "<a href='../../index.php'><button>Voltar</button></a>";
             else
-                echo "<a href='../../bottons-jogadores.html'><button>Voltar</button></a>";
+                echo "<a href='../../bottons-grupos.html'><button>Voltar</button></a>";
         ?>
         <div style="overflow-x:auto;" class="divs">
-            <table id="list" class="center">
+            <table id="list-stadiums" class="center">
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Camisa</th>
-                    <th>Posição</th>
-                    <th>Seleção</th>
-                    <th>Situação</th>
+                    <th>Nome Completo</th>
+                    <th>Nome de Usuário</th>
+                    <th>Email</th>
+                    <th>Data Registro</th>
                 </tr>
                 <?php
                     include "../conecta_banco.php";
-                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
-                    $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais;");
-                    if($sel_pais != "selected")
-                        $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, jogador.camisa, jogador.posicao, pais.selecao, jogador.situacao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais WHERE jogador.pais_idpais = '$sel_pais';");
-                    while($row = mysqli_fetch_array($query)) {
-                        echo "<tr>";
-                        echo "<td>";
-                        echo $row['idjogador'];
-                        echo "</td>";
-                        echo "<td class='nome'>";
-                        echo $row['nome'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['camisa'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['posicao'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['selecao'];
-                        echo "</td>";
-                        echo "<td>";
-                        echo $row['situacao'];
-                        echo "</td>";
-                        echo "</tr>";
-                    }
+                    $procura = "SELECT * FROM usuario WHERE nome_usuario <> 'admin';";
+                    $result = mysqli_query($conexao, $procura);
+                    while($row = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>";
+                    echo $row['idusuario'];
+                    echo "</td>";
+                    echo "<td class='nome'>";
+                    echo $row['nome_completo'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['nome_usuario'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['email'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['data_registro'];
+                    echo "</td>";
+                    echo "</tr>";
+                }
                 ?>
             </table>
         </div>
@@ -301,7 +281,7 @@ button{
             var input, filter, myList, tr, tdNames, i, txtValue, n_encontrados, counter;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
-            myList = document.getElementById("list");
+            myList = document.getElementById("list-stadiums");
             tr = myList.getElementsByTagName('tr');
 
             for (i = 1; i < tr.length; i++) {
@@ -323,7 +303,7 @@ button{
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de estádios encontrados: " + (n_encontrados - 1);
+            counter.innerHTML = "Número de usuarios encontrados: " + (n_encontrados - 1);
         }
 
     </script>

@@ -1,15 +1,11 @@
-<?php
-    session_start();
-    include "php/conecta_banco.php";
-?>
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Perfil</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA22</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -17,8 +13,7 @@
     
     body{
         font-family: 'Montserrat', sans-serif;
-        background-image: url('../../assets/backgorund.png');
-        /*background-color: #171920;*/
+        background-color: #171920;
         width: 98%;
         height:auto;
         text-align:center;
@@ -40,7 +35,7 @@
 form{
     text-align: center;
     color: rgb(214, 213, 212);
-    font-weight:200;
+    font-height:200;
 }
 input{
     font-family: 'Montserrat', sans-serif;
@@ -213,61 +208,21 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
-</style>
-    </head>
-    <body>
-        <?php if($_SESSION['usuario'] != "Visitante"): ?>
-            <h1>Perfil</h1>
-            <h3>
-                Nome Completo: 
-                <?php
-                    $select = "SELECT nome_completo FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
-                    $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
-                    $row = mysqli_fetch_array($result);
-                    $r = $row['nome_completo'];
-                    echo $r;
-                ?>
-            </h3>
-            <h3>
-                Nome de Usuário: 
-                <?php
-                    echo $_SESSION['usuario'];
-                ?>
-            </h3>
-            <h3>
-                E-mail: 
-                <?php
-                    $select = "SELECT email FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
-                    $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
-                    $row = mysqli_fetch_array($result);
-                    $r = $row['email'];
-                    echo $r;
-                ?>
-            </h3>
-            <h3>
-                Data e horário de cadastro: 
-                <?php
-                    $select = "SELECT data_registro FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
-                    $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
-                    $row = mysqli_fetch_array($result);
-                    $r = $row['data_registro'];
-                    echo $r;
-                ?>
-            </h3>
-            <a href="index.php">
-                <input type="button" class="btn" value="Voltar"/>
-            </a>
-        <?php endif; ?>
-        <?php if($_SESSION['usuario'] == "Visitante"): ?>
-            <h1>Ops!</h1>
-            <h3>Para acessar o perfil, é necessário realizar login</h3>
-            <a href="forms/login/login.html">
-                <input type="button" class="btn" value="Login"/>
-            </a>
-            <a href="index.php">
-                <input type="button" class="btn" value="Voltar"/>
-            </a>
-        <?php endif; ?>
-    </body>
+        }
+    </style>  
+</head>
+<body>
+    <?php
+    include "../conecta_banco.php";
+    $id = $_POST['id'];
+    $d = $_POST['descricao'];
+    $desc = "Grupo ".$_POST['descricao']."";
+    $query = "UPDATE grupo SET idgrupo = '$d', descricao = '$desc' WHERE idgrupo = '$id';";
+    if(mysqli_query($conexao, $query))
+        echo "Grupo alterado com sucesso!";
+    else
+        echo "Erro ao alterar estádio.";
+    echo '<br><a href="../../bottons-grupos.html"><button>Voltar</button></a>';
+?>
+</body>
 </html>
