@@ -17,6 +17,23 @@ body{
 .logo img{
     width: 70%;
 }
+@media (max-width: 780px){
+    .logo img{
+        width: 100%;
+    }
+    .header-1{
+        padding: 20px;
+    }
+    .profile img{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        object-fit: cover;
+    
+    }
+}
 header{
     background-color: #000000;
     max-width: 100%;
@@ -185,10 +202,10 @@ nav a:hover{
     display: flex;
     justify-content: center;
 }
+
 .image{
     opacity: 1;
     display: block;
-    
     height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
@@ -208,6 +225,9 @@ nav a:hover{
 .jogos:hover .image{
     opacity: 0.65;
 }
+.usuario:hover .image {
+    opacity: 0.65;
+  }
 .title2{
     font-family: 'Geo', sans-serif;
     color: #D1D1D1;
@@ -250,7 +270,10 @@ footer{
 	header { padding-top:40px; }
 }
 
-
+.footer-distributed .footer-links:hover{
+    opacity: 0.65;
+    transition: 0.6s;
+}
 .footer-distributed{
 	background-color: #000000;
 	box-sizing: border-box;
@@ -259,7 +282,7 @@ footer{
 	font: bold 16px sans-serif;
 	padding: 50px 50px 60px 50px;
 	margin-top: 80px;
-    font: 'Geo', sans-serif;
+    font-family: 'Geo', sans-serif;
 }
 
 .footer-distributed .footer-left,
@@ -453,17 +476,24 @@ footer{
           margin: 10%
       }
       .jogadores img{
-          width: 90%
+          width: 96%
       }
       .jogos img{
-          width: 90%;
-          margin-top: 10%;
+         width: 96%;
+          margin-top: 10%; 
       }
       .paises img{
-        width: 70%;
+        width: 80%;
         margin-left: 15%;
       }
       .estadio img{
-        width: 70%;
+        width: 80%;
+      }
+      .grupo img{
+        width: 80%;
+      }
+      .usuario img{
+        width: 90%;
+        margin-top: 9%;
       }
   }
