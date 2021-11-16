@@ -133,20 +133,24 @@
         <article class="bottons"> <!--Conteúdo: Botões-->
             <div class="paises">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/pais/listar_pais.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-paises.html'>";
+                    else
+                        echo "<a href='permissao.html'>";        
                 ?>
                     <img src="./assets/paises-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
             <div class="estadio">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/estadio/listar_estadio.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-estadios.html'>";
+                    else
+                        echo "<a href='permissao.html'>";   
                 ?>
                     <img src="./assets/estadio-btn.png" alt="" width="320px" class="image">
                 </a>
@@ -162,20 +166,24 @@
         <article class="btn-down">
             <div class="jogadores">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/jogador/listar_jogador.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-jogadores.html'>";
+                    else
+                        echo "<a href='permissao.html'>";   
                 ?>
                     <img src="./assets/jogadores-btn.png" alt="" width="320px" class="image">
                 </a>
             </div>
             <div class="jogos">
                 <?php
-                    if($_SESSION['usuario'] == "Visitante")
+                    if($_SESSION['usuario'] != "Visitante" && $_SESSION['usuario'] != "admin")
                         echo "<a href='php/jogo/listar_jogo.php'>";
-                    else
+                    else if($_SESSION['usuario'] == "admin")
                         echo "<a href='bottons-jogos.html'>";
+                    else
+                        echo "<a href='permissao.html'>";  
                 ?>
                     <img src="./assets/jogos-btn.png" alt="" width="320px" class="image">
                 </a>

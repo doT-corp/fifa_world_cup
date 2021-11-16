@@ -234,7 +234,7 @@ button{
         <h3>Pesquisar por nome:</h3> <input type="text" id="myInput" onkeyup="search();"/>
         <h3 id="counter">Número de estádios encontrados: 0</h3>
         <?php
-            if($_SESSION['usuario'] == "Visitante")
+            if($_SESSION['usuario'] != "admin")
                 echo "<a href='../../index.php'><button>Voltar</button></a>";
             else
                 echo "<a href='../../bottons-estadios.html'><button>Voltar</button></a>";

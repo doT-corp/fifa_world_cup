@@ -248,7 +248,7 @@ button{
             <input type="submit" value="Filtrar"/>
         </form>
         <?php
-            if($_SESSION['usuario'] == "Visitante")
+            if($_SESSION['usuario'] != "admin")
                 echo "<a href='../../index.php'><button>Voltar</button></a>";
             else
                 echo "<a href='../../bottons-jogadores.html'><button>Voltar</button></a>";
