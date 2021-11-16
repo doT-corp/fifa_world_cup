@@ -339,7 +339,7 @@ tr:nth-child(even){background-color: #21242e}
             }
 
             counter = document.getElementById("counter");
-            counter.innerHTML = "Número de estádios encontrados: " + (n_encontrados - 1);
+            counter.innerHTML = "Número de países encontrados: " + (n_encontrados - 1);
         }
 
     </script>
