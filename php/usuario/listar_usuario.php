@@ -237,7 +237,7 @@ button{
             if($_SESSION['usuario'] != "admin")
                 echo "<a href='../../index.php'><button>Voltar</button></a>";
             else
-                echo "<a href='../../bottons-grupos.html'><button>Voltar</button></a>";
+                echo "<a href='../../bottons-usuarios.html'><button>Voltar</button></a>";
         ?>
         <div style="overflow-x:auto;" class="divs">
             <table id="list-stadiums" class="center">
