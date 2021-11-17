@@ -12,8 +12,8 @@
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
-                background-image: url('../../assets/backgorund.png');
-                /*background-color: #171920;*/
+                /*background-image: url('../../assets/backgorund.png');*/
+                background-color: #171920;
                 width: 98%;
                 height:auto;
                 text-align:center;
