@@ -232,13 +232,13 @@ button{
     $row = mysqli_fetch_assoc($query);
 
     if($row['total'] >= 1) array_push($problems, "nome");
-
+/*
     $sql = "SELECT COUNT(*) AS total FROM usuario WHERE senha = MD5('".$senha."');";
     $query = mysqli_query($conexao, $sql) or die("Erro!");
     $row = mysqli_fetch_assoc($query);
 
     if($row['total'] >= 1) array_push($problems, "senha");
-    
+*/    
     $sql = "SELECT COUNT(*) AS total FROM usuario WHERE email = '$email';";
     $query = mysqli_query($conexao, $sql) or die("Erro!");
     $row = mysqli_fetch_assoc($query);
@@ -266,7 +266,7 @@ button{
     {
         if(in_array('nome', $problems, TRUE)) $errors .= "<br><h3>Nome de usuário existente.</h3>";
         if(in_array('email', $problems, TRUE)) $errors .= "<br><h3>E-mail existente.</h3>";
-        if(in_array('senha', $problems, TRUE)) $errors .= "<br><h3>Senha existente.</h3>";
+        //if(in_array('senha', $problems, TRUE)) $errors .= "<br><h3>Senha existente.</h3>";
         echo $errors;
         echo "<br><a href='../../forms/cadastro/cadastro.html'><button>Voltar</button></a>";
     }
