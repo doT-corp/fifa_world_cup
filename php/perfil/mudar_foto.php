@@ -277,7 +277,7 @@ button{
             if($file != NULL) {
                 $file_pointer = "../../photos/".$file;
                 if (!unlink($file_pointer))
-                    echo ("Erro ao alterar imagem de perfil"); 
+                    echo ("Erro ao modificar imagem de perfil"); 
                 else {
                     echo "Imagem de perfil enviada com sucesso!";
                     $query = "UPDATE usuario SET foto = '".$nome_arquivo."' WHERE nome_usuario = '".$_SESSION['usuario']."';";
@@ -298,7 +298,7 @@ button{
         $file = $row['foto'];
         $file_pointer = "../../photos/".$file;
         if (!unlink($file_pointer))
-            echo ("Erro ao deletar imagem de perfil."); 
+            echo ("Erro ao modificar imagem de perfil."); 
         else {
             echo ("A imagem de perfil foi deletada.");
             $query = "UPDATE usuario SET foto = null WHERE nome_usuario = '".$_SESSION['usuario']."';";
