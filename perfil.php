@@ -175,7 +175,13 @@ background: #1e3772;
     select{
         margin: 3%;
     }
-    
+    .label-upload{
+        
+        inline-size: 86%;
+    }
+    input[type="file"]{
+        inline-size: 86%;
+    }
 }
 h3{
     font-weight: 700;
@@ -213,12 +219,49 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
+        }
+        #perfil {
+            width: 10%;
+            height: auto;
+            border-radius: 5%;
+        }
+        input[type="file"] {
+            display:none;
+        }
+        .label-upload{
+        margin-top:10%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        margin: 2%;
+        color: rgb(214, 213, 212);
+        border-radius: 30px;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 20px;
+        border-color: transparent;
+        background-color: #3765cf;
+        box-shadow: 2px 10px 18px #000000 ;
+       }
+       .label-upload:hover{
+            background-color: #284a99;
+            transition: 0.2s;
+        }
+        
+        
 </style>
     </head>
     <body>
         <?php if($_SESSION['usuario'] != "Visitante"): ?>
             <h1>Perfil</h1>
+            <?php
+                $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
+                $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
+                $row = mysqli_fetch_array($result);
+                $r = $row['foto'];
+                if($r != NULL)
+                    echo "<img id='perfil' src='photos/".$r."'>";
+            ?>
             <h3>
                 Nome Completo: 
                 <?php
@@ -255,6 +298,22 @@ button{
                     echo $r;
                 ?>
             </h3>
+            <form method="POST" action="php/perfil/mudar_foto.php" enctype="multipart/form-data">
+                <br><br>
+                <label for="custom-file-input" class="label-upload">Procurar uma imagem   </label>
+                <input id="custom-file-input" type="file" name="foto"><br>
+                <br><br>
+                <input type="submit" name="alterar" value="Alterar imagem">
+                <?php
+                    $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
+                    $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
+                    $row = mysqli_fetch_array($result);
+                    $r = $row['foto'];
+                    if($r != NULL)
+                        echo '<input type="submit" name="deletar" value="Deletar imagem">';
+                        
+                ?>    
+            </form><br>
             <a href="index.php">
                 <input type="button" class="btn" value="Voltar"/>
             </a>
@@ -267,6 +326,10 @@ button{
             </a>
             <a href="index.php">
                 <input type="button" class="btn" value="Voltar"/>
+            </a>
+            <h3>Não possui conta? Cadastre-se!</h3>
+            <a href="forms/cadastro/cadastro.html">
+                <input type="button" class="btn" value="Cadastrar"/>
             </a>
         <?php endif; ?>
     </body>
