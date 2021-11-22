@@ -7,6 +7,7 @@
         $_SESSION['usuario'] = "Visitante";
         exit();
     }
+    include "php/conecta_banco.php";
 ?>
 <html lang="pt-br">
 <head>
@@ -76,7 +77,20 @@
                </nav>
                <div class="action">
                     <div class="profile" onclick = "menuToggle();">
-                        <img src="./assets/profile.png" alt="">
+                        <?php
+                            if($_SESSION['usuario'] == "Visitante")
+                                echo "<img src='./assets/profile.png'>";
+                            else {
+                                $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
+                                $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
+                                $row = mysqli_fetch_array($result);
+                                $r = $row['foto'];
+                                if($r != NULL)
+                                    echo "<img id='perfil' src='photos/".$r."'>";
+                                else
+                                    echo "<img src='./assets/profile.png'>";
+                            }
+                        ?>
                     </div>
                     <div class="menu">
                         <ul>

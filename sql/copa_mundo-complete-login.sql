@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 09-Nov-2021 às 20:19
+-- Tempo de geração: 22-Nov-2021 às 19:30
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `estadio` (
   `localizacao` varchar(20) DEFAULT NULL,
   `capacidade` int(11) NOT NULL,
   PRIMARY KEY (`idestadio`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5301 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `estadio`
@@ -202,7 +202,8 @@ INSERT INTO `grupo` (`idgrupo`, `descricao`) VALUES
 ('A', 'Grupo A'),
 ('B', 'Grupo B'),
 ('C', 'Grupo C'),
-('D', 'Grupo D');
+('D', 'Grupo D'),
+('ee', 'Grupo ee');
 
 -- --------------------------------------------------------
 
@@ -220,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `situacao` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idjogador`),
   KEY `pais_idpais` (`pais_idpais`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3771 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `jogador`
@@ -488,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `jogos` (
   KEY `estadio_idestadio` (`estadio_idestadio`),
   KEY `pais_idpais_1` (`pais_idpais_1`),
   KEY `pais_idpais_2` (`pais_idpais_2`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `jogos`
@@ -599,7 +600,7 @@ CREATE TABLE IF NOT EXISTS `pais` (
   `grupo_idgrupo` varchar(20) NOT NULL,
   PRIMARY KEY (`idpais`),
   KEY `grupo_idgrupo` (`grupo_idgrupo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1251 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `pais`
@@ -674,32 +675,36 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(20) NOT NULL,
   `senha` varchar(40) NOT NULL,
   `data_registro` datetime NOT NULL,
+  `foto` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`idusuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`idusuario`, `nome_completo`, `nome_usuario`, `email`, `senha`, `data_registro`) VALUES
-(1, 'dasd', 'asdasd', 'saddsa@sda', '3dad9cbf9baaa0360c0f2ba372d25716', '2021-11-09 15:25:00'),
-(2, 'dasd', 'asda sd', 'saddsa@sda', 'd6858433a94067aebede7f4e70e894f7', '2021-11-09 15:25:46'),
-(3, 'dasdhj', 'asda sdjh', 'saddsa@sdahj', '662fdd2a3f9edf03f2678bfe4882f4eb', '2021-11-09 15:28:36'),
-(4, 'fghfgh', 'fghfgh', 'fgfhg@hghgf', 'd133705d6204a9e4518144623cb8ec18', '2021-11-09 15:31:18'),
-(5, 'hjhg', 'jghjgh', 'ghjghj@gdg', '76b0bf37ef9417552121cb66bb62a3ed', '2021-11-09 15:31:45'),
-(6, 'gui', 'hui', 'gui@gui', '1b393a3028f2f46306a46cb97ad4bb56', '2021-11-09 15:32:28'),
-(7, 'eae', 'eae', 'eae@eae', '1b393a3028f2f46306a46cb97ad4bb56', '2021-11-09 15:39:05'),
-(8, 'ya', 'ya', 'ya@ta', '2e23e4302ae4c223ca0d32097853344e', '2021-11-09 15:40:20'),
-(10, 'eai', 'eai', 'eai@eai', '75723d36d3434256206a9a0d98cc5ef3', '2021-11-09 16:00:56'),
-(11, 'ear', 'ear', 'ear@ear', 'f1559e3fa3025616c6a4afa14bb8a6fe', '2021-11-09 16:01:43'),
-(12, 'eat', 'eat', 'eat@eat', 'e0c641c0671162e8a70df78ad19f24a5', '2021-11-09 16:03:01'),
-(13, 'yut', 'yut', 'yut@yut', '0d4ea94e7d243b5065a2f6c76c81d208', '2021-11-09 16:04:37'),
-(14, 'hue', 'hue', 'hue@hue', '9c61e94da6f691ddd6e06ade8e07d8ff', '2021-11-09 16:06:37'),
-(15, 'pop', 'pop', 'pop@pop', '712b0e63935f5d942fe806ef4f8215ea', '2021-11-09 16:07:25'),
-(16, 'jooj', 'jooj', 'jooj@jooj', '62f6582342ae50b1d7689fae0faeaab8', '2021-11-09 16:08:55'),
-(17, 'pop', 'pop', 'pop@pop', '712b0e63935f5d942fe806ef4f8215ea', '2021-11-09 16:20:39'),
-(25, 'Guiasdhuidsa', 'ola', 'ola@ola', '0b156072ca845f7e1859d55dba493fb3', '2021-11-09 17:15:38'),
-(19, 'wow', 'wow', 'wow@wow', '96cabca7a92e0ebe17f802ad6e592cb2', '2021-11-09 16:37:09');
+INSERT INTO `usuario` (`idusuario`, `nome_completo`, `nome_usuario`, `email`, `senha`, `data_registro`, `foto`) VALUES
+(1, 'dasd', 'asdasd', 'saddsa@sda', '3dad9cbf9baaa0360c0f2ba372d25716', '2021-11-09 15:25:00', NULL),
+(2, 'dasd', 'asda sd', 'saddsa@sda', 'd6858433a94067aebede7f4e70e894f7', '2021-11-09 15:25:46', NULL),
+(3, 'dasdhj', 'asda sdjh', 'saddsa@sdahj', '662fdd2a3f9edf03f2678bfe4882f4eb', '2021-11-09 15:28:36', NULL),
+(4, 'fghfgh', 'fghfgh', 'fgfhg@hghgf', 'd133705d6204a9e4518144623cb8ec18', '2021-11-09 15:31:18', NULL),
+(5, 'hjhg', 'jghjgh', 'ghjghj@gdg', '76b0bf37ef9417552121cb66bb62a3ed', '2021-11-09 15:31:45', NULL),
+(6, 'gui', 'hui', 'gui@gui', '1b393a3028f2f46306a46cb97ad4bb56', '2021-11-09 15:32:28', NULL),
+(7, 'eae', 'eae', 'eae@eae', '1b393a3028f2f46306a46cb97ad4bb56', '2021-11-09 15:39:05', NULL),
+(8, 'ya', 'ya', 'ya@ta', '2e23e4302ae4c223ca0d32097853344e', '2021-11-09 15:40:20', NULL),
+(10, 'eai', 'eai', 'eai@eai', '75723d36d3434256206a9a0d98cc5ef3', '2021-11-09 16:00:56', NULL),
+(11, 'ear', 'ear', 'ear@ear', 'f1559e3fa3025616c6a4afa14bb8a6fe', '2021-11-09 16:01:43', NULL),
+(12, 'eat', 'eat', 'eat@eat', 'e0c641c0671162e8a70df78ad19f24a5', '2021-11-09 16:03:01', NULL),
+(13, 'yut', 'yut', 'yut@yut', '0d4ea94e7d243b5065a2f6c76c81d208', '2021-11-09 16:04:37', NULL),
+(14, 'hue', 'hue', 'hue@hue', '9c61e94da6f691ddd6e06ade8e07d8ff', '2021-11-09 16:06:37', NULL),
+(15, 'pop', 'pop', 'pop@pop', '712b0e63935f5d942fe806ef4f8215ea', '2021-11-09 16:07:25', NULL),
+(16, 'jooj', 'jooj', 'jooj@jooj', '62f6582342ae50b1d7689fae0faeaab8', '2021-11-09 16:08:55', NULL),
+(17, 'pop', 'pop', 'pop@pop', '712b0e63935f5d942fe806ef4f8215ea', '2021-11-09 16:20:39', NULL),
+(25, 'Guiasdhuidsa', 'ola', 'ola@ola', '0b156072ca845f7e1859d55dba493fb3', '2021-11-09 17:15:38', NULL),
+(19, 'wow', 'wow', 'wow@wow', '96cabca7a92e0ebe17f802ad6e592cb2', '2021-11-09 16:37:09', NULL),
+(26, 'admin', 'admin', 'admin@admin', 'c3284d0f94606de1fd2af172aba15bf3', '2021-11-12 16:39:20', NULL),
+(27, 'Diego Gimenes', 'Diegusto', 'diegusto35@gmail.com', 'c98a40710192dd190da7f2e447ff1e47', '2021-11-22 14:48:32', NULL),
+(28, 'epa', 'epa', 'epa@epa', '6453be0ca5d4ca275e9d4808bdd63d40', '2021-11-22 15:06:40', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

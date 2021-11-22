@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "../conecta_banco.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,12 +8,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        <style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="../../assets/fifa_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <style>
     
     body{
         font-family: 'Montserrat', sans-serif;
@@ -39,7 +40,7 @@
 form{
     text-align: center;
     color: rgb(214, 213, 212);
-    font-height:200;
+    font-weight:200;
 }
 input{
     font-family: 'Montserrat', sans-serif;
@@ -174,7 +175,13 @@ background: #1e3772;
     select{
         margin: 3%;
     }
-    
+    .label-upload{
+        
+        inline-size: 86%;
+    }
+    input[type="file"]{
+        inline-size: 86%;
+    }
 }
 h3{
     font-weight: 700;
@@ -212,67 +219,94 @@ button{
         button:hover{
             background-color: #284a99;
             transition: 0.2s;
-        }      
-</style>
+        }
+        #perfil {
+            width: 10%;
+            height: auto;
+            border-radius: 5%;
+        }
+        input[type="file"] {
+            display:none;
+        }
+        .label-upload{
+        margin-top:10%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        margin: 2%;
+        color: rgb(214, 213, 212);
+        border-radius: 30px;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 20px;
+        border-color: transparent;
+        background-color: #3765cf;
+        box-shadow: 2px 10px 18px #000000 ;
+       }
+       .label-upload:hover{
+            background-color: #284a99;
+            transition: 0.2s;
+        }
+        </style>
 </head>
 <body>
     <?php
-    include "../conecta_banco.php";
-
-    $problems = array();
-    $errors = "<h2>Foram detectados os seguintes problemas durante o cadastro:</h2>";
-
-    $nome_completo = $_POST['nome_completo'];
-    $nome_usuario = trim($_POST['nome_usuario']);
-    $email = trim($_POST['email']);
-    $senha = trim(md5($_POST['senha']));
-
-    $sql = "SELECT COUNT(*) AS total FROM usuario WHERE nome_usuario = '$nome_usuario';";
-    $query = mysqli_query($conexao, $sql) or die("Erro!");
-    $row = mysqli_fetch_assoc($query);
-
-    if($row['total'] >= 1) array_push($problems, "nome");
-
-    $sql = "SELECT COUNT(*) AS total FROM usuario WHERE senha = MD5('".$senha."');";
-    $query = mysqli_query($conexao, $sql) or die("Erro!");
-    $row = mysqli_fetch_assoc($query);
-
-    if($row['total'] >= 1) array_push($problems, "senha");
     
-    $sql = "SELECT COUNT(*) AS total FROM usuario WHERE email = '$email';";
-    $query = mysqli_query($conexao, $sql) or die("Erro!");
-    $row = mysqli_fetch_assoc($query);
 
-    if($row['total'] >= 1) array_push($problems, "email");
-
-    if(in_array('nome', $problems, TRUE) or in_array('email', $problems, TRUE) or in_array('senha', $problems, TRUE))
-        $_SESSION['usuario_existe'] = true;
-    else
-        $_SESSION['usuario_existe'] = false;
-
-    if($_SESSION['usuario_existe'] == false)
-    {
-        $sql = "INSERT INTO usuario (nome_completo, nome_usuario, email, senha, data_registro) VALUES ('$nome_completo', '$nome_usuario', '$email', MD5('".$senha."'), NOW());";
-        
-        if($conexao->query($sql) === TRUE) {
-            $_SESSION['status'] = 'cadastro_feito';
+    if(isset($_POST['alterar'])) {
+        $nome_arquivo = '';
+        $confirm = 0;
+        if($_FILES['foto']['type'] == 'image/png' && isset($_FILES['foto'])) {
+            $nome_arquivo = md5($_FILES['foto']['name'].rand(1,999)).'.png';
+            move_uploaded_file($_FILES['foto']['tmp_name'], '../../photos/'.$nome_arquivo);
+            $confirm = 1;
         }
-        echo "<h2>Usuário cadastrado com sucesso!</h2><br>";
-        echo "<br><a href='../../index.php'><button>Voltar</button></a>";
-        echo "<br><a href='../../forms/login/login.html'><button>Login</button></a>";
-        $_SESSION['status_cadastro'] = true;
-    }
-    else 
-    {
-        if(in_array('nome', $problems, TRUE)) $errors .= "<br><h3>Nome de usuário existente.</h3>";
-        if(in_array('email', $problems, TRUE)) $errors .= "<br><h3>E-mail existente.</h3>";
-        if(in_array('senha', $problems, TRUE)) $errors .= "<br><h3>Senha existente.</h3>";
-        echo $errors;
-        echo "<br><a href='../../forms/cadastro/cadastro.html'><button>Voltar</button></a>";
-    }
+        else if($_FILES['foto']['type'] == 'image/jpeg' && isset($_FILES['foto'])) {
+            $nome_arquivo = md5($_FILES['foto']['name'].rand(1,999)).'.jpg';
+            move_uploaded_file($_FILES['foto']['tmp_name'], '../../photos/'.$nome_arquivo);  
+            $confirm = 1;
+        }
+        else
+            echo "Imagem inválida! Envie por outra forma de arquivo!";
 
-    $conexao->close();
-    
+        if($confirm == 1) {
+            $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
+            $result = mysqli_query($conexao, $select) or die("Erro.");
+            $row = mysqli_fetch_array($result);
+            $file = $row['foto'];
+            if($file != NULL) {
+                $file_pointer = "../../photos/".$file;
+                if (!unlink($file_pointer))
+                    echo ("Erro ao alterar imagem de perfil"); 
+                else {
+                    echo "Imagem de perfil enviada com sucesso!";
+                    $query = "UPDATE usuario SET foto = '".$nome_arquivo."' WHERE nome_usuario = '".$_SESSION['usuario']."';";
+                    $result = mysqli_query($conexao, $query);
+                }
+            }
+            else {
+                echo "Imagem de perfil enviada com sucesso!";
+                $query = "UPDATE usuario SET foto = '".$nome_arquivo."' WHERE nome_usuario = '".$_SESSION['usuario']."';";
+                $result = mysqli_query($conexao, $query);    
+            }
+        }
+    }
+    else {
+        $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
+        $result = mysqli_query($conexao, $select) or die("Erro.");
+        $row = mysqli_fetch_array($result);
+        $file = $row['foto'];
+        $file_pointer = "../../photos/".$file;
+        if (!unlink($file_pointer))
+            echo ("Erro ao deletar imagem de perfil."); 
+        else {
+            echo ("A imagem de perfil foi deletada.");
+            $query = "UPDATE usuario SET foto = null WHERE nome_usuario = '".$_SESSION['usuario']."';";
+            $result = mysqli_query($conexao, $query) or die("Erro");
+        }
+    }
 ?>
+<br>
+<a href="../../perfil.php"><button>Voltar</button></a>
 </body>
 </html>
