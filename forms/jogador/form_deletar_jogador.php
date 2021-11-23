@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Deletar Jogador</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Deletar Jogador</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -174,78 +177,86 @@
         </style>
     </head>
     <body>
-        <h1>Escolha o país e jogador para deletar</h1>
-        <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/>
+        <!-- Formulário para deletar -->
+        <h1>Escolha o jogador para deletar</h1>
+        <input type="text" id="myInput" onkeyup="search('myInput', 'button');"/> <!-- Quando digitar, ativar a função de procura -->
         <a href="../../bottons-jogadores.html"><input type="button" class="btn" value="Voltar"/></a>
-        <h3 id="counter">Número de jogadores encontrados: 0</h3>
+        <h3 id="counter">Número de jogadores encontrados: 0</h3> <!-- Indica o número de elementos encontrados -->
         <form method="post">
+            <!-- PHP ComboBox com FK (foreign key) -->
             <select name="pais" id="mySelect">
                 <?php
-                    include "../../php/conecta_banco.php";
-                    echo "<option value='selected'>Qualquer</option>";
-                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
+                    include "../../php/conecta_banco.php"; // Incluir conexão
+                    echo "<option value='selected'>Qualquer</option>"; // Imprime a opção qualquer
+                    $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC"); // Realizar query
+                    while($dados = mysqli_fetch_assoc($query)) { // Enquanto a query retornar dados
+                        // Imprime uma opção qualquer
                         echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
                     }
                 ?>
             </select>
+            <!-- input-text escondido -->
             <input type="text" name="id" id="secret" style="display: none"/>
             <input type="submit" value="Filtrar"/>
         </form>
         <form name="jogador" action="../../php/jogador/deletar_jogador.php" id="myForm" method="post">
             <ul id="list-buttons">
                 <?php
-                    include "../../php/conecta_banco.php";
-                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING);
+                    include "../../php/conecta_banco.php"; // Incluir conexão
+                    $sel_pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_STRING); // Pega o valor do option
+                    // Realização de query com algum país específico ou não
                     $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, pais.selecao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais;");
                     if($sel_pais != "selected")
                         $query = mysqli_query($conexao, "SELECT jogador.idjogador, jogador.nome, pais.selecao FROM jogador INNER JOIN pais ON jogador.pais_idpais = pais.idpais WHERE jogador.pais_idpais = '$sel_pais';");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
+                    while($dados = mysqli_fetch_assoc($query)) { // Enquanto encontrar resultados da query
+                        // Mostra através de um botão
                         echo "<li><button class='btn' id='".$dados['idjogador']."' onclick='getCupElement(".$dados['idjogador'].");'>".$dados['nome']."</button><p>ID: ".$dados['idjogador']."<br>País: ".$dados['selecao']."</p><br><br><br><br></li>";
                     }
                 ?>
             </ul>
+            <!-- input-text escondido -->
             <input type="text" name="id" id="secret2" style="display: none"/>
         </form>
         <script type="text/javascript">
             search('myInput', 'button');
-            function search(myInput, myTag) {
-                var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
-                input = document.getElementById(myInput);
-                filter = input.value.toUpperCase();
-                ul = document.getElementById("list-buttons");
-                li = ul.getElementsByTagName('li');
-                for (i = 0; i < li.length; i++) {
-                    btn = li[i].getElementsByTagName(myTag)[0];
-                    console.log(btn.innerText);
-                    txtValue = btn.textContent || btn.innerText;
+            function search(myInput, myTag) { // Função de procura
+                var input, filter, ul, li, a, i, txtValue, n_encontrados, counter; // declaração de variáveis
+                input = document.getElementById(myInput); // Atribui o input
+                filter = input.value.toUpperCase(); // Coloca todo o input em capslock, para facilitar na comparação
+                ul = document.getElementById("list-buttons"); // Pega a lista
+                li = ul.getElementsByTagName('li'); // Pega cada elemento da lista
+                for (i = 0; i < li.length; i++) { // Para 0 até o tamanho da lista
+                    btn = li[i].getElementsByTagName(myTag)[0]; // Pega o elemento atual
+                    // console.log(btn.innerText); 
+                    txtValue = btn.textContent || btn.innerText; // Atribui dois valores para txtValue
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
+                        li[i].style.display = ""; // Exibe 
+                    } else { // Senão
+                        li[i].style.display = "none"; // Esconde
                     }
                 }
 
-                n_encontrados = li.length;
+                n_encontrados = li.length; // Atribui o tamanho da lista
 
-                for (i = 0; i < li.length; i++) {
-                    if (li[i].style.display == "none") {
-                        n_encontrados--;
+                for (i = 0; i < li.length; i++) { // Para 0 até o tamanho da lista
+                    if (li[i].style.display == "none") { // Se encontrar um elemento com display: none
+                        n_encontrados--; // Diminui o número de elementos encontrados
                     }
                 }
 
-                counter = document.getElementById("counter");
-                counter.innerHTML = "Número de jogadores encontrados: " + n_encontrados;
+                counter = document.getElementById("counter"); // Pega o elemento que exibe o counter
+                counter.innerHTML = "Número de jogadores encontrados: " + n_encontrados; // Altera o valor de counter
             }       
-
+            /*
+            A função getCupElement serve para pegar o id e atribuir em um input type=text, 
+            que será responsável por levar qual id foi selecionado
+            */
             function getCupElement(myId) {
-                var btn = document.getElementById(myId);
-                var secret = document.getElementById('secret2');
-                secret.value = myId;
-                var myForm = document.getElementById("myForm").
-                myForm.submit();
+                var btn = document.getElementById(myId); // Pega o botão selecionado
+                var secret = document.getElementById('secret2'); // Pega o input=text escondido
+                secret.value = myId; // atribui o valor ao secreto
+                var myForm = document.getElementById("myForm"); // pega o formulário
+                myForm.submit(); // realiza um envio
             }
         </script>
     </body>

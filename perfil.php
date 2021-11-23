@@ -1,18 +1,23 @@
 <?php
+    // Reinicia a seção para a variável $_SESSION
     session_start();
+    // Inclui a conexão do banco
     include "php/conecta_banco.php";
 ?>
 <!DOCTYPE html>
-    <html lang="en">
+    <html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Perfil</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Perfil</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
     
     body{
@@ -252,52 +257,58 @@ button{
 </style>
     </head>
     <body>
+        <!-- Se o usuário estiver logado, exibe o perfil-->
         <?php if($_SESSION['usuario'] != "Visitante"): ?>
             <h1>Perfil</h1>
             <?php
+                // Executa a query SQL e pega o valor
                 $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
                 $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
                 $row = mysqli_fetch_array($result);
                 $r = $row['foto'];
-                if($r != NULL)
-                    echo "<img id='perfil' src='photos/".$r."'>";
+                if($r != NULL) // Se o usuário tiver foto de perfil / != NULL
+                    echo "<img id='perfil' src='photos/".$r."'>"; // Mostra a foto
             ?>
             <h3>
                 Nome Completo: 
                 <?php
+                    // Executa a query SQL e pega o valor
                     $select = "SELECT nome_completo FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
                     $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
                     $row = mysqli_fetch_array($result);
                     $r = $row['nome_completo'];
-                    echo $r;
+                    echo $r; // imprime na tela
                 ?>
             </h3>
             <h3>
                 Nome de Usuário: 
                 <?php
-                    echo $_SESSION['usuario'];
+                    echo $_SESSION['usuario']; // imprime na tela o nome de usuário de acordo com a seção
                 ?>
             </h3>
             <h3>
                 E-mail: 
                 <?php
+                    // Executa a query SQL e pega o valor
                     $select = "SELECT email FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
                     $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
                     $row = mysqli_fetch_array($result);
                     $r = $row['email'];
-                    echo $r;
+                    echo $r; // imprime na tela
                 ?>
             </h3>
             <h3>
                 Data e horário de cadastro: 
                 <?php
+                    // Executa a query SQL e pega o valor
                     $select = "SELECT data_registro FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
                     $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
                     $row = mysqli_fetch_array($result);
                     $r = $row['data_registro'];
-                    echo $r;
+                    echo $r; // imprime na tela
                 ?>
             </h3>
+            <!-- formulário para inserção de imagens -->
             <form method="POST" action="php/perfil/mudar_foto.php" enctype="multipart/form-data">
                 <br><br>
                 <label for="custom-file-input" class="label-upload">Procurar uma imagem   </label>
@@ -305,12 +316,13 @@ button{
                 <br><br>
                 <input type="submit" name="alterar" value="Alterar imagem">
                 <?php
+                    // Executa a query SQL e pega o valor
                     $select = "SELECT foto FROM usuario WHERE nome_usuario = '".$_SESSION['usuario']."';";
                     $result = mysqli_query($conexao, $select) or die("Erro ao acessar perfil.");
                     $row = mysqli_fetch_array($result);
                     $r = $row['foto'];
-                    if($r != NULL)
-                        echo '<input type="submit" name="deletar" value="Deletar imagem">';
+                    if($r != NULL) // Se o usuário tiver foto de perfil / != NULL
+                        echo '<input type="submit" name="deletar" value="Deletar imagem">'; // Mostra a opção
                         
                 ?>    
             </form><br>
@@ -318,6 +330,7 @@ button{
                 <input type="button" class="btn" value="Voltar"/>
             </a>
         <?php endif; ?>
+        <!-- Se o usuário não estiver logado, mostrar mensagem de aviso -->
         <?php if($_SESSION['usuario'] == "Visitante"): ?>
             <h1>Ops!</h1>
             <h3>Para acessar o perfil, é necessário realizar login</h3>

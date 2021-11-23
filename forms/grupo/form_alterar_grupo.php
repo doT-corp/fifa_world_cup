@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alterar Grupo</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Alterar Grupo</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -174,21 +177,26 @@
         </style>
     </head>
     <body>
+        <!-- Formulário para alteração -->
         <h1>Formulário para alterar dados do estádio</h1>
         <form name="estadio" action="../../php/grupo/alterar_grupo.php" method="post">
+                <!-- Mostra o ID -->
                 ID: <?php
                         $myid = $_POST['id'];
                         echo $myid;
                     ?><br><br>
+                <!-- Mostra a descrição -->
                 Descrição Antiga:
                 <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT descricao FROM grupo WHERE idgrupo = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['descricao'];
-                ?><br>                
+                ?><br>  
+                <!-- Entrada da nova descrição -->              
                 Descrição Nova (máximo 3 caracteres): <input class="input-text" type="text" name="descricao" max="3"/> <br><br>
                 <?php
+                    // input-text escondido
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
                 <input type="submit" class="btn" value="Alterar"/>

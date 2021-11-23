@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Jogador</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Inserir Jogador</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -174,6 +177,7 @@
         </style>
     </head>
     <body>
+        <!-- Formulário para inserção -->
         <h1>Formulário para inserir dados do jogador</h1>
         <form name="estadio" action="../../php/jogador/inserir_jogador.php" method="post">
                 Nome: <input class="input-text" type="text" name="nome"/> <br><br>
@@ -186,13 +190,13 @@
                     <option value="Lateral Esquerdo">Lateral Esquerdo</option>
                     <option value="Meio Campo">Meio Campo</option>
                 </select> <br><br>
-                País: <select name="idpais">
+                País: <select name="idpais"> 
                         <?php
-                            include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais");
-                            while($dados = mysqli_fetch_array($query))
-                            {
-                                echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
+                            // PHP COMBOBOX 
+                            include "../../php/conecta_banco.php"; // inclui conexão
+                            $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais"); // realiza a query
+                            while($dados = mysqli_fetch_array($query)) { // enquanto a query retornar valores
+                                echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>"; // imprimir opções
                             }
                         ?>
                 </select><br><br>

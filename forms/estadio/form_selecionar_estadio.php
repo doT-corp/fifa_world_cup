@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Selecione o estádio</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Selecione o Estádio</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
     
     body{
@@ -203,7 +206,7 @@ button{
         font-size: 20px;
         border-color: transparent;
         background-color: #3765cf;
-        box-shadow: 2px 10px 18px #000000 ;
+        box-shadow: 2px 10px 18px #000000;
        }
         button:hover{
             background-color: #284a99;
@@ -213,60 +216,66 @@ button{
     </head>
     <body>
         <h1>Escolha o estádio para alterar</h1>
-        <input type="text" id="myInput" onkeyup="search()"/>
+        <input type="text" id="myInput" onkeyup="search()"/> <!-- Quando digitar, ativar a função de procura -->
         <a href="../../bottons-estadios.html"><input type="button" class="btn" value="Voltar"/></a>
-        <h3 id="counter">Número de jogadores encontrados: 0</h3>
+        <h3 id="counter">Número de jogadores encontrados: 0</h3> <!-- Indica o número de elementos encontrados -->
         <form name="estadio" action="form_alterar_estadio.php" id="myForm" method="post">
             <ul id="list-buttons">
                 <?php
-                    include "../../php/conecta_banco.php";
-                    $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio");
-                    while($dados = mysqli_fetch_assoc($query))
-                    {
+                    include "../../php/conecta_banco.php"; // Incluir conexão
+                    $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio"); // Realizar query
+                    while($dados = mysqli_fetch_assoc($query)) { // Enquanto encontrar resultados da query
+                        // Mostra através de um botão
                         echo "<li><button class='btn' id='".$dados['idestadio']."' onclick='getCupElement(".$dados['idestadio'].");'>".$dados['idestadio']." - ".$dados['descricao']."</button></li>";
                     }
                 ?>
             </ul>
+            <!-- input-text escondido -->
             <input type="text" name="id" id="secret" style="display: none"/>
         </form>
     </body>
     <script type="text/javascript">
         search()
-        function search() {
-            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("list-buttons");
-            li = ul.getElementsByTagName('li');
+        function search() { // Função de procura
+            var input, filter, ul, li, a, i, txtValue, n_encontrados, counter; // declaração de variáveis
+            input = document.getElementById('myInput'); // Atribui o input
+            filter = input.value.toUpperCase(); // Coloca todo o input em capslock, para facilitar na comparação
+            ul = document.getElementById("list-buttons"); // Pega a lista
+            li = ul.getElementsByTagName('li'); // Pega cada elemento da lista
 
-            for (i = 0; i < li.length; i++) {
-                btn = li[i].getElementsByTagName("button")[0];
-                txtValue = btn.textContent || btn.innerText;
+            for (i = 0; i < li.length; i++) { // Para 0 até o tamanho da lista
+                btn = li[i].getElementsByTagName("button")[0]; // Pega o elemento atual
+                txtValue = btn.textContent || btn.innerText; // Atribui dois valores para txtValue
+                // Se o elemento (letra ou número) pode ser encontrado no array
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
+                    li[i].style.display = ""; // Exibe 
+                } else { // Senão
+                    li[i].style.display = "none"; // Esconde
                 }
             }
             
-            n_encontrados = li.length;
+            n_encontrados = li.length; // Atribui o tamanho da lista
 
-            for (i = 0; i < li.length; i++) {
-                if (li[i].style.display == "none") {
-                    n_encontrados--;
+            for (i = 0; i < li.length; i++) { // Para 0 até o tamanho da lista
+                if (li[i].style.display == "none") { // Se encontrar um elemento com display: none
+                    n_encontrados--; // Diminui o número de elementos encontrados
                 }
             }
 
-            counter = document.getElementById("counter");
-            counter.innerHTML = "Número de estádios encontrados: " + n_encontrados;
+            counter = document.getElementById("counter"); // Pega o elemento que exibe o counter
+            counter.innerHTML = "Número de estádios encontrados: " + n_encontrados; // Altera o valor de counter
         }
 
+        /*
+        A função getCupElement serve para pegar o id e atribuir em um input type=text, 
+        que será responsável por levar qual id foi selecionado
+        */
         function getCupElement(myId) {
-            var btn = document.getElementById(myId);
-            var secret = document.getElementById('secret');
-            secret.value = myId;
-            var myForm = document.getElementById("myForm").
-            myForm.submit();
+            var btn = document.getElementById(myId); // Pega o botão selecionado
+            var secret = document.getElementById('secret'); // Pega o input=text escondido
+            secret.value = myId; // atribui o valor ao secreto
+            var myForm = document.getElementById("myForm"); // pega o formulário
+            myForm.submit(); // realiza um envio
         }
 
         </script>

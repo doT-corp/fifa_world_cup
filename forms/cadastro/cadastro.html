@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastrar Usuário</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
+<head>
+    <!-- Configuração de HEAD da página-->
+    <meta charset="UTF-8"> <!-- Definição de caracteres -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+    <title>Cadastrar Usuário</title> <!-- Titulo da página -->
+    <!-- Fontes utilizadas na home -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+    <!-- CSS -->
         <style>
     
     body{
@@ -36,7 +39,7 @@
 form{
     text-align: center;
     color: rgb(214, 213, 212);
-    font-height:200;
+    font-weight: 200;
 }
 input{
     font-family: 'Montserrat', sans-serif;
@@ -214,6 +217,7 @@ button{
     </head>
     <body>
         <H1>Tela de Cadastro</H1>
+        <!-- Formulário de cadastro -->
         <form action="../../php/cadastro/cadastrar.php" method="post">
             Nome Completo: <input type="text" name="nome_completo"><br>
             Nome de Usuário: <input type="text" name="nome_usuario"><br>

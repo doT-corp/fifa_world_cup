@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Jogador</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Alterar Jogador</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -47,7 +50,7 @@
             font-size: 20px;
             border-color: transparent;
             background-color: #3765cf;
-            box-shadow: 2px 10px 18px #000000 ;
+            box-shadow: 2px 10px 18px #000000;
         }
         input:hover{
             background-color: #284a99;
@@ -104,7 +107,7 @@
             font-size: 20px;
             border-color: transparent;
             background-color: #3765cf;
-            box-shadow: 2px 10px 18px #000000 ;
+            box-shadow: 2px 10px 18px #000000;
             list-style-type:none;
         }
         .btn:hover{
@@ -174,33 +177,40 @@
         </style>
     </head>
     <body>
+        <!-- Formulário para alteração -->
         <h1>Formulário para alterar dados do jogador</h1>
         <form name="estadio" action="../../php/jogador/alterar_jogador.php" method="post">
+                <!-- Mostra o ID -->
                 ID: <?php
                         $myid = $_POST['id'];
                         echo $myid;
                     ?><br><br>
+                <!-- Mostra o nome -->
                 Nome Antigo: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT nome FROM jogador WHERE idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['nome'];
                 ?><br>
+                <!-- Entrada do novo nome -->   
                 Nome Novo: <input class="input-text" type="text" name="nome"/> <br><br>
+                <!-- Mostra a camisa -->
                 Camisa Antiga: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT camisa FROM jogador WHERE idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['camisa'];
                 ?><br>
+                <!-- Entrada da nova camisa -->   
                 Camisa Nova: <input class="input-text" type="text" name="camisa"/> <br><br>
-         
+                <!-- Mostra a posição -->
                 Posição Antiga: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT posicao FROM jogador WHERE idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['posicao'];
                 ?><br><br>
+                <!-- Entrada da nova posição -->   
                 Posição Nova: <select name="posicao">
                     <option value="Atacante">Atacante</option>
                     <option value="Central">Central</option>
@@ -209,33 +219,37 @@
                     <option value="Lateral Esquerdo">Lateral Esquerdo</option>
                     <option value="Meio Campo">Meio Campo</option>
                 </select> <br><br>
+                <!-- Mostra o país -->
                 País Antigo: <?php
-                    include "../../php/conecta_banco.php";
+                    include "../../php/conecta_banco.php"; 
                     $query = mysqli_query($conexao, "SELECT pais.selecao FROM pais INNER JOIN jogador ON jogador.pais_idpais = pais.idpais WHERE jogador.idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['selecao'];
                 ?><br><br>
+                <!-- Entrada do novo país -->   
                 País Novo: <select name="idpais">
                         <?php
                             include "../../php/conecta_banco.php";
                             $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais");
-                            while($dados = mysqli_fetch_array($query))
-                            {
+                            while($dados = mysqli_fetch_array($query)) {
                                 echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
                             }
                         ?>
                 </select><br><br>
+                <!-- Mostra a situação -->
                 Situação Antiga: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT situacao FROM jogador WHERE idjogador = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['situacao'];
                 ?><br>
+                <!-- Entrada da nova situação -->   
                 Situação Nova: 
                 <input type="radio" name="situacao" value="T"> Titular
                 <input type="radio" name="situacao" value="R"> Reserva
                 <br><br>
                 <?php
+                    // input-text escondido
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
                 <input type="submit" class="btn" value="Alterar"/>
