@@ -210,7 +210,7 @@
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
              
-                Senha Nova: <input class="input-text" type="email" name="senha"/> <br><br>
+                Senha Nova: <input class="input-text" type="password" name="senha"/> <br><br>
                 <?php
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
