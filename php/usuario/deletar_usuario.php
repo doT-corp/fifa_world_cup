@@ -229,7 +229,7 @@ button{
     }
     else
         echo "Falha na exclusão!";
-    echo '<br><a href="../../bottons-grupos.html"><button>Voltar</button></a>';
+    echo '<br><a href="../../bottons-usuarios.html"><button>Voltar</button></a>';
 ?>
 </body>
 </html>
