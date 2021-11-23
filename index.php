@@ -62,7 +62,7 @@
     });
     </script>
     <!-- Header da página -->
-    <header class="menu-top">
+    <header class="menu-top" id="menu-top">
         <div class="header-1" id= "myHeader">
             <div class="logo">
                 <img src="./assets/fifa_logo.jpg" alt="LOGO FIFA"> <!-- Logotipo -->
@@ -243,7 +243,7 @@
             <img src="./assets/Logo_footer.png" width="12%">
                   <h3>Copa <span> FIFA 22</span></h3>
                   <p class="footer-links">
-					<a href="#">Início</a>
+					<a href="#menu-top">Início</a>
 					|
 					<a href="#sobre">Sobre</a>
 					|

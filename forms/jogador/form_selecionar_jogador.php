@@ -255,7 +255,6 @@
                 var myForm = document.getElementById("myForm"); // pega o formulário
                 myForm.submit(); // realiza um envio
             }
-
         </script>
     </body>
 </html>

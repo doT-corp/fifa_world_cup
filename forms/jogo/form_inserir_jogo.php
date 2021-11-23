@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Jogo</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Inserir Jogo</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -173,39 +176,41 @@
         </style>
     </head>
     <body>
+        <!-- Formulário para inserção -->
         <h1>Formulário para inserir jogo</h1>
         <form name="jogo" action="form_inserir_jogo_estatisticas.php" method="post">
                 Dia e Hora: <input type="datetime-local" name="data"/> <br><br>
                 Estadio: <select name="estadio">
                         <?php
-                            include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio ORDER BY descricao ASC");
-                            while($dados = mysqli_fetch_assoc($query))
-                            {
-                                echo "<option value='".$dados['idestadio']."'>".$dados['descricao']."</option>";
+                            // PHP COMBOBOX 
+                            include "../../php/conecta_banco.php"; // inclui conexão
+                            $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio ORDER BY descricao ASC"); // realiza a query
+                            while($dados = mysqli_fetch_assoc($query)) { // enquanto a query retornar valores
+                                echo "<option value='".$dados['idestadio']."'>".$dados['descricao']."</option>"; // imprimir opções
                             }
                         ?>
                 </select> <br><br>
                 País 1: <select name="pais_um">
                         <?php
+                            // PHP COMBOBOX
                             include "../../php/conecta_banco.php";
-                            $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
-                            while($dados = mysqli_fetch_assoc($query))
-                            {
+                            $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC"); 
+                            while($dados = mysqli_fetch_assoc($query)) {
                                 echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
                             }
                         ?>
                 </select> <br><br>
                 País 2: <select name="pais_dois">
                         <?php
+                            // PHP COMBOBOX 
                             include "../../php/conecta_banco.php";
                             $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
-                            while($dados = mysqli_fetch_assoc($query))
-                            {
+                            while($dados = mysqli_fetch_assoc($query)) {
                                 echo "<option value='".$dados['idpais']."'>".$dados['selecao']."</option>";
                             }
                         ?>
                 </select> <br><br>
+                <!-- Inserir estatísitcas: quantidade -->
                 Quantidade de gols do país 1: <input class="input-text" type="number" name="gols_um"/> <br><br>
                 Quantidade de gols do país 2: <input class="input-text" type="number" name="gols_dois"/> <br><br>
                 Quantidade de cartões amarelos do país 1: <input class="input-text" type="number" name="amarelo_um"/> <br><br>

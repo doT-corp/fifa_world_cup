@@ -1,13 +1,17 @@
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inserir Jogo - Estatísticas</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Inserir Jogo - Estatísticas</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -176,7 +180,8 @@
     </head>
     <body>
         <?php
-            include "../../php/conecta_banco.php";
+            include "../../php/conecta_banco.php"; // arquivo de conexão
+            /* Inclui todos os $_POST */
             $data = $_POST['data'];
             $estadio = $_POST['estadio'];
             $pais_um = $_POST['pais_um'];
@@ -190,18 +195,24 @@
             $vermelho_um = $_POST['vermelho_um'];
             $vermelho_dois = $_POST['vermelho_dois'];
             $publico = $_POST['publico'];
+
+            /* Inserir temporariamente */
             $insere = "INSERT INTO jogos (data_hora, estadio_idestadio, pais_idpais_1, pais_idpais_2, gols_idpais_1, gols_idpais_2, publico) 
             VALUES ('$data', '$estadio', '$pais_um', '$pais_dois', '$gols_um', '$gols_dois', '$publico');";
             $result = mysqli_query($conexao, $insere) or die("Erro ao inserir jogo.");
 
+            /* Resetar para serem inseridos depois junto com as estatísticas*/
             $select_id = "SELECT idrodada FROM jogos WHERE data_hora = '$data' AND estadio_idestadio = '$estadio' AND pais_idpais_1 = '$pais_um' AND pais_idpais_2 = '$pais_dois' AND gols_idpais_1 = '$gols_um' AND gols_idpais_2 = '$gols_dois' AND publico = '$publico';";
             $r_id = mysqli_query($conexao, $select_id) or die("Erro ao inserir jogo.");
             $myrow = mysqli_fetch_array($r_id);
             $id = $myrow['idrodada'];
-
             $delete_id = "DELETE FROM jogos WHERE idrodada = '$id';";
             $del = mysqli_query($conexao, $delete_id) or die("Erro ao inserir jogo.");
         ?>
+        <!-- os dados funcionam de forma semelhante, apenas com 
+        execção para gols (possuem 2 input type=number) 
+        e substituições (2 combobox)
+        -->
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/estatisticas_jogo.php" method="post">
             <h2>Especificar País 1</h2><br>
@@ -366,7 +377,8 @@
                     }
                 }
                 else echo "<h3>Não houve cartões vermelhos do time 2</h3>";
-
+                
+                // Inputs escondidos para auxiliar e enviar
                 echo "<input type='datetime-local' style='display: none;' name='data' value='".$data."'>";
                 echo "<input type='number' style='display: none;' name='estadio' value='".$estadio."'>";
                 echo "<input type='number' style='display: none;' name='pais_um' value='".$pais_um."'>";

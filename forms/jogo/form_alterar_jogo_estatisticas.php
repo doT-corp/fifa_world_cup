@@ -1,13 +1,17 @@
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alterar Jogo - Estatísticas</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Alterar Jogo - Estatísticas</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
     
     body{
@@ -48,7 +52,7 @@ input{
     font-size: 20px;
     border-color: transparent;
     background-color: #3765cf;
-    box-shadow: 2px 10px 18px #000000 ;
+    box-shadow: 2px 10px 18px #000000;
 }
 input:hover{
     background-color: #284a99;
@@ -67,7 +71,7 @@ select{
     font-size: 20px;
     border-color: transparent;
     background-color:#3765cf;
-    box-shadow: 2px 10px 18px #000000 ;
+    box-shadow: 2px 10px 18px #000000;
     color: rgb(214, 213, 212);
 }
 option{
@@ -80,7 +84,7 @@ option{
     font-size: 20px;
     border-color: transparent;
     background-color: #9BAF59;
-    box-shadow: 2px 10px 18px #000000 ;
+    box-shadow: 2px 10px 18px #000000;
     color: rgb(214, 213, 212);
 }
 a{
@@ -105,7 +109,7 @@ a{
     font-size: 20px;
     border-color: transparent;
     background-color: #3765cf;
-    box-shadow: 2px 10px 18px #000000 ;
+    box-shadow: 2px 10px 18px #000000;
     list-style-type:none;
 }
 .btn:hover{
@@ -218,7 +222,8 @@ button{
     </head>
     <body>
         <?php
-            include "../../php/conecta_banco.php";
+            include "../../php/conecta_banco.php"; // arquivo de conexão
+            /* Inclui todos os $_POST */
             $id = $_POST['id'];
             $data = $_POST['data'];
             $estadio = $_POST['estadio'];
@@ -233,7 +238,8 @@ button{
             $vermelho_um = $_POST['vermelho_um'];
             $vermelho_dois = $_POST['vermelho_dois'];
             $publico = $_POST['publico'];
-        
+
+            /* Resetar para serem inseridos depois junto com as estatísticas*/
             $resetar = "DELETE FROM gols WHERE jogos_idrodada = '$id';";
             mysqli_query($conexao, $resetar) or die("Erro!");
             $resetar = "DELETE FROM substituicao WHERE jogos_idrodada = '$id';";
@@ -241,6 +247,10 @@ button{
             $resetar = "DELETE FROM cartao WHERE jogos_idrodada = '$id';";
             mysqli_query($conexao, $resetar) or die("Erro!");
         ?>
+        <!-- os dados funcionam de forma semelhante, apenas com 
+        execção para gols (possuem 2 input type=number) 
+        e substituições (2 combobox)
+        -->
         <h1>Estatísticas do jogo</h1>
         <form action="../../php/jogo/estatisticas_jogo.php" method="post">
             <h2>Especificar País 1</h2><br>
@@ -406,6 +416,7 @@ button{
                 }
                 else echo "<h3>Não houve cartões vermelhos do time 2</h3>";
                 
+                // Inputs escondidos para auxiliar e enviar
                 echo "<input type='number' style='display: none;' name='id' value='".$id."'>";
                 echo "<input type='datetime-local' style='display: none;' name='data' value='".$data."'>";
                 echo "<input type='number' style='display: none;' name='estadio' value='".$estadio."'>";

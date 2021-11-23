@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alterar Jogo</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Alterar Jogo</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
             body{
                 font-family: 'Montserrat', sans-serif;
@@ -173,12 +176,15 @@
         </style>
     </head>
     <body>
+        <!-- Formulário para alteração -->
         <h1>Formulário para alterar jogo</h1>
         <form name="jogo" action="form_alterar_jogo_estatisticas.php" method="post">
+                <!-- Mostra o ID -->
                 ID: <?php
                         $myid = $_POST['id'];
                         echo $myid;
                     ?><br><br>
+                <!-- Mostra o dia e hora -->
                 Dia e Hora Antigos:
                 <?php
                     include "../../php/conecta_banco.php";
@@ -186,13 +192,16 @@
                     $row = mysqli_fetch_array($query);
                     echo $row['data_hora'];
                 ?><br>
+                <!-- Entrada do novo input type=datetime -->
                 Dia e Hora Novos: <input type="datetime-local" name="data"/> <br><br>
+                <!-- Mostra o estádio -->
                 Estadio Antigo:
                 <?php
                     $query = mysqli_query($conexao, "SELECT estadio.descricao FROM estadio INNER JOIN jogos ON estadio.idestadio = jogos.estadio_idestadio WHERE idrodada = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['descricao'];
-                ?><br>                
+                ?><br>
+                <!-- Entrada do novo estádio -->
                 Estadio Novo: <select name="estadio">
                         <?php
                             $query = mysqli_query($conexao, "SELECT idestadio, descricao FROM estadio ORDER BY descricao ASC");
@@ -202,12 +211,14 @@
                             }
                         ?>
                 </select> <br><br>
+                <!-- Mostra o país 1 -->
                 País 1 Antigo:
                 <?php
                     $query = mysqli_query($conexao, "SELECT pais.selecao FROM pais INNER JOIN jogos ON pais.idpais = jogos.pais_idpais_1 WHERE idrodada = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['selecao'];
-                ?><br>  
+                ?><br>
+                <!-- Entrada de novo país -->
                 País 1 Novo: <select name="pais_um">
                         <?php
                             $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
@@ -217,12 +228,14 @@
                             }
                         ?>
                 </select> <br><br>
+                <!-- Mostra o país 2 -->
                 País 2 Antigo:
                 <?php
                     $query = mysqli_query($conexao, "SELECT pais.selecao FROM pais INNER JOIN jogos ON pais.idpais = jogos.pais_idpais_2 WHERE idrodada = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['selecao'];
-                ?><br>                
+                ?><br>
+                <!-- Entrada de novo país -->
                 País 2 Novo: <select name="pais_dois">
                         <?php
                             $query = mysqli_query($conexao, "SELECT idpais, selecao FROM pais ORDER BY selecao ASC");
@@ -232,6 +245,9 @@
                             }
                         ?>
                 </select> <br><br>
+
+                <!-- Entrada e mostragem das estatísticas do jogo -->
+
                 Quantidade de gols do país 1 antigo:
                 <?php
                     $query = mysqli_query($conexao, "SELECT gols_idpais_1 FROM jogos WHERE idrodada = '$myid';");
@@ -305,6 +321,7 @@
                 ?><br>
                 Público Novo: <input class="input-text" type="number" name="publico"/> <br><br>
                 <?php
+                    // input escondido para auxilio
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
                 <p>Atenção: após a confirmação, os gols, substituições e cartões serão excluidos para serem repostos por novos.</p>

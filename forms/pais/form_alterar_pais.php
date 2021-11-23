@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- Muda a linguagem da webpage para português -->
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alterar País</title>
+        <!-- Configuração de HEAD da página-->
+        <meta charset="UTF-8"> <!-- Definição de caracteres -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Configuração do HTTP -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
+        <title>Alterar País</title> <!-- Titulo da página -->
+        <!-- Fontes utilizadas na home -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" href="../../assets/fifa_icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="icon" href="../../assets/fifa_icon.png"> <!-- Ícone da aba do navegador -->
+        <!-- CSS -->
         <style>
     
             body{
@@ -189,23 +192,28 @@
     <body>
         <h1>Formulário para alterar dados do país</h1>
         <form name="estadio" action="../../php/pais/alterar_pais.php" method="post">
+                <!-- Mostra o ID -->
                 ID: <?php
                         $myid = $_POST['id'];
                         echo $myid;
                     ?><br><br>
+                <!-- Mostra o nome -->
                 Nome Antigo: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT selecao FROM pais WHERE idpais = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['selecao'];
-                ?><br>                
+                ?><br>
+                <!-- Entrada do novo nome -->        
                 Nome Novo: <input class="input-text" type="text" name="nome"/> <br><br>
+                <!-- Mostra o continente -->
                 Continente Antigo: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT continente FROM pais WHERE idpais = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['continente'];
-                ?><br><br>  
+                ?><br><br>
+                <!-- Entrada da novo continente -->  
                 Continente Novo: <select name="continente">
                     <option value="África">África</option>
                     <option value="América">América</option>
@@ -213,19 +221,23 @@
                     <option value="Europa">Europa</option>
                     <option value="Oceania">Oceania</option>
                 </select> <br><br>
+                <!-- Mostra o técnico -->
                 <p class="tecnico">Técnico Antigo: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT tecnico FROM pais WHERE idpais = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['tecnico'];
                 ?><br></p>
+                <!-- Entrada do novo técnico -->
                 Técnico Novo: <input class="input-text" type="text" name="tecnico"/> <br><br>
+                <!-- Mostra o grupo -->
                 Grupo Antigo: <?php
                     include "../../php/conecta_banco.php";
                     $query = mysqli_query($conexao, "SELECT grupo.descricao FROM grupo INNER JOIN pais ON pais.grupo_idgrupo = grupo.idgrupo WHERE pais.idpais = '$myid';");
                     $row = mysqli_fetch_array($query);
                     echo $row['descricao'];
                 ?><br><br>
+                <!-- Entrada do novo grupo -->
                 Grupo Novo: <select name="grupo">
                         <?php
                             include "../../php/conecta_banco.php";
@@ -237,6 +249,7 @@
                         ?>
                 </select> <br><br>
                 <?php
+                    // input type=text escondido
                     echo "<input type='text' value='{$myid}' name='id' style='display: none'/>";
                 ?>
                 <input type="submit" class="btn" value="Alterar"/>
