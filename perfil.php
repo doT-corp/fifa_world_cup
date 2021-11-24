@@ -187,6 +187,11 @@ background: #1e3772;
     input[type="file"]{
         inline-size: 86%;
     }
+    #perfil img{
+            width: 22%;
+            height: auto;
+            border-radius: 5%;
+        }
 }
 h3{
     font-weight: 700;
@@ -226,7 +231,7 @@ button{
             transition: 0.2s;
         }
         #perfil {
-            width: 10%;
+            width: 22%;
             height: auto;
             border-radius: 5%;
         }
