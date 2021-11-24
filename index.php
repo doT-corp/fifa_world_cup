@@ -251,8 +251,9 @@
 					|
 					<a>Contato</a>
 				</p> 
-
-				<p class="footer-company-name">© 2021 doT. Inc</p>
+				<a href="https://sites.google.com/view/dotttt/p%C3%A1gina-inicial" style="text-decoration: none;">
+					<p class="footer-company-name">© 2021 doT. Inc</p>
+				</a>
 			</div>
             
 			<div class="footer-right">
