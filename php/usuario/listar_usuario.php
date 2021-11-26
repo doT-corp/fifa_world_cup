@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listar Estádios</title>
+        <title>Listar Usuários</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="icon" href="../../assets/fifa_icon.png">
@@ -228,6 +228,12 @@ button{
             padding: 8px;
         }
         tr:nth-child(even){background-color: #21242e}
+        img {
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+            border-radius: 5%;
+        }
 </style>
     </head>
     <body>
@@ -243,6 +249,7 @@ button{
             <table id="list-stadiums" class="center">
                 <tr>
                     <th>ID</th>
+                    <th>Foto de perfil</th>
                     <th>Nome Completo</th>
                     <th>Nome de Usuário</th>
                     <th>Email</th>
@@ -256,6 +263,9 @@ button{
                     echo "<tr>";
                     echo "<td>";
                     echo $row['idusuario'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo "<img src='../../photos/".$row['foto']."'>";
                     echo "</td>";
                     echo "<td class='nome'>";
                     echo $row['nome_completo'];
