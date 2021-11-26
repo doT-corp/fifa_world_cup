@@ -181,7 +181,7 @@
         <h1>Formulário para inserir dados do jogador</h1>
         <form name="estadio" action="../../php/jogador/inserir_jogador.php" method="post">
                 Nome: <input class="input-text" type="text" name="nome"/> <br><br>
-                Camisa: <input class="input-text" type="text" name="camisa"/> <br><br>
+                Camisa: <input class="input-text" type="number" name="camisa"/> <br><br>
                 Posição: <select name="posicao">
                     <option value="Atacante">Atacante</option>
                     <option value="Central">Central</option>
