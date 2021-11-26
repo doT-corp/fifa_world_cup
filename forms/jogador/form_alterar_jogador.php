@@ -202,7 +202,7 @@
                     echo $row['camisa'];
                 ?><br>
                 <!-- Entrada da nova camisa -->   
-                Camisa Nova: <input class="input-text" type="text" name="camisa"/> <br><br>
+                Camisa Nova: <input class="input-text" type="number" name="camisa"/> <br><br>
                 <!-- Mostra a posição -->
                 Posição Antiga: <?php
                     include "../../php/conecta_banco.php";
