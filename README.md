@@ -20,6 +20,9 @@ Languages:<br>
   <p>Project Status: Completed :heavy_check_mark:</p>
 </b></i>
 
+## Preview
+<img src="photos/preview.jpg">
+  
 ## CRUD
 <p>:trophy: Admin possui acesso completo ao CRUD // Admin has full access to CRUD;</p>
 <p>:trophy: Usuário pode apenas listar as tabelas // User can only list the tables;</p>
@@ -29,13 +32,13 @@ Languages:<br>
 * É necessário um ambiente com Apache, PHP e o MySQL;
   * Recomendamos baixar algumas soluções com pacotes de desenvolvimento embutidos, como o <a href="https://www.wampserver.com/en/">WampServer</a> ou <a href="https://www.apachefriends.org/index.html">XAMPP</a>;
 * Após a instalação, coloque a pasta no diretório raiz do servidor;
-* Entre na ferramenta de administração de banco de dados, e execute o arquivo "copa_mundo-complete-login.sql", presente na pasta "sql";
+* Entre na ferramenta de administração de banco de dados, e execute os comandos do arquivo "copa_mundo-complete-login.sql", presente na pasta "sql";
 * Após a inserção das tabelas e dados, o seu projeto estará configurado.
 ##
 * An environment with Apache, PHP and MySQL is required;
   * We recommend downloading some solutions with built-in development packages, such as <a href="https://www.wampserver.com/en/">WampServer</a> or <a href="https://www.apachefriends.org/index.html">XAMPP</a>;
 * After installation, place the folder in the root directory of the server;
-* Enter the database administration tool, and run the file "copa_mundo-complete-login.sql", present in the "sql" folder;
+* Enter the database administration tool, and run the commands from the file "copa_mundo-complete-login.sql", present in the "sql" folder;
 * After inserting the tables and data, your project is configured.
   
 ## Slide
