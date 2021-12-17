@@ -21,7 +21,7 @@ Languages:<br>
 </b></i>
 
 ## Preview
-<img src="photos/preview.jpg">
+<img src="photos/preview.JPG">
   
 ## CRUD
 <p>:trophy: Admin possui acesso completo ao CRUD // Admin has full access to CRUD;</p>
